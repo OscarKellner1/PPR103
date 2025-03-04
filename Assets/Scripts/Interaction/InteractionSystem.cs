@@ -27,7 +27,7 @@ public class InteractionSystem : MonoBehaviour
 
 
     // Hidden variables
-    InteractionInfo interactionInfo;
+    InteractionQuery interactionInfo;
     GameObject UIElement;
 
 
@@ -39,7 +39,7 @@ public class InteractionSystem : MonoBehaviour
 
     void Update()
     {
-        Ray lookRay = new Ray(sphereCastSource.transform.position, sphereCastSource.transform.forward);
+        Ray lookRay = new(sphereCastSource.transform.position, sphereCastSource.transform.forward);
         if (Physics.SphereCast(
             lookRay,
             interactionSphereCastRadius,
@@ -47,14 +47,14 @@ public class InteractionSystem : MonoBehaviour
             maxInteractionRange,
             interactionSphereCastLayers))
         {
-            interactionInfo = new InteractionInfo(hit.collider.GetComponent<InteractionPoint>());
+            interactionInfo = new InteractionQuery(hit.collider.GetComponent<InteractionObject>());
         }
         else
         {
-            interactionInfo = InteractionInfo.None();
+            interactionInfo = InteractionQuery.None();
         }
 
-        if (interactionInfo.HasPoint())
+        if (interactionInfo.HasObject())
         {
             UIElement.SetActive(true);
         }
@@ -69,9 +69,9 @@ public class InteractionSystem : MonoBehaviour
     /// </summary>
     public bool TryInteract()
     {
-        if (interactionInfo.TryGetPoint(out InteractionPoint point))
+        if (interactionInfo.TryGetObject(out InteractionObject interactionObject))
         {
-            point.Interact();
+            interactionObject.Interact();
             return true;
         }
         return false;

@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class DEBUG_Interactible : MonoBehaviour
 {
-    private InteractionPoint interactionPoint;
+    private InteractionObject interactionPoint;
     private void Awake()
     {
-        interactionPoint = GetComponent<InteractionPoint>();
+        interactionPoint = GetComponent<InteractionObject>();
     }
 
     private void OnEnable()
