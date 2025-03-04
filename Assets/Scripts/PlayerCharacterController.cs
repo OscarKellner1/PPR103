@@ -21,7 +21,7 @@ public class PlayerCharacterController : MonoBehaviour
     private new CapsuleCollider collider; // Used in Gizmos
     private Rigidbody rb;
     private Camera cam;
-    private SphereCastInteractionSystem interactionSystem;
+    private InteractionSystem interactionSystem;
 
     //Input system
     private Controls controls;
@@ -34,7 +34,7 @@ public class PlayerCharacterController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         cam = GetComponentInChildren<Camera>();
-        interactionSystem = GetComponent<SphereCastInteractionSystem>();
+        interactionSystem = GetComponent<InteractionSystem>();
 
         controls = new Controls();
         moveAction = controls.FindAction("Move", throwIfNotFound: true);

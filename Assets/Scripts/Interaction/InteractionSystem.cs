@@ -3,14 +3,12 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using UnityEngine;
 
-public class SphereCastInteractionSystem : MonoBehaviour
+public class InteractionSystem : MonoBehaviour
 {
     // Inspector variables
-    [Header("Source")]
-    [SerializeField]
-    private GameObject sourceObject;
-
     [Header("Sphere cast")]
+    [SerializeField]
+    private GameObject sphereCastSource;
     [SerializeField]
     private float maxInteractionRange = 4f;
     [SerializeField]
@@ -19,18 +17,29 @@ public class SphereCastInteractionSystem : MonoBehaviour
     [Description("Specifies what layers to check when sphere-casting interactible objects.")]
     private LayerMask interactionSphereCastLayers;
 
+    [Header("UI")]
+    [SerializeField]
+    private GameObject uiPrefab;
+
     [Header("Debug")]
     [SerializeField]
     private bool displayRangeIndicator = false;
 
 
     // Hidden variables
-    InteractionInfo currrentInteractible;
+    InteractionInfo interactionInfo;
+    GameObject UIElement;
 
+
+    private void Start()
+    {
+        UIElement = UISystem.AddElement(uiPrefab);
+        UIElement.SetActive(false);
+    }
 
     void Update()
     {
-        Ray lookRay = new Ray(sourceObject.transform.position, sourceObject.transform.forward);
+        Ray lookRay = new Ray(sphereCastSource.transform.position, sphereCastSource.transform.forward);
         if (Physics.SphereCast(
             lookRay,
             interactionSphereCastRadius,
@@ -38,11 +47,20 @@ public class SphereCastInteractionSystem : MonoBehaviour
             maxInteractionRange,
             interactionSphereCastLayers))
         {
-            currrentInteractible = new InteractionInfo(hit.collider.GetComponent<InteractionPoint>());
+            interactionInfo = new InteractionInfo(hit.collider.GetComponent<InteractionPoint>());
         }
         else
         {
-            currrentInteractible = InteractionInfo.None();
+            interactionInfo = InteractionInfo.None();
+        }
+
+        if (interactionInfo.HasPoint())
+        {
+            UIElement.SetActive(true);
+        }
+        else
+        {
+            UIElement.SetActive(false);
         }
     }
 
@@ -51,7 +69,7 @@ public class SphereCastInteractionSystem : MonoBehaviour
     /// </summary>
     public bool TryInteract()
     {
-        if (currrentInteractible.TryGetPoint(out InteractionPoint point))
+        if (interactionInfo.TryGetPoint(out InteractionPoint point))
         {
             point.Interact();
             return true;
@@ -69,7 +87,7 @@ public class SphereCastInteractionSystem : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.green;
-        Gizmos.matrix = sourceObject.transform.localToWorldMatrix;
+        Gizmos.matrix = sphereCastSource.transform.localToWorldMatrix;
         if (displayRangeIndicator )
         {
             Gizmos.DrawWireSphere(Vector3.zero, maxInteractionRange);

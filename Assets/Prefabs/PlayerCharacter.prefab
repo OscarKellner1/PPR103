@@ -112,12 +112,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9250c50f36479cc449e3600ae80a686c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sourceObject: {fileID: 8359687740175087845}
+  sphereCastSource: {fileID: 8359687740175087845}
   maxInteractionRange: 4
   interactionSphereCastRadius: 0.3
   interactionSphereCastLayers:
     serializedVersion: 2
     m_Bits: 1
+  uiPrefab: {fileID: 349880438757985574, guid: c217efeffc1da2046bb465543e04828e, type: 3}
   displayRangeIndicator: 0
 --- !u!1 &8359687740175087845
 GameObject:
