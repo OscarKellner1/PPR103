@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 3597832924669225848}
   - component: {fileID: 2529763758027064678}
   - component: {fileID: 3126418134086178476}
-  m_Layer: 0
+  - component: {fileID: 4586623519908261888}
+  m_Layer: 6
   m_Name: PlayerCharacter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -99,6 +100,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movespeed: 5
   lookSensitivity: 0.2
+--- !u!114 &4586623519908261888
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6443429798631478426}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9250c50f36479cc449e3600ae80a686c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sourceObject: {fileID: 8359687740175087845}
+  maxInteractionRange: 4
+  interactionSphereCastRadius: 0.3
+  interactionSphereCastLayers:
+    serializedVersion: 2
+    m_Bits: 1
+  displayRangeIndicator: 0
 --- !u!1 &8359687740175087845
 GameObject:
   m_ObjectHideFlags: 0
@@ -110,7 +130,7 @@ GameObject:
   - component: {fileID: 7568743062184228929}
   - component: {fileID: 4127487457447876068}
   - component: {fileID: 4737275466830259702}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}

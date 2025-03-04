@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -12,6 +13,7 @@ public class PlayerCharacterController : MonoBehaviour
     [SerializeField]
     private float lookSensitivity = 0.2f;
 
+
     // Hidden varaibles
     private float cameraPitch;
 
@@ -19,6 +21,7 @@ public class PlayerCharacterController : MonoBehaviour
     private new CapsuleCollider collider; // Used in Gizmos
     private Rigidbody rb;
     private Camera cam;
+    private SphereCastInteractionSystem interactionSystem;
 
     //Input system
     private Controls controls;
@@ -31,12 +34,12 @@ public class PlayerCharacterController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         cam = GetComponentInChildren<Camera>();
+        interactionSystem = GetComponent<SphereCastInteractionSystem>();
 
         controls = new Controls();
         moveAction = controls.FindAction("Move", throwIfNotFound: true);
         lookAction = controls.FindAction("Look", throwIfNotFound: true);
         interactAction = controls.FindAction("Interact", throwIfNotFound: true);
-
         controls.Character.Enable();
     }
 
@@ -49,13 +52,17 @@ public class PlayerCharacterController : MonoBehaviour
         cam.transform.localRotation = Quaternion.Euler(cameraPitch, 0f, 0f);
 
         //Movement
-        var moveInput = moveAction.ReadValue<Vector2>();
-        var direction =  new Vector3(moveInput.x, 0f, moveInput.y);
-        rb.velocity = transform.rotation * (direction * movespeed);
+        var moveInput = moveAction.ReadValue<Vector3>();
+        rb.velocity = transform.rotation * (moveInput * movespeed);
+
+        //Interaction
+        if (interactAction.triggered)
+        {
+            interactionSystem.TryInteract();
+        }
     }
 
-
-    // Editor and Gizmos //
+    // Gizmos
     private void OnDrawGizmos()
     {
         if (collider == null) collider = GetComponent<CapsuleCollider>();
