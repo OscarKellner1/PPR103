@@ -62,6 +62,7 @@ public class PlayerCharacterController : MonoBehaviour
 
         Gizmos.color = Color.green;
         Gizmos.DrawSphere(transform.position + transform.up * collider.radius, collider.radius);
+        Gizmos.DrawSphere(transform.position + transform.up * collider.height * 0.5f, collider.radius);
         Gizmos.DrawSphere(transform.position + transform.up * (collider.height - collider.radius), collider.radius);
         
         Gizmos.color = Color.blue;
