@@ -44,15 +44,6 @@ public class SphereCastInteractionSystem : MonoBehaviour
         {
             currrentInteractible = InteractionInfo.None();
         }
-
-        if (currrentInteractible.HasPoint())
-        {
-            Debug.Log("Can interact");
-        }
-        else
-        {
-            Debug.Log("Cannot interact");
-        }
     }
 
     /// <summary>
