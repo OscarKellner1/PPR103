@@ -9,6 +9,7 @@ public static class Bootstrapper
     private static void StartUpSequence()
     {
         Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
         SceneManager.LoadScene("Bootstrap", LoadSceneMode.Additive);
     }
 }
