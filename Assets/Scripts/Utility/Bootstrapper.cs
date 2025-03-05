@@ -6,9 +6,9 @@ using UnityEngine.SceneManagement;
 public static class Bootstrapper
 {
     [RuntimeInitializeOnLoadMethod]
-    private static void LoadBoostrapScene()
+    private static void StartUpSequence()
     {
-        Debug.Log("bootstrap");
+        Cursor.visible = false;
         SceneManager.LoadScene("Bootstrap", LoadSceneMode.Additive);
     }
 }
