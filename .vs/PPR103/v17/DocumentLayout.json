@@ -1,12 +1,135 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "D:\\GITHUB REPO\\PPR103\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{62E6792D-30DD-8EF8-7CA9-C61FFD923B81}|Assembly-CSharp.csproj|d:\\github repo\\ppr103\\assets\\scripts\\cinemachinemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{62E6792D-30DD-8EF8-7CA9-C61FFD923B81}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\cinemachinemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{62E6792D-30DD-8EF8-7CA9-C61FFD923B81}|Assembly-CSharp.csproj|D:\\GITHUB REPO\\PPR103\\assets\\scripts\\interaction\\dialogue\\dialoguemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{62E6792D-30DD-8EF8-7CA9-C61FFD923B81}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\interaction\\dialogue\\dialoguemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{62E6792D-30DD-8EF8-7CA9-C61FFD923B81}|Assembly-CSharp.csproj|D:\\GITHUB REPO\\PPR103\\assets\\scripts\\interaction\\dialogue\\dialogueui.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{62E6792D-30DD-8EF8-7CA9-C61FFD923B81}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\interaction\\dialogue\\dialogueui.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{62E6792D-30DD-8EF8-7CA9-C61FFD923B81}|Assembly-CSharp.csproj|D:\\GITHUB REPO\\PPR103\\assets\\scripts\\interaction\\dialogue\\dialoguedata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{62E6792D-30DD-8EF8-7CA9-C61FFD923B81}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\interaction\\dialogue\\dialoguedata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{62E6792D-30DD-8EF8-7CA9-C61FFD923B81}|Assembly-CSharp.csproj|D:\\GITHUB REPO\\PPR103\\assets\\scripts\\interaction\\dialogue\\dialoguetrigger.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{62E6792D-30DD-8EF8-7CA9-C61FFD923B81}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\interaction\\dialogue\\dialoguetrigger.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{62E6792D-30DD-8EF8-7CA9-C61FFD923B81}|Assembly-CSharp.csproj|D:\\GITHUB REPO\\PPR103\\assets\\scripts\\interaction\\dialogue\\conditionchecker.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{62E6792D-30DD-8EF8-7CA9-C61FFD923B81}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\interaction\\dialogue\\conditionchecker.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{62E6792D-30DD-8EF8-7CA9-C61FFD923B81}|Assembly-CSharp.csproj|D:\\GITHUB REPO\\PPR103\\assets\\scripts\\interaction\\dialogue\\dialoguecondition.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{62E6792D-30DD-8EF8-7CA9-C61FFD923B81}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\interaction\\dialogue\\dialoguecondition.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
       "VerticalTabListWidth": 256,
-      "DocumentGroups": []
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "CinemachineManager.cs",
+              "DocumentMoniker": "D:\\GITHUB REPO\\PPR103\\Assets\\Scripts\\CinemachineManager.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\CinemachineManager.cs",
+              "ToolTip": "D:\\GITHUB REPO\\PPR103\\Assets\\Scripts\\CinemachineManager.cs",
+              "RelativeToolTip": "Assets\\Scripts\\CinemachineManager.cs",
+              "ViewState": "AQIAAAsAAAAAAAAAAAAQwCoAAAAeAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-06T14:00:26.877Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "DialogueTrigger.cs",
+              "DocumentMoniker": "D:\\GITHUB REPO\\PPR103\\Assets\\Scripts\\Interaction\\Dialogue\\DialogueTrigger.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Interaction\\Dialogue\\DialogueTrigger.cs",
+              "ToolTip": "D:\\GITHUB REPO\\PPR103\\Assets\\Scripts\\Interaction\\Dialogue\\DialogueTrigger.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Interaction\\Dialogue\\DialogueTrigger.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABYAAAAwAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-06T08:18:44.512Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "DialogueCondition.cs",
+              "DocumentMoniker": "D:\\GITHUB REPO\\PPR103\\Assets\\Scripts\\Interaction\\Dialogue\\DialogueCondition.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Interaction\\Dialogue\\DialogueCondition.cs",
+              "ToolTip": "D:\\GITHUB REPO\\PPR103\\Assets\\Scripts\\Interaction\\Dialogue\\DialogueCondition.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Interaction\\Dialogue\\DialogueCondition.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABYAAAATAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-06T08:17:51.04Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "ConditionChecker.cs",
+              "DocumentMoniker": "D:\\GITHUB REPO\\PPR103\\Assets\\Scripts\\Interaction\\Dialogue\\ConditionChecker.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Interaction\\Dialogue\\ConditionChecker.cs",
+              "ToolTip": "D:\\GITHUB REPO\\PPR103\\Assets\\Scripts\\Interaction\\Dialogue\\ConditionChecker.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Interaction\\Dialogue\\ConditionChecker.cs",
+              "ViewState": "AQIAABEAAAAAAAAAAAAuwC0AAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-06T08:17:21.747Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "DialogueUI.cs",
+              "DocumentMoniker": "D:\\GITHUB REPO\\PPR103\\Assets\\Scripts\\Interaction\\Dialogue\\DialogueUI.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Interaction\\Dialogue\\DialogueUI.cs",
+              "ToolTip": "D:\\GITHUB REPO\\PPR103\\Assets\\Scripts\\Interaction\\Dialogue\\DialogueUI.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Interaction\\Dialogue\\DialogueUI.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAB0AAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-06T02:12:05.667Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "DialogueManager.cs",
+              "DocumentMoniker": "D:\\GITHUB REPO\\PPR103\\Assets\\Scripts\\Interaction\\Dialogue\\DialogueManager.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Interaction\\Dialogue\\DialogueManager.cs",
+              "ToolTip": "D:\\GITHUB REPO\\PPR103\\Assets\\Scripts\\Interaction\\Dialogue\\DialogueManager.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Interaction\\Dialogue\\DialogueManager.cs",
+              "ViewState": "AQIAAEsAAAAAAAAAAAAowFkAAAAFAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-06T02:10:29.556Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "DialogueData.cs",
+              "DocumentMoniker": "D:\\GITHUB REPO\\PPR103\\Assets\\Scripts\\Interaction\\Dialogue\\DialogueData.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Interaction\\Dialogue\\DialogueData.cs",
+              "ToolTip": "D:\\GITHUB REPO\\PPR103\\Assets\\Scripts\\Interaction\\Dialogue\\DialogueData.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Interaction\\Dialogue\\DialogueData.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA8AAABWAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-06T02:09:24.793Z"
+            }
+          ]
+        }
+      ]
     }
   ]
 }
