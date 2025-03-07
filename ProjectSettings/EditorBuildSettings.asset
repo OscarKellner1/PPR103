@@ -9,5 +9,5 @@ EditorBuildSettings:
     path: Assets/Scenes/Bootstrap.unity
     guid: ca7d356e58ef21045b87953d73205c9f
   m_configObjects:
-    com.unity.input.settings: {fileID: 11400000, guid: cd7a802f6e92dee4297c19ff6656d6c6, type: 2}
+    com.unity.input.settings: {fileID: 11400000, guid: 6b6fc084f4483a04eb104afb6b5c02be, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 386bb79950c420f4b8ec794ecfd5ccec, type: 3}

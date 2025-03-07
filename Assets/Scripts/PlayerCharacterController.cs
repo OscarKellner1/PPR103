@@ -12,10 +12,21 @@ public class PlayerCharacterController : MonoBehaviour
     private float movespeed = 5f;
     [SerializeField]
     private float lookSensitivity = 0.2f;
+    [SerializeField]
+    private float jumpImpulse = 2f;
 
+    [Header("Grounded Check")]
+    [SerializeField]
+    private float groundedRaycastLength = 0.1f;
+    [SerializeField]
+    private LayerMask groundedRaycastMask;
 
     // Hidden varaibles
     private float cameraPitch;
+    private bool isGrounded;
+    private Vector2 lookInput;
+    private Vector3 moveInput;
+    private bool jumpInput;
 
     //Components
     private new CapsuleCollider collider; // Used in Gizmos
@@ -27,9 +38,11 @@ public class PlayerCharacterController : MonoBehaviour
     private Controls controls;
     private InputAction moveAction;
     private InputAction lookAction;
+    private InputAction jumpAction;
     private InputAction interactAction;
 
 
+    // Unity Messages
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -39,28 +52,69 @@ public class PlayerCharacterController : MonoBehaviour
         controls = new Controls();
         moveAction = controls.FindAction("Move", throwIfNotFound: true);
         lookAction = controls.FindAction("Look", throwIfNotFound: true);
+        jumpAction = controls.FindAction("Jump", throwIfNotFound: true);
         interactAction = controls.FindAction("Interact", throwIfNotFound: true);
         controls.Character.Enable();
     }
 
     void Update()
     {
-        //Looking around
-        var lookInput = lookAction.ReadValue<Vector2>() * lookSensitivity;
-        rb.rotation *= Quaternion.Euler(0f, lookInput.x, 0f);
-        cameraPitch = Mathf.Clamp(cameraPitch - lookInput.y, -89, 89);
-        cam.transform.localRotation = Quaternion.Euler(cameraPitch, 0f, 0f);
+        isGrounded = CheckGrounded();
+        Debug.Log(isGrounded);
 
-        //Movement
-        var moveInput = moveAction.ReadValue<Vector3>();
-        rb.velocity = transform.rotation * (moveInput * movespeed);
+        // Physics related input
+        lookInput += lookAction.ReadValue<Vector2>() * lookSensitivity;
+        moveInput = moveAction.ReadValue<Vector3>();
+        jumpInput |= jumpAction.triggered;
 
-        //Interaction
         if (interactAction.triggered)
         {
             interactionSystem.TryInteract();
         }
+
     }
+
+    private void FixedUpdate()
+    {
+        RotateView(lookInput);
+        lookInput = Vector2.zero;
+
+        MoveInDirection(moveInput);
+
+
+        if (jumpInput && isGrounded)
+        {
+            Jump();
+        }
+        jumpInput = false;
+    }
+
+
+    // Helper Methods
+    bool CheckGrounded()
+    {
+        Ray ray = new(transform.position + transform.up * 0.1f, -transform.up);
+        Debug.DrawRay(ray.origin, ray.direction, Color.cyan);
+        return Physics.Raycast(ray, groundedRaycastLength + 0.1f, groundedRaycastMask);
+    }
+
+    void RotateView(Vector2 input)
+    {
+        rb.rotation *= Quaternion.Euler(0f, input.x, 0f);
+        cameraPitch = Mathf.Clamp(cameraPitch - input.y, -89, 89);
+        cam.transform.localRotation = Quaternion.Euler(cameraPitch, 0f, 0f);
+    }
+
+    void MoveInDirection(Vector3 input)
+    {
+        Vector3 planarMovement = transform.rotation * (input * movespeed);
+        rb.velocity = new Vector3(planarMovement.x, rb.velocity.y, planarMovement.z);
+    }
+    void Jump()
+    {
+        rb.AddForce(transform.up * jumpImpulse);
+    }
+
 
     // Gizmos
     private void OnDrawGizmos()
