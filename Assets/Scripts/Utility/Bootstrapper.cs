@@ -10,6 +10,9 @@ public static class Bootstrapper
     {
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
+
+        InputUtility.Initialize();
+
         SceneManager.LoadScene("Bootstrap", LoadSceneMode.Additive);
     }
 }

@@ -35,7 +35,6 @@ public class PlayerCharacterController : MonoBehaviour
     private InteractionSystem interactionSystem;
 
     //Input system
-    private Controls controls;
     private InputAction moveAction;
     private InputAction lookAction;
     private InputAction jumpAction;
@@ -49,18 +48,16 @@ public class PlayerCharacterController : MonoBehaviour
         cam = GetComponentInChildren<Camera>();
         interactionSystem = GetComponent<InteractionSystem>();
 
-        controls = new Controls();
-        moveAction = controls.FindAction("Move", throwIfNotFound: true);
-        lookAction = controls.FindAction("Look", throwIfNotFound: true);
-        jumpAction = controls.FindAction("Jump", throwIfNotFound: true);
-        interactAction = controls.FindAction("Interact", throwIfNotFound: true);
-        controls.Character.Enable();
+        moveAction = InputUtility.Controls.Character.Move;
+        lookAction = InputUtility.Controls.Character.Look;
+        jumpAction = InputUtility.Controls.Character.Jump;
+        interactAction = InputUtility.Controls.Character.Interact;
+        InputUtility.SetInputType(InputType.Character);
     }
 
     void Update()
     {
         isGrounded = CheckGrounded();
-        Debug.Log(isGrounded);
 
         // Physics related input
         lookInput += lookAction.ReadValue<Vector2>() * lookSensitivity;
@@ -110,6 +107,7 @@ public class PlayerCharacterController : MonoBehaviour
         Vector3 planarMovement = transform.rotation * (input * movespeed);
         rb.velocity = new Vector3(planarMovement.x, rb.velocity.y, planarMovement.z);
     }
+
     void Jump()
     {
         rb.AddForce(transform.up * jumpImpulse);
