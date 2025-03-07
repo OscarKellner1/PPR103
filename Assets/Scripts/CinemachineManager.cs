@@ -1,13 +1,11 @@
 using UnityEngine;
 using Cinemachine;
-using System.Collections;
 
 public class CinemachineManager : MonoBehaviour
 {
     public static CinemachineManager Instance;
 
-    public Transform playerCamera;
-    public float lookSpeed = 2f;
+    public CinemachineVirtualCamera currentCamera;
 
     void Awake()
     {
@@ -24,24 +22,12 @@ public class CinemachineManager : MonoBehaviour
 
     public void SwitchCamera(Transform newTransform)
     {
-        StartCoroutine(SmoothLookAt(newTransform));
-    }
-
-    public IEnumerator SmoothLookAt(Transform target)
-    {
-        while (true)
+        Debug.Log("I'm looking here: " +  newTransform);
+        if (currentCamera != null)
         {
-            Debug.Log("Looked");
-            Vector3 direction = (target.position - playerCamera.position).normalized;
-            Quaternion lookRotation = Quaternion.LookRotation(direction);
-            playerCamera.rotation = Quaternion.Slerp(playerCamera.rotation, lookRotation, Time.deltaTime * lookSpeed);
-
-            // Stop when close enough
-            if (Quaternion.Angle(playerCamera.rotation, lookRotation) < 1f)
-                yield break;
-
-            yield return null;
+            // Update the camera's position or look at target
+        
+            currentCamera.LookAt = newTransform;
         }
-       
     }
 }

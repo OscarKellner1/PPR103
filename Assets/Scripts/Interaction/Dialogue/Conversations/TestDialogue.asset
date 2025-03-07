@@ -15,7 +15,7 @@ MonoBehaviour:
   dialogueEntries:
   - speakerName: Josephine
     portrait: {fileID: 21300000, guid: aca2c05509b02c141a3f25a92864c47e, type: 3}
-    cameraContext: Josephine
+    cameraContext: Buddy
     dialogueText: 'If you love soup so much why dont you
 
       marry
