@@ -86,10 +86,10 @@ public class InteractionSystem : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Gizmos.color = Color.green;
-        Gizmos.matrix = sphereCastSource.transform.localToWorldMatrix;
         if (displayRangeIndicator )
         {
+            Gizmos.color = Color.green;
+            Gizmos.matrix = sphereCastSource.transform.localToWorldMatrix;
             Gizmos.DrawWireSphere(Vector3.zero, maxInteractionRange);
         }
     }
