@@ -138,7 +138,7 @@
             "id": "69c2a95d-008f-48da-8c3c-ec3b50e163be",
             "actions": [
                 {
-                    "name": "New action",
+                    "name": "NextLine",
                     "type": "Button",
                     "id": "68e7156f-4794-4b3a-950b-84eb35add592",
                     "expectedControlType": "",
@@ -151,11 +151,11 @@
                 {
                     "name": "",
                     "id": "7ea9178e-dea4-4e46-bd5d-3f152e5be4a2",
-                    "path": "",
+                    "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "New action",
+                    "action": "NextLine",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

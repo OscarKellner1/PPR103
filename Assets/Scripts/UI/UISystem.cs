@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class UISystem : MonoBehaviour
 {
-    public static UISystem Instance;
+    private static UISystem instance;
 
     // Singleton
     private void Awake()
     {
-        if (Instance == null)
+        if (instance == null)
         {
-            Instance = this;
+            instance = this;
             DontDestroyOnLoad(gameObject);
         }
         else
@@ -22,6 +22,8 @@ public class UISystem : MonoBehaviour
 
     public static GameObject AddElement(GameObject prefab)
     {
-        return Instantiate(prefab, Instance.transform);
+        GameObject gameObject = Instantiate(prefab);
+        gameObject.transform.SetParent(instance.transform, false);
+        return gameObject;
     }
 }
