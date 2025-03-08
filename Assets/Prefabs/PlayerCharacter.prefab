@@ -263,7 +263,7 @@ MonoBehaviour:
   interactionSphereCastRadius: 0.3
   interactionSphereCastLayers:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 129
   uiPrefab: {fileID: 349880438757985574, guid: ccc067c62397a354ca91eb9e6fce62c7, type: 3}
   displayRangeIndicator: 0
 --- !u!1 &7004508948581511489
