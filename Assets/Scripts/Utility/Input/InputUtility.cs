@@ -23,9 +23,21 @@ public static class InputUtility
         type = newType;
         switch (newType)
         {
-            case InputType.Character: Controls.Character.Enable(); break;
-            case InputType.Dialogue: Controls.Dialogue.Enable(); break;
-            case InputType.UI: Controls.UI.Enable(); break;
+            case InputType.Character:
+                Controls.Character.Enable();
+                Cursor.visible = false;
+                Cursor.lockState = CursorLockMode.Locked;
+                break;
+            case InputType.Dialogue:
+                Controls.Dialogue.Enable();
+                Cursor.visible = true;
+                Cursor.lockState = CursorLockMode.Confined;
+                break;
+            case InputType.UI:
+                Controls.UI.Enable();
+                Cursor.visible = true;
+                Cursor.lockState = CursorLockMode.Confined;
+                break;
         }
     }
 }
