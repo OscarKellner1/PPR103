@@ -260,7 +260,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sphereCastSource: {fileID: 7004508948581511489}
   maxInteractionRange: 4
-  interactionSphereCastRadius: 0.3
+  interactionSphereCastRadius: 0.1
   interactionSphereCastLayers:
     serializedVersion: 2
     m_Bits: 129

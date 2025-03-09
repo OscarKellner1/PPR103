@@ -33,9 +33,18 @@ public class DialogueManager : MonoBehaviour
     private int dialogueIndex = 0;
     private InputType previousInputType; //used to remember the input type used before entering dialogue
 
-    void Awake()
+    private void Awake()
     {
-        Instance = this;
+        if(Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+      
     }
 
     // Starts a new dialogue sequence
@@ -63,7 +72,7 @@ public class DialogueManager : MonoBehaviour
         DialogueData.DialogueEntry entry = currentDialogue.dialogueEntries[dialogueIndex];
 
         // Check if the cameraContext matches an NPC/target name
-        SwitchCamera(entry.cameraContext);
+      //  SwitchCamera(entry.cameraContext);
 
         // Check conditions before displaying dialogue entry
         if (!ConditionChecker.Instance.AreConditionsMet(entry.conditions))

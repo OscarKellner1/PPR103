@@ -1,0 +1,145 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 468ecc104494f3c409ea9267ca843a65, type: 3}
+  m_Name: Demo1
+  m_EditorClassIdentifier: 
+  dialogueEntries:
+  - speakerName: Josephine
+    portrait: {fileID: 21300000, guid: d2142de98e3fbda4a8904a40be6df949, type: 3}
+    cameraContext: 
+    dialogueText: Oh! Hello!
+    isThinking: 0
+    waitTime: 0
+    autoProgress: 0
+    autoProgressDelay: 0
+    voiceClip: {fileID: 0}
+    onDialogueEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 0}
+          m_TargetAssemblyTypeName: 
+          m_MethodName: 
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: 
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    conditions: []
+    failedDialogue: {fileID: 0}
+    responses:
+    - responseText: Hey there!
+      nextDialogue: {fileID: 0}
+      Ender: 0
+  - speakerName: Josephine
+    portrait: {fileID: 21300000, guid: d2142de98e3fbda4a8904a40be6df949, type: 3}
+    cameraContext: 
+    dialogueText: Are you about to climb the mountain?
+    isThinking: 0
+    waitTime: 0
+    autoProgress: 0
+    autoProgressDelay: 0
+    voiceClip: {fileID: 0}
+    onDialogueEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 0}
+          m_TargetAssemblyTypeName: 
+          m_MethodName: 
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: 
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    conditions: []
+    failedDialogue: {fileID: 0}
+    responses:
+    - responseText: Sure am!
+      nextDialogue: {fileID: 0}
+      Ender: 0
+    - responseText: Not at all.
+      nextDialogue: {fileID: 0}
+      Ender: 0
+  - speakerName: Josephine
+    portrait: {fileID: 21300000, guid: d2142de98e3fbda4a8904a40be6df949, type: 3}
+    cameraContext: 
+    dialogueText: Oh terrific! Would you be able to check up on my twin sister Mary?
+      She should be at the top!
+    isThinking: 0
+    waitTime: 0
+    autoProgress: 0
+    autoProgressDelay: 0
+    voiceClip: {fileID: 0}
+    onDialogueEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 0}
+          m_TargetAssemblyTypeName: 
+          m_MethodName: 
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: 
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    conditions: []
+    failedDialogue: {fileID: 0}
+    responses:
+    - responseText: I sure can!
+      nextDialogue: {fileID: 0}
+      Ender: 0
+    - responseText: Sorry, I'm busy.
+      nextDialogue: {fileID: 0}
+      Ender: 0
+  - speakerName: Josephine
+    portrait: {fileID: 21300000, guid: d2142de98e3fbda4a8904a40be6df949, type: 3}
+    cameraContext: 
+    dialogueText: Oh thank you so much! Safe travels!
+    isThinking: 0
+    waitTime: 0
+    autoProgress: 0
+    autoProgressDelay: 0
+    voiceClip: {fileID: 0}
+    onDialogueEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 0}
+          m_TargetAssemblyTypeName: 
+          m_MethodName: 
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: 
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    conditions: []
+    failedDialogue: {fileID: 0}
+    responses:
+    - responseText: '[End]'
+      nextDialogue: {fileID: 0}
+      Ender: 0
+  AfterDialogueEvent:
+    m_PersistentCalls:
+      m_Calls: []
