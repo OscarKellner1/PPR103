@@ -31,6 +31,7 @@ public class DialogueManager : MonoBehaviour
 
     private DialogueData currentDialogue;
     private int dialogueIndex = 0;
+    private InputType previousInputType; //used to remember the input type used before entering dialogue
 
     void Awake()
     {
@@ -44,6 +45,8 @@ public class DialogueManager : MonoBehaviour
         dialogueIndex = 0; // Start from the beginning of the dialogue
         dialogueBox.SetActive(true); // Show the dialogue box
         speakerBox.SetActive(true);
+        previousInputType = InputUtility.InputType;
+        InputUtility.SetInputType(InputType.Dialogue);
         ShowDialogueEntry(); // Display the first entry
     }
 
@@ -170,6 +173,7 @@ public class DialogueManager : MonoBehaviour
         {
             currentDialogue.AfterDialogueEvent.Invoke();
         }
+        InputUtility.SetInputType(previousInputType);
     }
 
     [System.Serializable]

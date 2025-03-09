@@ -4,24 +4,19 @@ using UnityEngine;
 public static class InputUtility
 {
     public static Controls Controls { get; private set; }
-    private static InputType type;
+    public static InputType InputType { get; private set; }
 
 
     public static void Initialize()
     {
         Controls = new Controls();
     }
-
-    public static InputType GetInputType()
-    {
-        return type;
-    }
-
+   
     public static void SetInputType(InputType newType)
     {
         Controls.Disable();
-        type = newType;
-        switch (newType)
+        InputType = newType;
+        switch (InputType)
         {
             case InputType.Character:
                 Controls.Character.Enable();
