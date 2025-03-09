@@ -8,9 +8,6 @@ public static class Bootstrapper
     [RuntimeInitializeOnLoadMethod]
     private static void StartUpSequence()
     {
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
-
         InputUtility.Initialize();
 
         SceneManager.LoadScene("Bootstrap", LoadSceneMode.Additive);
