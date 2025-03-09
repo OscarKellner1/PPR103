@@ -168,10 +168,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   uiPrefab: {fileID: 7653263608855149900, guid: 2b81fa32d007c16438301787dc113a1c, type: 3}
   textLines:
-  - Helloooooo!
-  - This is our very nice game :3
-  - Pls be nice
-  - '*I''m very sensitive to criticism*'
+  - '"I can finally tell them the truth..."'
+  - '"It''s the best place for it..."'
+  - And what's better... SHE invited ME!"
+  - ...
+  - '"Could the feelings be mutual?"'
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
