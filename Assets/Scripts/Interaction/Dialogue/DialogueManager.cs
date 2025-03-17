@@ -32,6 +32,7 @@ public class DialogueManager : MonoBehaviour
     private DialogueData currentDialogue;
     private int dialogueIndex = 0;
     private InputType previousInputType; //used to remember the input type used before entering dialogue
+    public DialogueUI DUI;
 
     private void Awake()
     {
@@ -79,7 +80,8 @@ public class DialogueManager : MonoBehaviour
 
         speakerNameText.text = entry.speakerName;
         portraitImage.sprite = entry.portrait;
-        dialogueText.text = entry.dialogueText;
+        DUI.DisplayText(entry.dialogueText);
+       // dialogueText.text = entry.dialogueText;
 
         // Handle auto-progress if required
         if (entry.autoProgress)

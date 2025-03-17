@@ -23,7 +23,7 @@ MonoBehaviour:
       soup?'
     isThinking: 0
     waitTime: 2
-    autoProgress: 1
+    autoProgress: 0
     autoProgressDelay: 1
     voiceClip: {fileID: 0}
     onDialogueEvent:

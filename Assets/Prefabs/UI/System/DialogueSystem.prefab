@@ -354,6 +354,7 @@ MonoBehaviour:
   cameraTargets:
   - name: Buddy
     cameraTransform: {fileID: 0}
+  DUI: {fileID: 4013609127578344643}
 --- !u!114 &4013609127578344643
 MonoBehaviour:
   m_ObjectHideFlags: 0
