@@ -62,6 +62,24 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""LeftGrab"",
+                    ""type"": ""Button"",
+                    ""id"": ""4793e763-ccca-40b6-92af-5f1662e59bb3"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""RightGrab"",
+                    ""type"": ""Button"",
+                    ""id"": ""33dbaaa3-5814-4399-88ae-10ea407e4b25"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -152,6 +170,28 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""action"": ""Jump"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e937b773-20c0-4720-8581-ecf631b8a7f2"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LeftGrab"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""10bccc2d-7d83-48ab-894b-0d67b6be3158"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RightGrab"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -220,6 +260,8 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         m_Character_Look = m_Character.FindAction("Look", throwIfNotFound: true);
         m_Character_Jump = m_Character.FindAction("Jump", throwIfNotFound: true);
         m_Character_Interact = m_Character.FindAction("Interact", throwIfNotFound: true);
+        m_Character_LeftGrab = m_Character.FindAction("LeftGrab", throwIfNotFound: true);
+        m_Character_RightGrab = m_Character.FindAction("RightGrab", throwIfNotFound: true);
         // Dialogue
         m_Dialogue = asset.FindActionMap("Dialogue", throwIfNotFound: true);
         m_Dialogue_NextLine = m_Dialogue.FindAction("NextLine", throwIfNotFound: true);
@@ -298,6 +340,8 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Character_Look;
     private readonly InputAction m_Character_Jump;
     private readonly InputAction m_Character_Interact;
+    private readonly InputAction m_Character_LeftGrab;
+    private readonly InputAction m_Character_RightGrab;
     public struct CharacterActions
     {
         private @Controls m_Wrapper;
@@ -306,6 +350,8 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         public InputAction @Look => m_Wrapper.m_Character_Look;
         public InputAction @Jump => m_Wrapper.m_Character_Jump;
         public InputAction @Interact => m_Wrapper.m_Character_Interact;
+        public InputAction @LeftGrab => m_Wrapper.m_Character_LeftGrab;
+        public InputAction @RightGrab => m_Wrapper.m_Character_RightGrab;
         public InputActionMap Get() { return m_Wrapper.m_Character; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -327,6 +373,12 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @Interact.started += instance.OnInteract;
             @Interact.performed += instance.OnInteract;
             @Interact.canceled += instance.OnInteract;
+            @LeftGrab.started += instance.OnLeftGrab;
+            @LeftGrab.performed += instance.OnLeftGrab;
+            @LeftGrab.canceled += instance.OnLeftGrab;
+            @RightGrab.started += instance.OnRightGrab;
+            @RightGrab.performed += instance.OnRightGrab;
+            @RightGrab.canceled += instance.OnRightGrab;
         }
 
         private void UnregisterCallbacks(ICharacterActions instance)
@@ -343,6 +395,12 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @Interact.started -= instance.OnInteract;
             @Interact.performed -= instance.OnInteract;
             @Interact.canceled -= instance.OnInteract;
+            @LeftGrab.started -= instance.OnLeftGrab;
+            @LeftGrab.performed -= instance.OnLeftGrab;
+            @LeftGrab.canceled -= instance.OnLeftGrab;
+            @RightGrab.started -= instance.OnRightGrab;
+            @RightGrab.performed -= instance.OnRightGrab;
+            @RightGrab.canceled -= instance.OnRightGrab;
         }
 
         public void RemoveCallbacks(ICharacterActions instance)
@@ -458,6 +516,8 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         void OnLook(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
+        void OnLeftGrab(InputAction.CallbackContext context);
+        void OnRightGrab(InputAction.CallbackContext context);
     }
     public interface IDialogueActions
     {

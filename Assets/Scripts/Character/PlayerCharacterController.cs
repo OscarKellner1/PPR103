@@ -33,12 +33,15 @@ public class PlayerCharacterController : MonoBehaviour
     private Rigidbody rb;
     private CameraController cam;
     private InteractionSystem interactionSystem;
+    private GrabSystem grabSystem;
 
     //Input system
     private InputAction moveAction;
     private InputAction lookAction;
     private InputAction jumpAction;
     private InputAction interactAction;
+    private InputAction leftGrabAction;
+    private InputAction rightGrabAction;
 
 
     // Unity Messages
@@ -47,11 +50,14 @@ public class PlayerCharacterController : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         cam = GetComponentInChildren<CameraController>();
         interactionSystem = GetComponent<InteractionSystem>();
+        grabSystem = GetComponent<GrabSystem>();
 
         moveAction = InputUtility.Controls.Character.Move;
         lookAction = InputUtility.Controls.Character.Look;
         jumpAction = InputUtility.Controls.Character.Jump;
         interactAction = InputUtility.Controls.Character.Interact;
+        leftGrabAction = InputUtility.Controls.Character.LeftGrab;
+        rightGrabAction = InputUtility.Controls.Character.RightGrab;
         InputUtility.SetInputType(InputType.Character);
     }
 
@@ -69,6 +75,36 @@ public class PlayerCharacterController : MonoBehaviour
             interactionSystem.TryInteract();
         }
 
+        if (rightGrabAction.triggered)
+        {
+            if (grabSystem.TryGrabRight(out Vector3 grabPos))
+            {
+                rb.useGravity = false;
+                rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
+            }
+        }
+        else if (rightGrabAction.WasReleasedThisFrame())
+        {
+            grabSystem.ReleaseRight();
+        }
+
+        if (leftGrabAction.triggered)
+        {
+            if (grabSystem.TryGrabLeft(out Vector3 grabPos))
+            {
+                rb.useGravity = false;
+                rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
+            }
+        }
+        else if (leftGrabAction.WasReleasedThisFrame())
+        {
+            grabSystem.ReleaseLeft();
+        }
+
+        if (!grabSystem.grabbingLeft && !grabSystem.grabbingRight && !rb.useGravity)
+        {
+            rb.useGravity = true;
+        }
     }
 
     private void FixedUpdate()
