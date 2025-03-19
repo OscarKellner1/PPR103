@@ -2,56 +2,62 @@ using System;
 using System.Collections;
 using UnityEngine;
 
+
 public struct XZSample : IEnumerable
 {
-    public Vector3 Center;
+    public enum Area
+    {
+        Forward = 0,
+        Left = 1,
+        Right = 2,
+        Backward = 3,
+    }
+
     public Vector3 Forward;
     public Vector3 Left;
     public Vector3 Right;
     public Vector3 Backward;
 
-    public XZSample(float scale)
+    public XZSample(float scale, float angle = 0)
     {
         scale *= 0.5f;
-        Center = Vector3.zero;
-        Forward = Vector3.forward * scale;
-        Left = Vector3.left * scale;
-        Right = Vector3.right * scale;
-        Backward = Vector3.back * scale;
+        var rotation = Quaternion.Euler(0f, angle, 0f);
+        Forward = rotation * Vector3.forward * scale;
+        Left = rotation * Vector3.left * scale;
+        Right = rotation * Vector3.right * scale;
+        Backward = rotation *Vector3.back * scale;
     }
 
-    public readonly Vector3 Get(SampleArea area)
+    public readonly Vector3 Get(Area area)
     {
         return area switch
         {
-            SampleArea.Center => Center,
-            SampleArea.Forward => Forward,
-            SampleArea.Left => Left,
-            SampleArea.Right => Right,
-            SampleArea.Backward => Backward,
+            Area.Forward => Forward,
+            Area.Left => Left,
+            Area.Right => Right,
+            Area.Backward => Backward,
             _ => Vector3.zero,
         };
     }
 
-    public void Set(SampleArea area, Vector3 vec)
+    public void Set(Area area, Vector3 vec)
     {
         switch (area)
         {
-            case SampleArea.Center: Center = vec; break;
-            case SampleArea.Forward: Forward = vec; break;
-            case SampleArea.Left: Left = vec; break;
-            case SampleArea.Right: Right = vec; break;
-            case SampleArea.Backward: Backward = vec; break;
+            case Area.Forward: Forward = vec; break;
+            case Area.Left: Left = vec; break;
+            case Area.Right: Right = vec; break;
+            case Area.Backward: Backward = vec; break;
             default: break;
         }
     }
 
     public static Array SampleAreas()
     {
-        return Enum.GetValues(typeof(SampleArea));
+        return Enum.GetValues(typeof(Area));
     }
 
-    public XZSampleEnum GetEnumerator()
+    public readonly XZSampleEnum GetEnumerator()
     {
         return new XZSampleEnum(this);
     }
@@ -74,7 +80,7 @@ public struct XZSampleEnum : IEnumerator
         position = -1;
     }
 
-    public readonly object Current => sample.Get((SampleArea)position);
+    public readonly object Current => sample.Get((XZSample.Area)position);
 
     public bool MoveNext()
     {
@@ -86,13 +92,4 @@ public struct XZSampleEnum : IEnumerator
     {
         position = -1;
     }
-}
-
-public enum SampleArea
-{
-    Center = 0,
-    Forward = 1,
-    Left = 2,
-    Right = 3,
-    Backward = 4,
 }

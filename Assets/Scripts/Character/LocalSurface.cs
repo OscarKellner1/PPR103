@@ -13,11 +13,6 @@ public readonly struct LocalSurface
         this.Normals = normals;
     }
 
-    public Vector3 CenterNormal()
-    {
-        return Normals.Center;
-    }
-
     public Vector3 CenterNormalFromAverage()
     {
         Vector3 dz = (Points.Forward - Points.Backward).normalized;

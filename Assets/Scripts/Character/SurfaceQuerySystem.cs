@@ -5,9 +5,13 @@ using UnityEngine;
 public class SurfaceQuerySystem : MonoBehaviour
 {
     [SerializeField]
-    private float sampleSize = 1;
+    private float _queryScale = 1;
+    [SerializeField]
+    private int _sampleCount = 2;
 
-    public XZSample RaycastPoints { get; private set; }
+    public int SampleCount => _sampleCount;
+    public XZSample[] RaycastPoints { get; private set; }
+
 
 
     private void Start()
@@ -17,18 +21,24 @@ public class SurfaceQuerySystem : MonoBehaviour
 
     public void GenerateRaycastPoints()
     {
-        RaycastPoints = new XZSample(sampleSize);
+        RaycastPoints = new XZSample[_sampleCount];
+
+        for (int i = 0; i < _sampleCount; i++)
+        {
+            RaycastPoints[i] = new XZSample(_queryScale, angle: 90f * i / _sampleCount);
+        }
     }
 
-    public LocalSurface GetLocalSurface()
+    public LocalSurface GetSurface(int surfaceIndex)
     {
+        XZSample sample = RaycastPoints[surfaceIndex];
         Ray ray = new(Vector3.zero, Vector3.down);
 
         XZSample surfacePoints = new();
         XZSample surfaceNormals = new();
-        foreach (SampleArea area in XZSample.SampleAreas())
+        foreach (XZSample.Area area in XZSample.SampleAreas())
         {
-            var point = RaycastPoints.Get(area);
+            var point = sample.Get(area);
             ray.origin = transform.TransformPoint(point);
 
             if (Physics.Raycast(ray, out RaycastHit hit))
@@ -45,4 +55,13 @@ public class SurfaceQuerySystem : MonoBehaviour
         return new LocalSurface(surfacePoints, surfaceNormals);
     }
 
+    public LocalSurface[] GetAllSurfaces()
+    {
+        LocalSurface[] surfaces = new LocalSurface[SampleCount];
+        for (int i = 0; i < SampleCount; i++)
+        {
+            surfaces[i] = GetSurface(i);
+        }
+        return surfaces;
+    }
 }

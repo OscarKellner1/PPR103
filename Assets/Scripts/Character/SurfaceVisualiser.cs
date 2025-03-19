@@ -20,9 +20,20 @@ public class SurfaceVisualiser : MonoBehaviour
 
 
         querySystem.GenerateRaycastPoints();
-        LocalSurface surface = querySystem.GetLocalSurface();
+        Vector3 normalSum = Vector3.zero;
+        foreach (LocalSurface surface in querySystem.GetAllSurfaces())
+        {
+            DrawSurface(surface);
 
-        foreach (SampleArea area in XZSample.SampleAreas())
+            normalSum += surface.CenterNormalFromAverage();
+        }
+        Gizmos.color = Color.green;
+        Gizmos.DrawRay(Vector3.zero, normalSum.normalized * sphereRadius);
+    }
+
+    public void DrawSurface(LocalSurface surface)
+    {
+        foreach (XZSample.Area area in XZSample.SampleAreas())
         {
             var point = surface.Points.Get(area);
 
@@ -31,9 +42,5 @@ public class SurfaceVisualiser : MonoBehaviour
             Gizmos.color = Color.cyan;
             Gizmos.DrawRay(point, surface.Normals.Get(area) * 0.25f);
         }
-
-        Gizmos.color = Color.green;
-        Gizmos.DrawRay(Vector3.zero, surface.CenterNormalFromAverage() * sphereRadius);
-
     }
 }
