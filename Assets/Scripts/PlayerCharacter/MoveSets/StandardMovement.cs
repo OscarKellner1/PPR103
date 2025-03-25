@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class StandardMovement : IMoveSet
 {
-    public void OnEnter() { }
+    public void OnEnter(PlayerCharacterController controller) { }
 
-    public void OnExit() { }
+    public void OnExit(PlayerCharacterController controller) { }
 
     public void OnUpdate(PlayerInput input, PlayerCharacterController controller)
     {
