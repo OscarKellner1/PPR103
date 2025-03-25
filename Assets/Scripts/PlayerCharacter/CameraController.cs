@@ -5,6 +5,7 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
     private Camera cam;
+    public float Pitch = 0f;
 
     void Start()
     {
@@ -13,6 +14,7 @@ public class CameraController : MonoBehaviour
 
     void LateUpdate()
     {
+        transform.localRotation = Quaternion.Euler(Pitch, 0f, 0f);
         cam.transform.position = transform.position;
         cam.transform.rotation = transform.rotation;
     }

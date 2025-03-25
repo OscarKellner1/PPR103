@@ -15,36 +15,39 @@ public class PlayerCharacterController : MonoBehaviour
     [SerializeField]
     private float jumpImpulse = 2f;
 
-    [Header("Grounded Check")]
-    [SerializeField]
-    private float groundedRaycastLength = 0.1f;
-    [SerializeField]
-    private LayerMask groundedRaycastMask;
-
-    // Hidden varaibles
-    private float cameraPitch;
+    // State
     private bool isGrounded;
-    private Vector2 lookInput;
-    private Vector3 moveInput;
-    private bool jumpInput;
+    private IMoveSet moveSet;
 
     //Components
     private new CapsuleCollider collider; // Used in Gizmos
     private Rigidbody rb;
+    private GroundedSystem groundedSystem;
     private CameraController cam;
     private InteractionSystem interactionSystem;
 
-    //Input system
+    //Input
     private InputAction moveAction;
     private InputAction lookAction;
     private InputAction jumpAction;
     private InputAction interactAction;
+    private PlayerInput playerInput;
 
+    // Public variables
+    public float Movespeed => movespeed;
+    public float LookSensitvity => lookSensitivity;
+    public float JumpImpulse => jumpImpulse;
+    public bool IsGrounded => isGrounded;
+    public Rigidbody Rigidbody => rb;
+    public GroundedSystem GroundedSystem => groundedSystem;
+    public CameraController CameraController => cam;
+    public InteractionSystem InteractionSystem => interactionSystem;
 
     // Unity Messages
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        groundedSystem = GetComponent<GroundedSystem>();
         cam = GetComponentInChildren<CameraController>();
         interactionSystem = GetComponent<InteractionSystem>();
 
@@ -53,68 +56,30 @@ public class PlayerCharacterController : MonoBehaviour
         jumpAction = InputUtility.Controls.Character.Jump;
         interactAction = InputUtility.Controls.Character.Interact;
         InputUtility.SetInputType(InputType.Character);
+
+        playerInput = new PlayerInput();
+        moveSet = new StandardMovement();
     }
 
     void Update()
     {
-        isGrounded = CheckGrounded();
+        isGrounded = groundedSystem.CheckGrounded();
 
-        // Physics related input
-        lookInput += lookAction.ReadValue<Vector2>() * lookSensitivity;
-        moveInput = moveAction.ReadValue<Vector3>();
-        jumpInput |= jumpAction.triggered;
+        playerInput.Look += lookAction.ReadValue<Vector2>() * lookSensitivity;
+        playerInput.Move = moveAction.ReadValue<Vector3>();
+        playerInput.Jump |= jumpAction.triggered;
+        playerInput.Interact = interactAction.triggered;
 
-        if (interactAction.triggered)
-        {
-            interactionSystem.TryInteract();
-        }
-
+        moveSet.OnUpdate(ref playerInput, this);
     }
 
     private void FixedUpdate()
     {
-        RotateView(lookInput);
-        lookInput = Vector2.zero;
-
-        MoveInDirection(moveInput);
-
-
-        if (jumpInput && isGrounded)
-        {
-            Jump();
-        }
-        jumpInput = false;
+        moveSet.OnFixedUpdate(ref playerInput, this);
     }
 
 
-    // Helper Methods
-    bool CheckGrounded()
-    {
-        Ray ray = new(transform.position + transform.up * 0.1f, -transform.up);
-        Debug.DrawRay(ray.origin, ray.direction, Color.cyan);
-        return Physics.Raycast(ray, groundedRaycastLength + 0.1f, groundedRaycastMask);
-    }
-
-    void RotateView(Vector2 input)
-    {
-        rb.rotation *= Quaternion.Euler(0f, input.x, 0f);
-        cameraPitch = Mathf.Clamp(cameraPitch - input.y, -89, 89);
-        cam.transform.localRotation = Quaternion.Euler(cameraPitch, 0f, 0f);
-    }
-
-    void MoveInDirection(Vector3 input)
-    {
-        Vector3 planarMovement = transform.rotation * (input * movespeed);
-        rb.velocity = new Vector3(planarMovement.x, rb.velocity.y, planarMovement.z);
-    }
-
-    void Jump()
-    {
-        rb.AddForce(transform.up * jumpImpulse);
-    }
-
-
-    // Gizmos
+    // Gizmos //
     private void OnDrawGizmos()
     {
         if (collider == null) collider = GetComponent<CapsuleCollider>();
