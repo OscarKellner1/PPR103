@@ -8,4 +8,12 @@ public struct PlayerInput
     public Vector3 Move;
     public bool Interact;
     public bool Jump;
+
+    public void Flush()
+    {
+        Look = Vector2.zero;
+        Move = Vector3.zero;
+        Interact = false;
+        Jump = false;
+    }
 }

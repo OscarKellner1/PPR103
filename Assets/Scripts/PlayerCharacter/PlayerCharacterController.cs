@@ -70,12 +70,13 @@ public class PlayerCharacterController : MonoBehaviour
         playerInput.Jump |= jumpAction.triggered;
         playerInput.Interact = interactAction.triggered;
 
-        moveSet.OnUpdate(ref playerInput, this);
+        moveSet.OnUpdate(playerInput, this);
     }
 
     private void FixedUpdate()
     {
-        moveSet.OnFixedUpdate(ref playerInput, this);
+        moveSet.OnFixedUpdate(playerInput, this);
+        playerInput.Flush();
     }
 
 

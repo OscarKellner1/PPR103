@@ -6,7 +6,7 @@ public class StandardMovement : IMoveSet
 
     public void OnExit() { }
 
-    public void OnUpdate(ref PlayerInput input, PlayerCharacterController controller)
+    public void OnUpdate(PlayerInput input, PlayerCharacterController controller)
     {
         if (input.Interact)
         {
@@ -14,11 +14,9 @@ public class StandardMovement : IMoveSet
         }
     }
 
-    public void OnFixedUpdate(ref PlayerInput input, PlayerCharacterController controller)
+    public void OnFixedUpdate(PlayerInput input, PlayerCharacterController controller)
     {
         RotateView(input.Look, controller);
-        input.Look = Vector2.zero;
-
         MoveInDirection(input.Move, controller);
 
 
@@ -26,24 +24,23 @@ public class StandardMovement : IMoveSet
         {
             Jump(controller);
         }
-        input.Jump = false;
     }
 
-    void RotateView(Vector2 input, PlayerCharacterController controller)
+    void RotateView(Vector2 lookInput, PlayerCharacterController controller)
     {
         var rb = controller.Rigidbody;
         var camController = controller.CameraController;
 
-        rb.rotation *= Quaternion.Euler(0f, input.x, 0f);
-        camController.Pitch = Mathf.Clamp(camController.Pitch - input.y, -89, 89);
+        rb.rotation *= Quaternion.Euler(0f, lookInput.x, 0f);
+        camController.Pitch = Mathf.Clamp(camController.Pitch - lookInput.y, -89, 89);
     }
 
-    void MoveInDirection(Vector3 input, PlayerCharacterController controller)
+    void MoveInDirection(Vector3 moveInput, PlayerCharacterController controller)
     {
         var movespeed = controller.Movespeed;
         var rb = controller.Rigidbody;
        
-        Vector3 planarMovement = controller.transform.rotation * (input * movespeed);
+        Vector3 planarMovement = controller.transform.rotation * (moveInput * movespeed);
         rb.velocity = new Vector3(planarMovement.x, rb.velocity.y, planarMovement.z);
     }
 
