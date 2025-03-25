@@ -19,14 +19,14 @@ public class PlayerCharacterController : MonoBehaviour
     private bool isGrounded;
     private IMoveSet moveSet;
 
-    //Components
+    // Components
     private new CapsuleCollider collider; // Used in Gizmos
     private Rigidbody rb;
     private GroundedSystem groundedSystem;
     private CameraController cam;
     private InteractionSystem interactionSystem;
 
-    //Input
+    // Input
     private InputAction moveAction;
     private InputAction lookAction;
     private InputAction jumpAction;
@@ -92,12 +92,7 @@ public class PlayerCharacterController : MonoBehaviour
         
         Gizmos.color = Color.blue;
         Vector3 arrowStart = transform.position + transform.up * collider.height * 0.5f;
-        Vector3 arrowTip = arrowStart + transform.forward * collider.radius * 2f;
-        Gizmos.DrawLine(arrowStart, arrowTip);
+        ExtraGizmos.DrawArrow(arrowStart, transform.forward, length: collider.height * 0.5f);
 
-        Gizmos.DrawLine(arrowTip, arrowTip - (transform.forward + transform.up) * 0.3f);
-        Gizmos.DrawLine(arrowTip, arrowTip - (transform.forward - transform.up) * 0.3f);
-        Gizmos.DrawLine(arrowTip, arrowTip - (transform.forward + transform.right) * 0.3f);
-        Gizmos.DrawLine(arrowTip, arrowTip - (transform.forward - transform.right) * 0.3f);
     }
 }
