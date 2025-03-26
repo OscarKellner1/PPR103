@@ -30,6 +30,7 @@ public class DialogueManager : MonoBehaviour
     public List<CameraTarget> cameraTargets;
 
     private DialogueData currentDialogue;
+    private DialogueTrigger currentNPC;
     private int dialogueIndex = 0;
     private InputType previousInputType; //used to remember the input type used before entering dialogue
     public DialogueUI DUI;
@@ -43,20 +44,25 @@ public class DialogueManager : MonoBehaviour
     }
 
     // Starts a new dialogue sequence
-    public void StartDialogue(DialogueData dialogue)
+    public void StartDialogue(DialogueData dialogue, DialogueTrigger npc)
     {
         currentDialogue = dialogue;
-        dialogueIndex = 0; // Start from the beginning of the dialogue
-        dialogueBox.SetActive(true); // Show the dialogue box
+        dialogueIndex = 0;
+        currentNPC = npc; // Store reference to NPC
+
+        // Start dialogue UI
+        dialogueBox.SetActive(true);
         speakerBox.SetActive(true);
         previousInputType = InputUtility.InputType;
         InputUtility.SetInputType(InputType.Dialogue);
-        ShowDialogueEntry(); // Display the first entry
+
+        ShowDialogueEntry();
     }
 
     // Handles the display of each dialogue entry in the sequence
     void ShowDialogueEntry()
     {
+        currentNPC.isTalking = true;
         // If we have reached the end of the dialogue entries, end the conversation
         if (dialogueIndex >= currentDialogue.dialogueEntries.Count)
         {
@@ -74,7 +80,7 @@ public class DialogueManager : MonoBehaviour
         {
             // If conditions aren't met, end the current conversation and start a new one
             EndDialogue();
-            StartDialogue(entry.failedDialogue); // Start a new conversation if conditions fail
+            StartDialogue(entry.failedDialogue, currentNPC); // Start a new conversation if conditions fail
             return;
         }
 
@@ -158,7 +164,7 @@ public class DialogueManager : MonoBehaviour
         else if (response.nextDialogue != null)
         {
             // If there's a next dialogue to go to, start it (branching)
-            StartDialogue(response.nextDialogue); // Trigger the new conversation based on the response
+            StartDialogue(response.nextDialogue, currentNPC); // Trigger the new conversation based on the response
         }
         else
         {
@@ -170,22 +176,28 @@ public class DialogueManager : MonoBehaviour
     // End the current conversation
     public void EndDialogue()
     {
-        dialogueBox.SetActive(false); // Hide the dialogue box
+        dialogueBox.SetActive(false);
         speakerBox.SetActive(false);
         responseButton1.gameObject.SetActive(false);
         responseButton2.gameObject.SetActive(false);
+
+        // Stop NPC from talking
+        if (currentNPC != null)
+        {
+            currentNPC.StopTalking();
+            currentNPC = null;
+        }
+
         if (currentDialogue?.AfterDialogueEvent != null)
         {
             currentDialogue.AfterDialogueEvent.Invoke();
         }
+
         InputUtility.SetInputType(previousInputType);
     }
-
-    [System.Serializable]
-    public class CameraTarget
+    public void FinishedText()
     {
-        public string name; // The name of the target to match with cameraContext
-        public Transform cameraTransform; // The transform of the object to look at
+        currentNPC.StopTalking();
     }
 
 }
