@@ -121,8 +121,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ead8adcd4ad964b408e1af9d4dc5a8dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Me: {fileID: 0}
-  npcName: Anais
+  Me: {fileID: 279289471307918415}
+  npcName: NAME
   isTalking: 0
   materials:
   - {fileID: 2100000, guid: 301e9a9d9d2920e408a3309d79f467ef, type: 2}

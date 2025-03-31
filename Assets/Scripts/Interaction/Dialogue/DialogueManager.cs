@@ -27,7 +27,7 @@ public class DialogueManager : MonoBehaviour
     public TMP_Text responseButton1Text;
     public TMP_Text responseButton2Text;
 
-    public List<CameraTarget> cameraTargets;
+    public List<CameraTarget> cameraTargets; // Add code to NPC on awake, to find Dialogue manager, find the entry with the same name as the NPC, and attach its transform to the transform parameter of the entry. Cinemachine!
 
     private DialogueData currentDialogue;
     private DialogueTrigger currentNPC;
