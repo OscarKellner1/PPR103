@@ -46,10 +46,7 @@ public class DialogueTrigger : MonoBehaviour
         StartCoroutine(MaterialSwapRoutine());
     }
 
-    private void OnMouseDown()
-    {
-        TriggerDialogue();
-    }
+
 
     public void TriggerDialogue()
     {
