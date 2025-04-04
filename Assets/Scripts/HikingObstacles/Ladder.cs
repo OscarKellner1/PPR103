@@ -16,4 +16,12 @@ public class Ladder : MonoBehaviour
         Gizmos.color = Color.blue;
         ExtraGizmos.DrawArrow(transform.position + transform.TransformDirection(arrowOffset), UpDirection);
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.TryGetComponent(out PlayerCharacterController controller))
+        {
+            controller.ChangeMoveset(new LadderMovement(this));
+        }
+    }
 }

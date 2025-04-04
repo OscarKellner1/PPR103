@@ -80,6 +80,14 @@ public class PlayerCharacterController : MonoBehaviour
     }
 
 
+    public void ChangeMoveset(IMoveSet newMoveset)
+    {
+        moveSet.OnExit(this);
+        moveSet = newMoveset;
+        moveSet.OnEnter(this);
+    }
+
+
     // Gizmos //
     private void OnDrawGizmos()
     {
