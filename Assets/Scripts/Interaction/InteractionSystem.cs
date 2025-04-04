@@ -69,10 +69,14 @@ public class InteractionSystem : MonoBehaviour
     /// </summary>
     public bool TryInteract()
     {
-        if (interactionInfo.TryGetObject(out InteractionObject interactionObject))
+        if (interactionInfo.TryGetInteractionObject(out InteractionObject interactionObject))
         {
             interactionObject.Interact();
             return true;
+        }
+        else if (interactionInfo.TryGetPickUpObject(out PickUpObject pickUpObject))
+        {
+            // You can write pickup code here
         }
         return false;
     }

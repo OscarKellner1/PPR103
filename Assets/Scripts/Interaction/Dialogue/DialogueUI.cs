@@ -9,6 +9,7 @@ using TMPro;
 public class DialogueUI : MonoBehaviour
 {
     public TMP_Text dialogueText;
+    public DialogueManager manager;
     public float textSpeed = 0.05f;
 
     public void DisplayText(string text)
@@ -25,5 +26,6 @@ public class DialogueUI : MonoBehaviour
             dialogueText.text += c;
             yield return new WaitForSeconds(textSpeed);
         }
+        manager.FinishedText();
     }
 }

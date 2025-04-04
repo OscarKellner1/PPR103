@@ -294,7 +294,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6795798369437636967, guid: b41bbe403cb54af4696e1d443423cf83, type: 3}
       propertyPath: m_Layer
-      value: 0
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 8787046090656496994, guid: b41bbe403cb54af4696e1d443423cf83, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -706,7 +706,7 @@ GameObject:
   - component: {fileID: 1721392966}
   - component: {fileID: 1721392965}
   - component: {fileID: 1721392964}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -811,7 +811,7 @@ GameObject:
   - component: {fileID: 1854523639}
   - component: {fileID: 1854523638}
   - component: {fileID: 1854523637}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
