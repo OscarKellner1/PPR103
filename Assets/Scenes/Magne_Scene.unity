@@ -480,7 +480,7 @@ GameObject:
   - component: {fileID: 1559731947}
   - component: {fileID: 1559731946}
   - component: {fileID: 1559731950}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -568,13 +568,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1559731945}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.7030358, y: -0.70607847, z: -0.059845217, w: 0.06010435}
-  m_LocalPosition: {x: 7.78, y: 0.45, z: -3.66}
+  m_LocalRotation: {x: -0.21481834, y: -0.9729641, z: -0.018286118, w: 0.08282278}
+  m_LocalPosition: {x: 3.78, y: 1.03, z: -2.48}
   m_LocalScale: {x: 1, y: 4.438, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: -530.269, y: 0.042007446, z: 269.749}
+  m_LocalEulerAnglesHint: {x: -535.919, y: 8.841003, z: 204.58499}
 --- !u!114 &1559731950
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -587,7 +587,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93aa7fe2e618ee847aa72afc4ba2a5db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  upDirection: {x: 0, y: 1, z: 0}
+  localUpDirection: {x: 0, y: 1, z: 0}
   arrowOffset: {x: 1, y: 0, z: 0}
 --- !u!1 &1613131741
 GameObject:
