@@ -77,7 +77,8 @@ public class PlayerCharacterController : MonoBehaviour
     private void FixedUpdate()
     {
         moveSet.OnFixedUpdate(playerInput, this);
-        playerInput.Flush();
+        playerInput.Look = Vector2.zero;
+        playerInput.Jump = false;
     }
 
 
