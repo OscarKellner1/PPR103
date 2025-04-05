@@ -24,4 +24,12 @@ public class Ladder : MonoBehaviour
             controller.ChangeMoveset(new LadderMovement(this));
         }
     }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.TryGetComponent(out PlayerCharacterController controller))
+        {
+            controller.ChangeMoveset(new StandardMovement());
+        }
+    }
 }

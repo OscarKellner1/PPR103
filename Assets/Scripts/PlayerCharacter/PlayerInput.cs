@@ -5,7 +5,7 @@ using UnityEngine;
 public struct PlayerInput
 {
     public Vector2 Look;
-    public Vector3 Move;
+    public Vector2 Move;
     public bool Interact;
     public bool Jump;
 

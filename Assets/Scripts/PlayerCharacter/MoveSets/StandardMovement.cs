@@ -22,33 +22,21 @@ public class StandardMovement : IMoveSet
 
         if (input.Jump && controller.IsGrounded)
         {
-            Jump(controller);
+            controller.Jump(Vector3.up);
         }
     }
 
     void RotateView(Vector2 lookInput, PlayerCharacterController controller)
     {
-        var rb = controller.Rigidbody;
         var camController = controller.CameraController;
 
-        rb.rotation *= Quaternion.Euler(0f, lookInput.x, 0f);
+        controller.Rotate(Quaternion.Euler(0f, lookInput.x, 0f));
         camController.Pitch = Mathf.Clamp(camController.Pitch - lookInput.y, -89, 89);
     }
 
-    void MoveInDirection(Vector3 moveInput, PlayerCharacterController controller)
+    void MoveInDirection(Vector2 moveInput, PlayerCharacterController controller)
     {
-        var movespeed = controller.Movespeed;
-        var rb = controller.Rigidbody;
-       
-        Vector3 planarMovement = controller.transform.rotation * (moveInput * movespeed);
-        rb.velocity = new Vector3(planarMovement.x, rb.velocity.y, planarMovement.z);
-    }
-
-    void Jump(PlayerCharacterController controller)
-    {
-        var rb = controller.Rigidbody;
-        var jumpImpulse = controller.JumpImpulse;
-
-        rb.AddForce(controller.transform.up * jumpImpulse);
+        Vector3 planarMovement = new Vector3(moveInput.x, 0f, moveInput.y);
+        controller.MoveInDirection(planarMovement, Space.Self);
     }
 }

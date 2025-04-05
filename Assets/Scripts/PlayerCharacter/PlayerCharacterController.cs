@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -37,9 +34,13 @@ public class PlayerCharacterController : MonoBehaviour
     public float Movespeed => movespeed;
     public float LookSensitvity => lookSensitivity;
     public float JumpImpulse => jumpImpulse;
+    public bool UseGravity
+    {
+        get { return rb.useGravity; }
+        set { rb.useGravity = value; }  
+    }
     public bool IsGrounded => isGrounded;
-    public Rigidbody Rigidbody => rb;
-    public GroundedSystem GroundedSystem => groundedSystem;
+    public Vector3 Velocity => rb.velocity;
     public CameraController CameraController => cam;
     public InteractionSystem InteractionSystem => interactionSystem;
 
@@ -66,7 +67,7 @@ public class PlayerCharacterController : MonoBehaviour
         isGrounded = groundedSystem.CheckGrounded();
 
         playerInput.Look += lookAction.ReadValue<Vector2>() * lookSensitivity;
-        playerInput.Move = moveAction.ReadValue<Vector3>();
+        playerInput.Move = moveAction.ReadValue<Vector2>();
         playerInput.Jump |= jumpAction.triggered;
         playerInput.Interact = interactAction.triggered;
 
@@ -80,6 +81,7 @@ public class PlayerCharacterController : MonoBehaviour
     }
 
 
+    // Public interface
     public void ChangeMoveset(IMoveSet newMoveset)
     {
         moveSet.OnExit(this);
@@ -87,6 +89,47 @@ public class PlayerCharacterController : MonoBehaviour
         moveSet.OnEnter(this);
     }
 
+    public void MoveInDirection(Vector3 dir, Space space = Space.World)
+    {
+        if (space == Space.Self)
+        {
+            dir = transform.TransformDirection(dir);
+        }
+        if (UseGravity)
+        {
+            var planarVelocity = new Vector3(dir.x, 0f, dir.z).normalized * movespeed;
+            rb.velocity = planarVelocity + Vector3.up * rb.velocity.y;
+        }
+        else
+        {
+            rb.velocity = dir.normalized * movespeed;
+        }
+    }
+
+    public void Rotate(Quaternion rotation)
+    {
+        rb.rotation *= rotation;
+    }
+
+    public void AddForce(Vector3 force, Space space = Space.World, ForceMode forceMode = ForceMode.Force)
+    {
+        if (space == Space.Self)
+        {
+            force = transform.TransformDirection(force);
+        }
+        rb.AddForce(force, forceMode);
+    }
+
+    public void Jump(Vector3 dir, Space space = Space.World)
+    {
+        dir.Normalize();
+        if (space == Space.Self)
+        {
+            dir = transform.TransformDirection(dir);
+        }
+
+        rb.AddForce(dir * jumpImpulse, ForceMode.Force);
+    }
 
     // Gizmos //
     private void OnDrawGizmos()
