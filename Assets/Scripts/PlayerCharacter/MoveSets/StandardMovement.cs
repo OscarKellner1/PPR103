@@ -37,6 +37,6 @@ public class StandardMovement : IMoveSet
     void MoveInDirection(Vector2 moveInput, PlayerCharacterController controller)
     {
         Vector3 planarMovement = new Vector3(moveInput.x, 0f, moveInput.y);
-        controller.MoveInDirection(planarMovement, Space.Self);
+        controller.SetVelocity(planarMovement, Space.Self);
     }
 }

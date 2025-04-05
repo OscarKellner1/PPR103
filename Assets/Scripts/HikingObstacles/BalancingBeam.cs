@@ -1,21 +1,25 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.LightAnchor;
 
-public class Ladder : MonoBehaviour
+public class BalancingBeam : MonoBehaviour
 {
     [Header("Ladder Direction")]
     [SerializeField]
-    private Vector3 localUpDirection = Vector3.up;
+    private Vector3 localForwardDirection = Vector3.forward;
     [Header("Gizmos")]
     [SerializeField]
     private Vector3 arrowOffset;
 
-    public Vector3 UpDirection => transform.TransformDirection(localUpDirection.normalized);
+    public Vector3 ForwardDirection => transform.TransformDirection(localForwardDirection);
+
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.TryGetComponent(out PlayerCharacterController controller))
         {
-            controller.ChangeMoveset(new LadderMovement(this));
+            controller.ChangeMoveset(new BalanceMovement(this));
         }
     }
 
@@ -31,6 +35,6 @@ public class Ladder : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.blue;
-        ExtraGizmos.DrawArrow(transform.position + transform.TransformDirection(arrowOffset), UpDirection);
+        ExtraGizmos.DrawArrow(transform.position + transform.TransformDirection(arrowOffset), ForwardDirection);
     }
 }

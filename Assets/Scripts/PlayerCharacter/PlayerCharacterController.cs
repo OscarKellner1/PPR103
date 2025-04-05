@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -6,7 +7,7 @@ public class PlayerCharacterController : MonoBehaviour
     // Inspector varaibles
     [Header("Movement")]
     [SerializeField]
-    private float movespeed = 5f;
+    private float baseMovespeed = 5f;
     [SerializeField]
     private float lookSensitivity = 0.2f;
     [SerializeField]
@@ -14,6 +15,7 @@ public class PlayerCharacterController : MonoBehaviour
 
     // State
     private bool isGrounded;
+    private float moveSpeedModifier = 1f;
     private IMoveSet moveSet;
 
     // Components
@@ -31,7 +33,13 @@ public class PlayerCharacterController : MonoBehaviour
     private PlayerInput playerInput;
 
     // Public variables
-    public float Movespeed => movespeed;
+    public float BaseMovespeed => baseMovespeed;
+    public float Movespeed => baseMovespeed * moveSpeedModifier;
+    public float MovespeedModifier
+    { 
+        get { return moveSpeedModifier; } 
+        set { moveSpeedModifier = value; }
+    }
     public float LookSensitvity => lookSensitivity;
     public float JumpImpulse => jumpImpulse;
     public bool UseGravity
@@ -77,6 +85,8 @@ public class PlayerCharacterController : MonoBehaviour
     private void FixedUpdate()
     {
         moveSet.OnFixedUpdate(playerInput, this);
+
+        // Flushing persistent input
         playerInput.Look = Vector2.zero;
         playerInput.Jump = false;
     }
@@ -90,7 +100,7 @@ public class PlayerCharacterController : MonoBehaviour
         moveSet.OnEnter(this);
     }
 
-    public void MoveInDirection(Vector3 dir, Space space = Space.World)
+    public void SetVelocity(Vector3 dir, Space space = Space.World, VelocityScaling scalingMode = VelocityScaling.Normalize)
     {
         if (space == Space.Self)
         {
@@ -98,12 +108,29 @@ public class PlayerCharacterController : MonoBehaviour
         }
         if (UseGravity)
         {
-            var planarVelocity = new Vector3(dir.x, 0f, dir.z).normalized * movespeed;
+            var planarVelocity = scalingMode switch
+            {
+                VelocityScaling.Raw =>
+                    new Vector3(dir.x, 0f, dir.z),
+                VelocityScaling.Normalize =>
+                    new Vector3(dir.x, 0f, dir.z).normalized,
+                VelocityScaling.Clamp01 =>
+                    Vector3.ClampMagnitude(new Vector3(dir.x, 0f, dir.z), 1f),
+                _ => 
+                    throw new ArgumentException("Invalid scaling mode"),
+            } * Movespeed;
             rb.velocity = planarVelocity + Vector3.up * rb.velocity.y;
         }
         else
         {
-            rb.velocity = dir.normalized * movespeed;
+            rb.velocity = scalingMode switch
+            { 
+                VelocityScaling.Raw => dir,
+                VelocityScaling.Normalize => dir.normalized,
+                VelocityScaling.Clamp01 => Vector3.ClampMagnitude(dir, 1f),
+                _ => throw new ArgumentException("Invalid scaling mode"),
+
+            } * Movespeed;
         }
     }
 

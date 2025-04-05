@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class LadderMovement : IMoveSet
 {
-    Ladder ladder;
+    readonly Ladder ladder;
 
     public LadderMovement(Ladder ladder)
     {
@@ -47,7 +47,7 @@ public class LadderMovement : IMoveSet
                 + moveInput.x * controller.transform.right;
         }
 
-        controller.MoveInDirection(ladderMovement);
+        controller.SetVelocity(ladderMovement);
     }
 
 }
