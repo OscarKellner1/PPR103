@@ -14,11 +14,13 @@ public class BalanceMovement : IMoveSet
     public void OnEnter(PlayerCharacterController controller)
     {
         controller.MovespeedModifier = beam.MoveSpeedModifier;
+        controller.UseGravity = false;
     }
 
     public void OnExit(PlayerCharacterController controller)
     {
         controller.MovespeedModifier = 1f;
+        controller.UseGravity = true;
     }
 
     public void OnUpdate(PlayerInput input, PlayerCharacterController controller) { }

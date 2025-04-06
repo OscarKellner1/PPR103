@@ -11,9 +11,19 @@ public class LadderMovement : IMoveSet
         this.ladder = ladder;
     }
 
-    public void OnEnter(PlayerCharacterController controller) { controller.UseGravity = false; }
+    public void OnEnter(PlayerCharacterController controller) 
+    { 
+        controller.UseGravity = false;
+        controller.MovespeedModifier = 0.8f;
+    }
 
-    public void OnExit(PlayerCharacterController controller) { controller.UseGravity = true; }
+    public void OnExit(PlayerCharacterController controller) 
+    { 
+        controller.UseGravity = true;
+        controller.MovespeedModifier = 1f;
+        controller.SetVelocity(
+            new Vector3(controller.Velocity.x, 0f, controller.Velocity.y ), Space.World, VelocityScaling.Raw);
+    }
 
     public void OnUpdate(PlayerInput input, PlayerCharacterController controller) { }
 
