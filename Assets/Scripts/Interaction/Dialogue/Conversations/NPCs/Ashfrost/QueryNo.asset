@@ -1,0 +1,69 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 468ecc104494f3c409ea9267ca843a65, type: 3}
+  m_Name: QueryNo
+  m_EditorClassIdentifier: 
+  dialogueEntries:
+  - speakerName: Ashfrost
+    portrait: {fileID: 21300000, guid: 7ebed63bde4788f4ab00bf3843fd9310, type: 3}
+    cameraContext: 
+    dialogueText: ...
+    isThinking: 0
+    isSilent: 1
+    textspeed: 1
+    waitTime: 1
+    autoProgress: 1
+    autoProgressDelay: 4
+    voiceClip: {fileID: 0}
+    onDialogueEvent:
+      m_PersistentCalls:
+        m_Calls: []
+    responses: []
+  - speakerName: Ashfrost
+    portrait: {fileID: 21300000, guid: 7ebed63bde4788f4ab00bf3843fd9310, type: 3}
+    cameraContext: 
+    dialogueText: Dude.
+    isThinking: 0
+    isSilent: 0
+    textspeed: 0.05
+    waitTime: 0
+    autoProgress: 0
+    autoProgressDelay: 0
+    voiceClip: {fileID: 0}
+    onDialogueEvent:
+      m_PersistentCalls:
+        m_Calls: []
+    responses:
+    - responseText: Yeah?
+      nextDialogue: {fileID: 0}
+      Ender: 0
+  - speakerName: Ashfrost
+    portrait: {fileID: 21300000, guid: 7ebed63bde4788f4ab00bf3843fd9310, type: 3}
+    cameraContext: 
+    dialogueText: That's hella lame.
+    isThinking: 0
+    isSilent: 0
+    textspeed: 0.05
+    waitTime: 1
+    autoProgress: 0
+    autoProgressDelay: 0
+    voiceClip: {fileID: 0}
+    onDialogueEvent:
+      m_PersistentCalls:
+        m_Calls: []
+    responses:
+    - responseText: Okay.
+      nextDialogue: {fileID: 0}
+      Ender: 0
+  AfterDialogueEvent:
+    m_PersistentCalls:
+      m_Calls: []

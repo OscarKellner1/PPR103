@@ -15,10 +15,12 @@ public class DialogueTrigger : MonoBehaviour
     public GameObject Me;
     public string npcName; // Set this in the inspector or dynamically
     public bool isTalking = false; // True when NPC is talking
+    public bool AlternateSprites = false;
 
     private Renderer npcRenderer;
     private int matIndex = 1; // Swaps between 1 and 2
     private Dictionary<string, Material> materialDict = new Dictionary<string, Material>();
+    
 
     public List<Material> materials; // Assign materials in the inspector (must be 4: idle1, idle2, talk1, talk2)
 
@@ -42,6 +44,11 @@ public class DialogueTrigger : MonoBehaviour
         materialDict.Add(npcName + "_False_2", materials[1]); // Idle 2
         materialDict.Add(npcName + "_True_1", materials[2]);  // Talking 1
         materialDict.Add(npcName + "_True_2", materials[3]);  // Talking 2
+        materialDict.Add(npcName + "_False_1Alt", materials[4]); // Idle 1
+        materialDict.Add(npcName + "_False_2Alt", materials[5]); // Idle 2
+        materialDict.Add(npcName + "_True_1Alt", materials[6]);  // Talking 1
+        materialDict.Add(npcName + "_True_2Alt", materials[7]);  // Talking 2
+
 
         StartCoroutine(MaterialSwapRoutine());
     }
@@ -79,7 +86,10 @@ public class DialogueTrigger : MonoBehaviour
 
             // Generate the key
             string code = npcName + "_" + isTalking + "_" + matIndex;
-
+            if(AlternateSprites)
+            {
+                code = code + "Alt";
+            }
             // Apply the correct material
             if (materialDict.TryGetValue(code, out Material newMaterial))
             {
