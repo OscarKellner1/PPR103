@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-7962435671494286742
+--- !u!114 &-7545551614360099773
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
@@ -37,7 +37,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _Texture:
-        m_Texture: {fileID: 2800000, guid: 4c84ecb3b6395834382fbfb75cf251ba, type: 3}
+        m_Texture: {fileID: 2800000, guid: 16268708223d6944588e0b4df56660a3, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -54,7 +54,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _AlphaClipThreshold: 0.903
+    - _AlphaClipThreshold: 0.862
     - _QueueControl: 0
     - _QueueOffset: 0
     m_Colors: []

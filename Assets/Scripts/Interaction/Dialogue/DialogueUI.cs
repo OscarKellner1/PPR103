@@ -10,22 +10,42 @@ public class DialogueUI : MonoBehaviour
 {
     public TMP_Text dialogueText;
     public DialogueManager manager;
-    public float textSpeed = 0.05f;
 
-    public void DisplayText(string text)
+    private void Start()
+    {
+ 
+    }
+    public void DisplayText(string text,float speed)
     {
         StopAllCoroutines();
-        StartCoroutine(TypeText(text));
+        StartCoroutine(TypeText(text, speed, manager));
     }
 
-    IEnumerator TypeText(string text)
+    IEnumerator TypeText(string text,float speed, DialogueManager man )
     {
-        dialogueText.text = "";
-        foreach (char c in text)
+        if(speed == 0)
         {
-            dialogueText.text += c;
-            yield return new WaitForSeconds(textSpeed);
+            dialogueText.text = text;
+            
         }
-        manager.FinishedText();
+        else
+        {
+            dialogueText.text = "";
+            foreach (char c in text)
+            {
+                dialogueText.text += c;
+                yield return new WaitForSeconds(speed);
+            }
+        }
+        
+        if (man != null)
+        {
+            man.FinishedText();
+        }
+
+           
+        
+
+       
     }
 }

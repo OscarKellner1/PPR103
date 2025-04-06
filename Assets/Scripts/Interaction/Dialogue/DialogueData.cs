@@ -13,9 +13,12 @@ public class DialogueData : ScriptableObject
     {
         public string speakerName; // Name of the speaker
         public Sprite portrait; // Speaker portrait image
-        public string cameraContext;  // The name of the object to focus the camera on
+        public string cameraContext;  // The name of the object to focus the camera on, a list of names and pairing game objects will be searched to find this.
         [TextArea(3, 5)] public string dialogueText; // The actual dialogue line
         public bool isThinking; // Whether it's a "thinking" dialogue
+        public bool isSilent;
+        [Tooltip("Default is 0.05f")]
+        public float textspeed = 0.05f;
         public float waitTime; // Time to wait before showing this dialogue
         public bool autoProgress; // If true, auto-continues after delay
         public float autoProgressDelay; // Delay before auto-progressing
@@ -23,8 +26,8 @@ public class DialogueData : ScriptableObject
         public AudioClip voiceClip; // Voice clip for the dialogue
         public UnityEngine.Events.UnityEvent onDialogueEvent; // Events triggered in this entry
 
-        public List<DialogueCondition> conditions; // Conditions required for this dialogue
-        public DialogueData failedDialogue;
+       /* public List<DialogueCondition> conditions; // Conditions required for this dialogue
+        public DialogueData failedDialogue;*/
         public List<PlayerResponse> responses; // Player response options
     }
 

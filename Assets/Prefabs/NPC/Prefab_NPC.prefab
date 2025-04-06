@@ -65,7 +65,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 7878e4caa40277f4492ec1558577b908, type: 2}
+  - {fileID: 2100000, guid: 6c53446d8d5b4c34f86b5e37a5f64e28, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -124,10 +124,15 @@ MonoBehaviour:
   Me: {fileID: 279289471307918415}
   npcName: NAME
   isTalking: 0
+  AlternateSprites: 0
   materials:
   - {fileID: 2100000, guid: 301e9a9d9d2920e408a3309d79f467ef, type: 2}
   - {fileID: 2100000, guid: 7878e4caa40277f4492ec1558577b908, type: 2}
   - {fileID: 2100000, guid: d9e65a96b9906ee4d834677555b11806, type: 2}
+  - {fileID: 2100000, guid: 371fe054d6e46c043b152ce9230fc018, type: 2}
+  - {fileID: 2100000, guid: 371fe054d6e46c043b152ce9230fc018, type: 2}
+  - {fileID: 2100000, guid: 371fe054d6e46c043b152ce9230fc018, type: 2}
+  - {fileID: 2100000, guid: 371fe054d6e46c043b152ce9230fc018, type: 2}
   - {fileID: 2100000, guid: 371fe054d6e46c043b152ce9230fc018, type: 2}
   conversations:
   - conversationName: First Encounter

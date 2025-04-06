@@ -8,6 +8,7 @@ using UnityEngine.UI;
 using TMPro;
 using System.Collections.Generic;
 using static DialogueData;
+using static UnityEngine.EventSystems.EventTrigger;
 
 public class DialogueManager : MonoBehaviour
 {
@@ -15,6 +16,8 @@ public class DialogueManager : MonoBehaviour
 
     [Header("UI Elements")]
     public GameObject dialogueBox;
+    public GameObject dialogueObject;
+    public GameObject thoughtBox;
     public GameObject speakerBox;
     public TMP_Text dialogueText;
     public TMP_Text speakerNameText;
@@ -49,11 +52,9 @@ public class DialogueManager : MonoBehaviour
         currentDialogue = dialogue;
         dialogueIndex = 0;
         currentNPC = npc; // Store reference to NPC
-
+      
         // Start dialogue UI
-        dialogueBox.SetActive(true);
-        speakerBox.SetActive(true);
-        previousInputType = InputUtility.InputType;
+  
         InputUtility.SetInputType(InputType.Dialogue);
 
         ShowDialogueEntry();
@@ -62,42 +63,86 @@ public class DialogueManager : MonoBehaviour
     // Handles the display of each dialogue entry in the sequence
     void ShowDialogueEntry()
     {
-        currentNPC.isTalking = true;
+        dialogueObject.SetActive(false);
+        StopAllCoroutines();
         // If we have reached the end of the dialogue entries, end the conversation
         if (dialogueIndex >= currentDialogue.dialogueEntries.Count)
         {
             EndDialogue();
             return;
         }
-
+        
         DialogueData.DialogueEntry entry = currentDialogue.dialogueEntries[dialogueIndex];
 
+        if (entry.waitTime != 0)
+        {
+            currentNPC.isTalking = false;
+        }
+
+        StartCoroutine(NextStep(entry));
+
         // Check if the cameraContext matches an NPC/target name
-      //  SwitchCamera(entry.cameraContext);
+        //  SwitchCamera(entry.cameraContext);
 
         // Check conditions before displaying dialogue entry
-        if (!ConditionChecker.Instance.AreConditionsMet(entry.conditions))
+        /* if (!ConditionChecker.Instance.AreConditionsMet(entry.conditions))
+         {
+             // If conditions aren't met, end the current conversation and start a new one
+             EndDialogue();
+             StartDialogue(entry.failedDialogue, currentNPC); // Start a new conversation if conditions fail
+             return;
+         }*/
+       
+    }
+    private IEnumerator NextStep(DialogueEntry entry)
+    {
+        if(entry.waitTime != 0)
         {
-            // If conditions aren't met, end the current conversation and start a new one
-            EndDialogue();
-            StartDialogue(entry.failedDialogue, currentNPC); // Start a new conversation if conditions fail
-            return;
+            dialogueBox.SetActive(false);
+            dialogueObject.SetActive(false);
+            speakerBox.SetActive(false);
+            responseButton1.gameObject.SetActive(false);
+            responseButton2.gameObject.SetActive(false);
+            yield return new WaitForSeconds(entry.waitTime);
         }
-
+       
+        if (entry.isThinking)
+        {
+            dialogueBox.SetActive(false);
+            speakerBox.SetActive(false);
+            thoughtBox.SetActive(true);
+        }
+        else
+        {
+            thoughtBox.SetActive(false);
+            dialogueBox.SetActive(true);
+            speakerBox.SetActive(true);
+        }
+        if (entry.isSilent == false)
+        {
+            currentNPC.isTalking = true;
+        }
+        else
+        {
+            currentNPC.isTalking = false;
+        }
+        dialogueObject.SetActive(true);
         speakerNameText.text = entry.speakerName;
         portraitImage.sprite = entry.portrait;
-        DUI.DisplayText(entry.dialogueText);
-       // dialogueText.text = entry.dialogueText;
+        DUI.DisplayText(entry.dialogueText, entry.textspeed);
+        // dialogueText.text = entry.dialogueText;
 
         // Handle auto-progress if required
-        if (entry.autoProgress)
-        {
-            StartCoroutine(AutoProgressDialogue(entry.autoProgressDelay));
-        }
+       
 
         // Trigger any events tied to the dialogue entry
         entry.onDialogueEvent?.Invoke();
         ShowResponses(entry.responses);
+        if (entry.autoProgress)
+        {
+            yield return new WaitForSeconds(entry.autoProgressDelay);
+            NextDialogueEntry();
+        }
     }
 
     void SwitchCamera(string cameraContext)
@@ -114,11 +159,7 @@ public class DialogueManager : MonoBehaviour
     }
 
     // Automatically progresses to the next dialogue entry after a delay
-    IEnumerator AutoProgressDialogue(float delay)
-    {
-        yield return new WaitForSeconds(delay);
-        NextDialogueEntry();
-    }
+   
 
     // Proceed to the next dialogue entry in the sequence
     public void NextDialogueEntry()
@@ -176,28 +217,37 @@ public class DialogueManager : MonoBehaviour
     // End the current conversation
     public void EndDialogue()
     {
+        
         dialogueBox.SetActive(false);
+        dialogueObject.SetActive(false);
         speakerBox.SetActive(false);
         responseButton1.gameObject.SetActive(false);
         responseButton2.gameObject.SetActive(false);
 
+       
         // Stop NPC from talking
         if (currentNPC != null)
         {
             currentNPC.StopTalking();
             currentNPC = null;
         }
-
+       
         if (currentDialogue?.AfterDialogueEvent != null)
         {
             currentDialogue.AfterDialogueEvent.Invoke();
         }
-
-        InputUtility.SetInputType(previousInputType);
+      
+        InputUtility.SetInputType(InputType.Character);
+      
     }
     public void FinishedText()
     {
-        currentNPC.StopTalking();
+        if (currentNPC != null)
+        {
+            currentNPC.StopTalking();
+        }
+      
+        
     }
 
 }
