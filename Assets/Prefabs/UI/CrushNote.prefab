@@ -135,7 +135,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2287962128982610921}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 6.3092, y: 1.614757, z: -7.655998}
   m_LocalScale: {x: 0.67888653, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -420,10 +420,10 @@ MonoBehaviour:
   - {x: 1, y: 0, z: 0, w: -1}
   - {x: 1, y: 0, z: 0, w: -1}
   - {x: 1, y: 0, z: 0, w: -1}
-  - {x: -1, y: 0.0000052020473, z: 0.000005543207, w: -1}
-  - {x: -1, y: 0.000005202061, z: 0.000005526189, w: -1}
-  - {x: -1, y: 0.000005202061, z: 0.000005526189, w: -1}
-  - {x: -1, y: 0.0000052020746, z: 0.0000055091705, w: -1}
+  - {x: -1, y: 0.0000052020478, z: 0.000000059577573, w: -1}
+  - {x: -1, y: 0.0000052020614, z: 0.00000004254525, w: -1}
+  - {x: -1, y: 0.0000052020614, z: 0.00000004254525, w: -1}
+  - {x: -1, y: 0.000005202075, z: 0.000000025512925, w: -1}
   m_Colors: []
   m_UnwrapParameters:
     m_HardAngle: 88
@@ -433,7 +433,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 2084
+  m_VersionIndex: 2090
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []

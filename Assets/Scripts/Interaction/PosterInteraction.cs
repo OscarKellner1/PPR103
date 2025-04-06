@@ -12,6 +12,7 @@ public class PosterInteraction : MonoBehaviour
     public Animator uiAnimator; // Reference to Animator
     public VideoClip clip;
     private bool isInteracting = false;
+    public GameObject PCan;
 
     [System.Serializable]
     public class PosterEntry
@@ -98,5 +99,17 @@ public class PosterInteraction : MonoBehaviour
                 yield return new WaitForSeconds(speed);
             }
         }
+    }
+    private void Start()
+    {
+        StartCoroutine(GetPcan());
+    }
+    private IEnumerator GetPcan()
+    {
+        yield return new WaitForSeconds(0.5f);
+        PCan = GameObject.Find("PosterCanvas");
+        videoPlayer = PCan.GetComponentInChildren<VideoPlayer>();
+        uiAnimator = PCan.GetComponentInChildren<Animator>();
+        textDisplay = PCan.GetComponentInChildren<TextMeshProUGUI>();
     }
 }

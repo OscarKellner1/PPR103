@@ -1,0 +1,16 @@
+{
+  "74e6c118251988f448db92f26e3da63a": {
+    "sceneGuid": "ce1e044610c2da541bc42aa7862cb0a7",
+    "uniqueCameraId": "74e6c118251988f448db92f26e3da63a",
+    "name": "NPC Wall",
+    "pointX": -138.473236,
+    "pointY": 44.66668,
+    "pointZ": 22.940731,
+    "directionX": 0.06804478,
+    "directionY": -0.242877752,
+    "directionZ": -0.01711457,
+    "directionW": -0.967919767,
+    "zoom": 2.171908,
+    "cameraMode": 2
+  }
+}
