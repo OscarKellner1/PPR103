@@ -10,11 +10,14 @@ public static class InputUtility
     public static void Initialize()
     {
         Controls = new Controls();
+        if (Debug.isDebugBuild) Controls.Debug.Enable();
     }
    
     public static void SetInputType(InputType newType)
     {
         Controls.Disable();
+        if (Debug.isDebugBuild) Controls.Debug.Enable(); // Debug should always be enabled in debug scenarios
+
         InputType = newType;
         switch (InputType)
         {

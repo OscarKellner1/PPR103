@@ -153,6 +153,7 @@ GameObject:
   - component: {fileID: 3597832924669225848}
   - component: {fileID: 2529763758027064678}
   - component: {fileID: 6495010082920913133}
+  - component: {fileID: 3564074074564717536}
   - component: {fileID: 1432131162565930066}
   - component: {fileID: 2578783576949459627}
   m_Layer: 6
@@ -186,7 +187,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6443429798631478426}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 2eaa059da5bd2f94e8e6a0d98ac78a22, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -241,9 +242,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e0e98aee822fcf42893d54de9f205e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movespeed: 5
+  baseMovespeed: 5
   lookSensitivity: 0.2
   jumpImpulse: 200
+--- !u!114 &3564074074564717536
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6443429798631478426}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00db5ab20f248964e96b06ca83f20dbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   groundedRaycastLength: 0.1
   groundedRaycastMask:
     serializedVersion: 2
@@ -360,3 +373,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59fe1d52a3054db499962ca87c56b92b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bobSpeed: 3
+  bobAmplitude: 0.1
+  bobAmount:
+    upperBound: 1
+    lowerBound: 0
+    changeSpeed: 4
