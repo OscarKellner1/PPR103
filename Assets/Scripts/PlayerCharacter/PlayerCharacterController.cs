@@ -174,4 +174,19 @@ public class PlayerCharacterController : MonoBehaviour
         ExtraGizmos.DrawArrow(arrowStart, transform.forward, length: collider.height * 0.5f);
 
     }
+    private void OnTriggerEnter(Collider collision)
+    {
+        if (collision.gameObject.tag == "Speed") {
+
+            moveSpeedModifier = 3f / 5f;
+        }
+    }
+
+    private void OnTriggerExit(Collider collision)
+    {
+        if (collision.gameObject.tag == "Speed")
+        {
+            moveSpeedModifier = 5f / 5f;
+        }
+    }
 }
