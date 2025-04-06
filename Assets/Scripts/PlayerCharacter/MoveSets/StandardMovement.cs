@@ -31,7 +31,7 @@ public class StandardMovement : IMoveSet
         var camController = controller.CameraController;
 
         controller.Rotate(Quaternion.Euler(0f, lookInput.x, 0f));
-        camController.Pitch = Mathf.Clamp(camController.Pitch - lookInput.y, -89, 89);
+        camController.Pitch = Mathf.Clamp(camController.Pitch - lookInput.y, -89f, 89f);
     }
 
     void MoveInDirection(Vector2 moveInput, PlayerCharacterController controller)

@@ -5,14 +5,18 @@ using static UnityEngine.LightAnchor;
 
 public class BalancingBeam : MonoBehaviour
 {
-    [Header("Ladder Direction")]
+    [Header("Beam Direction")]
     [SerializeField]
     private Vector3 localForwardDirection = Vector3.forward;
+    [Header("Movement Modifications")]
+    [SerializeField]
+    float moveSpeedModifier = 1.0f;
     [Header("Gizmos")]
     [SerializeField]
     private Vector3 arrowOffset;
 
     public Vector3 ForwardDirection => transform.TransformDirection(localForwardDirection);
+    public float MoveSpeedModifier => moveSpeedModifier;
 
 
     private void OnTriggerEnter(Collider other)

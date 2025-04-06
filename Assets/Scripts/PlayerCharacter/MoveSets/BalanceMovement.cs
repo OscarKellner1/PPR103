@@ -13,14 +13,12 @@ public class BalanceMovement : IMoveSet
 
     public void OnEnter(PlayerCharacterController controller)
     {
-        controller.MovespeedModifier = 0.5f;
-        controller.CameraController.FOVModifier = 0.1f;
+        controller.MovespeedModifier = beam.MoveSpeedModifier;
     }
 
     public void OnExit(PlayerCharacterController controller)
     {
         controller.MovespeedModifier = 1f;
-        controller.CameraController.FOVModifier = 1f;
     }
 
     public void OnUpdate(PlayerInput input, PlayerCharacterController controller) { }

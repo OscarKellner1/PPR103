@@ -4,24 +4,56 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
+    [SerializeField]
+    float bobSpeed = 2f;
+    [SerializeField]
+    float bobAmplitude = 0.15f;
+    [SerializeField]
+    DynamicValue bobAmount;
+
     private Camera cam;
+    private PlayerCharacterController charController;
+    private Vector3 cameraOffset;
+    private float pitch = 0;
+    
+    private float bobAnimationValue;
 
-    private float baseFOV;
+    public float Pitch
+    {
+        get { return pitch; }
+        set { transform.localRotation = Quaternion.Euler(value, 0f, 0f); pitch = value; }
+    }
 
-    public float Pitch { get; set; } = 0f;
-    public float FOVModifier { get; set; } = 1.0f;
+
 
     void Start()
     {
         cam = Camera.main;
-        baseFOV = cam.fieldOfView;
+        charController = GetComponentInParent<PlayerCharacterController>();
+        Pitch = 0f;
     }
+
 
     void LateUpdate()
     {
-        transform.localRotation = Quaternion.Euler(Pitch, 0f, 0f);
-        cam.transform.position = transform.position;
+        if (charController.Velocity.magnitude > 0f )
+        {
+            bobAmount.Increase(Time.deltaTime);
+        }
+        else
+        {
+            bobAmount.Decrease(Time.deltaTime);
+        }
+
+        bobAnimationValue += Time.deltaTime * bobSpeed * charController.Velocity.magnitude;
+        cameraOffset = Vector3.up * Mathf.Sin(bobAnimationValue) * bobAmplitude * bobAmount.Value;
+
+        UpdateCamera();
+    }
+
+    void UpdateCamera()
+    {
+        cam.transform.position = transform.position + cameraOffset;
         cam.transform.rotation = transform.rotation;
-        Debug.Log(FOVModifier);
     }
 }
