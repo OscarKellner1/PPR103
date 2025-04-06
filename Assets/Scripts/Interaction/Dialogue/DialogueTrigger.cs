@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static DialogueTrigger;
 
 public class DialogueTrigger : MonoBehaviour
 {
@@ -68,6 +69,22 @@ public class DialogueTrigger : MonoBehaviour
         }
 
         Debug.Log("No valid conversations found for this NPC.");
+    }
+
+    private void OnTriggerEnter(Collider collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            TriggerDialogue();
+        }
+    }
+    
+    private void OnTriggerExit(Collider collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            GetComponent<Collider>().enabled = false;
+        }
     }
 
     public void StopTalking()
