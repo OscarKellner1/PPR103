@@ -76,7 +76,7 @@ public class PlayModeDebug : MonoBehaviour
     void ToggleConsole(bool isActive)
     {
         DebugConsole.SetActive(isActive);
-        InputUtility.SetDebugMode(!isActive);
+        InputUtility.SetDebugMode(isActive);
         consoleActive = isActive;
     }
 
