@@ -9,14 +9,14 @@ EditorBuildSettings:
     path: Assets/Scenes/IntroScene.unity
     guid: 44ac997c0f108c2429becfdcafd827bf
   - enabled: 1
-    path: Assets/Scenes/Bootstrap.unity
-    guid: d3c30795a65a75642ae33578d6bc68bf
-  - enabled: 1
     path: Assets/Scenes/A1PrototypeScene.unity
     guid: ce1e044610c2da541bc42aa7862cb0a7
   - enabled: 1
     path: Assets/Scenes/Magne_Scene.unity
     guid: 27eabd62b3cdbd247bb903a15ff59cf7
+  - enabled: 1
+    path: Assets/Scenes/Bootstrap.unity
+    guid: d3c30795a65a75642ae33578d6bc68bf
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 6b6fc084f4483a04eb104afb6b5c02be, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 386bb79950c420f4b8ec794ecfd5ccec, type: 3}
