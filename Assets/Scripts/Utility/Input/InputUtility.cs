@@ -46,6 +46,7 @@ public static class InputUtility
         }
         else
         {
+            Controls.Disable();
             isActive = false;
         }
     }
