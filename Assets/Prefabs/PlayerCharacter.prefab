@@ -438,7 +438,7 @@ MonoBehaviour:
   groundedRaycastLength: 0.1
   groundedRaycastMask:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 65
 --- !u!114 &1432131162565930066
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -456,7 +456,7 @@ MonoBehaviour:
   interactionSphereCastRadius: 0.1
   interactionSphereCastLayers:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 65
   uiPrefab: {fileID: 349880438757985574, guid: ccc067c62397a354ca91eb9e6fce62c7, type: 3}
   displayRangeIndicator: 0
 --- !u!114 &2578783576949459627
