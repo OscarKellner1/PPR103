@@ -14,7 +14,10 @@ public class PlayModeDebug : MonoBehaviour
     GameObject DebugConsole;
     [SerializeField]
     TMP_Text textField;
+    [SerializeField]
+    InputActionAsset debugInputActionAsset;
 
+    private DebugControls debugControls;
     private InputAction reloadScene;
     private InputAction toggleConsole;
     private InputAction enter;
@@ -25,7 +28,11 @@ public class PlayModeDebug : MonoBehaviour
 
     private void Awake()
     {
-        if (instance == null)
+        if (!Debug.isDebugBuild)
+        {
+            Destroy(gameObject);
+        }
+        else if (instance == null)
         {
             instance = this;
             DontDestroyOnLoad(gameObject);
@@ -38,14 +45,16 @@ public class PlayModeDebug : MonoBehaviour
 
     private void Start()
     {
-        reloadScene = InputUtility.Controls.Debug.ReloadScene;
-        toggleConsole = InputUtility.Controls.Debug.ToggleConsole;
-        enter = InputUtility.Controls.Debug.Enter;
-        backspace = InputUtility.Controls.Debug.Backspace;
-        ToggleConsole(false);
+        debugControls = new DebugControls();
+        reloadScene = debugControls.Default.ReloadScene;
+        toggleConsole = debugControls.Default.ToggleConsole;
+        enter = debugControls.Default.Enter;
+        backspace = debugControls.Default.Backspace;
+        debugControls.Enable();
+
+        ToggleConsole(consoleActive);
         inputBuffer = string.Empty;
         Keyboard.current.onTextInput += AppendToInputBuffer;
-
     }
 
     void Update()
@@ -76,7 +85,12 @@ public class PlayModeDebug : MonoBehaviour
     void ToggleConsole(bool isActive)
     {
         DebugConsole.SetActive(isActive);
-        InputUtility.SetDebugMode(isActive);
+        InputUtility.SetActive(!isActive);
+        if (isActive)
+        {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+        }
         consoleActive = isActive;
     }
 

@@ -182,116 +182,6 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
-        },
-        {
-            ""name"": ""Debug"",
-            ""id"": ""b752330d-077e-45e2-9566-d6be1f19a9c6"",
-            ""actions"": [
-                {
-                    ""name"": ""ReloadScene"",
-                    ""type"": ""Button"",
-                    ""id"": ""19915f8a-cb68-4f1f-a3f9-a13e96db1a85"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""ToggleConsole"",
-                    ""type"": ""Button"",
-                    ""id"": ""4c8bf49c-ae78-47d5-b4f8-699280a91e00"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Enter"",
-                    ""type"": ""Button"",
-                    ""id"": ""20d6ba2a-8558-4abb-878b-37c7342c00da"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Backspace"",
-                    ""type"": ""Button"",
-                    ""id"": ""ec124b3b-828e-41a8-bcbf-28969e549a37"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                }
-            ],
-            ""bindings"": [
-                {
-                    ""name"": ""One Modifier"",
-                    ""id"": ""4fb7bbd2-a947-43a2-ba11-53b24a557521"",
-                    ""path"": ""OneModifier"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""ReloadScene"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""modifier"",
-                    ""id"": ""398c6100-05cf-4124-a0c2-e6e4088319a0"",
-                    ""path"": ""<Keyboard>/ctrl"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""ReloadScene"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""binding"",
-                    ""id"": ""8f468ec5-09c2-4159-a85c-287d0a94303b"",
-                    ""path"": ""<Keyboard>/r"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""ReloadScene"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""dd78039e-b7e1-404c-ad0b-f813517f7684"",
-                    ""path"": ""<Keyboard>/numpadMultiply"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""ToggleConsole"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""bf44ae72-7de9-446f-b6ca-f40e32286e3c"",
-                    ""path"": ""<Keyboard>/backspace"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Backspace"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""8ef2b0f3-0d8e-44f4-a381-74fac60ac609"",
-                    ""path"": ""<Keyboard>/enter"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Enter"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                }
-            ]
         }
     ],
     ""controlSchemes"": []
@@ -305,19 +195,12 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         // Dialogue
         m_Dialogue = asset.FindActionMap("Dialogue", throwIfNotFound: true);
         m_Dialogue_NextLine = m_Dialogue.FindAction("NextLine", throwIfNotFound: true);
-        // Debug
-        m_Debug = asset.FindActionMap("Debug", throwIfNotFound: true);
-        m_Debug_ReloadScene = m_Debug.FindAction("ReloadScene", throwIfNotFound: true);
-        m_Debug_ToggleConsole = m_Debug.FindAction("ToggleConsole", throwIfNotFound: true);
-        m_Debug_Enter = m_Debug.FindAction("Enter", throwIfNotFound: true);
-        m_Debug_Backspace = m_Debug.FindAction("Backspace", throwIfNotFound: true);
     }
 
     ~@Controls()
     {
         UnityEngine.Debug.Assert(!m_Character.enabled, "This will cause a leak and performance issues, Controls.Character.Disable() has not been called.");
         UnityEngine.Debug.Assert(!m_Dialogue.enabled, "This will cause a leak and performance issues, Controls.Dialogue.Disable() has not been called.");
-        UnityEngine.Debug.Assert(!m_Debug.enabled, "This will cause a leak and performance issues, Controls.Debug.Disable() has not been called.");
     }
 
     public void Dispose()
@@ -491,76 +374,6 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         }
     }
     public DialogueActions @Dialogue => new DialogueActions(this);
-
-    // Debug
-    private readonly InputActionMap m_Debug;
-    private List<IDebugActions> m_DebugActionsCallbackInterfaces = new List<IDebugActions>();
-    private readonly InputAction m_Debug_ReloadScene;
-    private readonly InputAction m_Debug_ToggleConsole;
-    private readonly InputAction m_Debug_Enter;
-    private readonly InputAction m_Debug_Backspace;
-    public struct DebugActions
-    {
-        private @Controls m_Wrapper;
-        public DebugActions(@Controls wrapper) { m_Wrapper = wrapper; }
-        public InputAction @ReloadScene => m_Wrapper.m_Debug_ReloadScene;
-        public InputAction @ToggleConsole => m_Wrapper.m_Debug_ToggleConsole;
-        public InputAction @Enter => m_Wrapper.m_Debug_Enter;
-        public InputAction @Backspace => m_Wrapper.m_Debug_Backspace;
-        public InputActionMap Get() { return m_Wrapper.m_Debug; }
-        public void Enable() { Get().Enable(); }
-        public void Disable() { Get().Disable(); }
-        public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(DebugActions set) { return set.Get(); }
-        public void AddCallbacks(IDebugActions instance)
-        {
-            if (instance == null || m_Wrapper.m_DebugActionsCallbackInterfaces.Contains(instance)) return;
-            m_Wrapper.m_DebugActionsCallbackInterfaces.Add(instance);
-            @ReloadScene.started += instance.OnReloadScene;
-            @ReloadScene.performed += instance.OnReloadScene;
-            @ReloadScene.canceled += instance.OnReloadScene;
-            @ToggleConsole.started += instance.OnToggleConsole;
-            @ToggleConsole.performed += instance.OnToggleConsole;
-            @ToggleConsole.canceled += instance.OnToggleConsole;
-            @Enter.started += instance.OnEnter;
-            @Enter.performed += instance.OnEnter;
-            @Enter.canceled += instance.OnEnter;
-            @Backspace.started += instance.OnBackspace;
-            @Backspace.performed += instance.OnBackspace;
-            @Backspace.canceled += instance.OnBackspace;
-        }
-
-        private void UnregisterCallbacks(IDebugActions instance)
-        {
-            @ReloadScene.started -= instance.OnReloadScene;
-            @ReloadScene.performed -= instance.OnReloadScene;
-            @ReloadScene.canceled -= instance.OnReloadScene;
-            @ToggleConsole.started -= instance.OnToggleConsole;
-            @ToggleConsole.performed -= instance.OnToggleConsole;
-            @ToggleConsole.canceled -= instance.OnToggleConsole;
-            @Enter.started -= instance.OnEnter;
-            @Enter.performed -= instance.OnEnter;
-            @Enter.canceled -= instance.OnEnter;
-            @Backspace.started -= instance.OnBackspace;
-            @Backspace.performed -= instance.OnBackspace;
-            @Backspace.canceled -= instance.OnBackspace;
-        }
-
-        public void RemoveCallbacks(IDebugActions instance)
-        {
-            if (m_Wrapper.m_DebugActionsCallbackInterfaces.Remove(instance))
-                UnregisterCallbacks(instance);
-        }
-
-        public void SetCallbacks(IDebugActions instance)
-        {
-            foreach (var item in m_Wrapper.m_DebugActionsCallbackInterfaces)
-                UnregisterCallbacks(item);
-            m_Wrapper.m_DebugActionsCallbackInterfaces.Clear();
-            AddCallbacks(instance);
-        }
-    }
-    public DebugActions @Debug => new DebugActions(this);
     public interface ICharacterActions
     {
         void OnMove(InputAction.CallbackContext context);
@@ -571,12 +384,5 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     public interface IDialogueActions
     {
         void OnNextLine(InputAction.CallbackContext context);
-    }
-    public interface IDebugActions
-    {
-        void OnReloadScene(InputAction.CallbackContext context);
-        void OnToggleConsole(InputAction.CallbackContext context);
-        void OnEnter(InputAction.CallbackContext context);
-        void OnBackspace(InputAction.CallbackContext context);
     }
 }
