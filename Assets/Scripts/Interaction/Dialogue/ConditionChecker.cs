@@ -4,12 +4,10 @@ using UnityEngine;
 public class ConditionChecker : MonoBehaviour
 {
     public static ConditionChecker Instance;
-    public GameObject Player;
 
     private void Awake()
     {
         Instance = this;
-        Player = GameObject.Find("PlayerCharacter");
     }
 
     public bool AreConditionsMet(List<DialogueCondition> conditions)
@@ -34,7 +32,7 @@ public class ConditionChecker : MonoBehaviour
 
             case DialogueCondition.ConditionType.HoldingItem:
                 // Check if the item is held (assumes InventoryManager handles this logic)
-                HeldObjectHandler Handle = Player.GetComponent<HeldObjectHandler>();
+                HeldObjectHandler Handle = GameInfo.GetPlayerCharacter().GetComponent<HeldObjectHandler>();
                 if (Handle.heldObject == null)
                 {                 
                     return false;
