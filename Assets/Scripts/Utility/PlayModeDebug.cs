@@ -98,14 +98,7 @@ public class PlayModeDebug : MonoBehaviour
     void HandleCommand()
     {
         var arguments = inputBuffer.Split(' ');
-        if (arguments[0] == "scenes" && arguments.Length == 1)
-        {
-            for (int i = 1; i < SceneManager.sceneCountInBuildSettings; i++)
-            {
-                var scene = SceneManager.GetSceneByBuildIndex(i);
-                Debug.Log("Scene " + i + ": " + scene.name);
-            }
-        }
+
         if (arguments[0] == "load" && arguments.Length == 2)
         {
             SceneManager.LoadScene(arguments[1], LoadSceneMode.Single);
