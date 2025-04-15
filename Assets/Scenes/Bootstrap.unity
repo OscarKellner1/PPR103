@@ -263,6 +263,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f1da54846539c942bae48ec7fbe0aa7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DebugConsole: {fileID: 0}
+  textField: {fileID: 0}
 --- !u!1001 &435094039
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1052,3 +1054,4 @@ SceneRoots:
   - {fileID: 1996222866}
   - {fileID: 69932110}
   - {fileID: 185182973}
+  - {fileID: 1895962090}
