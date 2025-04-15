@@ -76,7 +76,7 @@ public class PlayModeDebug : MonoBehaviour
     void ToggleConsole(bool isActive)
     {
         DebugConsole.SetActive(isActive);
-        InputUtility.SetActive(!isActive);
+        InputUtility.SetDebugMode(!isActive);
         consoleActive = isActive;
     }
 
@@ -99,9 +99,22 @@ public class PlayModeDebug : MonoBehaviour
     {
         var arguments = inputBuffer.Split(' ');
 
+        // Load new scene by name
         if (arguments[0] == "load" && arguments.Length == 2)
         {
             SceneManager.LoadScene(arguments[1], LoadSceneMode.Single);
+        }
+
+        // Reload current scene
+        if (arguments[0] == "reload" && arguments.Length == 1)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex, LoadSceneMode.Single);
+        }
+
+        // Force end dialogue
+        if (arguments[0] == "end_dialogue")
+        {
+            DialogueManager.Instance.EndDialogue();
         }
 
         inputBuffer = string.Empty;

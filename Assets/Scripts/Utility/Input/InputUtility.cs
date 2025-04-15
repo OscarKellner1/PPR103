@@ -5,20 +5,20 @@ public static class InputUtility
 {
     public static Controls Controls { get; private set; }
     public static InputType InputType { get; private set; }
-    public static bool IsActive { get; private set; }
+    public static bool InDebugMode { get; private set; }
 
     private static InputType previousInputType;
 
     public static void Initialize()
     {
         Controls = new Controls();
-        IsActive = true;
+        InDebugMode = false;
         if (Debug.isDebugBuild) Controls.Debug.Enable();
     }
    
     public static void SetInputType(InputType newType)
     {
-        if (!IsActive) return;
+        if (!InDebugMode) return;
 
         Controls.Disable();
         if (Debug.isDebugBuild) Controls.Debug.Enable(); // Debug should always be enabled in debug builds
@@ -36,30 +36,27 @@ public static class InputUtility
                 Cursor.visible = true;
                 Cursor.lockState = CursorLockMode.Confined;
                 break;
-            case InputType.UI:
-                Controls.UI.Enable();
-                Cursor.visible = true;
-                Cursor.lockState = CursorLockMode.Confined;
-                break;
         }
     }
 
-    public static void SetActive(bool active)
+    public static void SetDebugMode(bool active)
     {
-        if (IsActive == active) return;
-        IsActive = active;
+        if (!Debug.isDebugBuild) return;
+
+        if (InDebugMode == active) return;
+        InDebugMode = active;
 
         if (active)
         {
-
-            SetInputType(previousInputType);
+            previousInputType = InputType;
+            Controls.Disable();
+            Controls.Debug.Enable(); // Make sure debug is still active
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
         }
         else
         {
-            previousInputType = InputType;
-            Controls.Disable();
+            SetInputType(previousInputType);
         }
-
-        if (Debug.isDebugBuild) Controls.Debug.Enable(); // Debug should always be enabled in debug builds
     }
 }
