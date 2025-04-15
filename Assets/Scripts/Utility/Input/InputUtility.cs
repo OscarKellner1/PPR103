@@ -5,18 +5,23 @@ public static class InputUtility
 {
     public static Controls Controls { get; private set; }
     public static InputType InputType { get; private set; }
+    public static bool IsActive { get; private set; }
 
+    private static InputType previousInputType;
 
     public static void Initialize()
     {
         Controls = new Controls();
+        IsActive = true;
         if (Debug.isDebugBuild) Controls.Debug.Enable();
     }
    
     public static void SetInputType(InputType newType)
     {
+        if (!IsActive) return;
+
         Controls.Disable();
-        if (Debug.isDebugBuild) Controls.Debug.Enable(); // Debug should always be enabled in debug scenarios
+        if (Debug.isDebugBuild) Controls.Debug.Enable(); // Debug should always be enabled in debug builds
 
         InputType = newType;
         switch (InputType)
@@ -37,5 +42,24 @@ public static class InputUtility
                 Cursor.lockState = CursorLockMode.Confined;
                 break;
         }
+    }
+
+    public static void SetActive(bool active)
+    {
+        if (IsActive == active) return;
+        IsActive = active;
+
+        if (active)
+        {
+
+            SetInputType(previousInputType);
+        }
+        else
+        {
+            previousInputType = InputType;
+            Controls.Disable();
+        }
+
+        if (Debug.isDebugBuild) Controls.Debug.Enable(); // Debug should always be enabled in debug builds
     }
 }
