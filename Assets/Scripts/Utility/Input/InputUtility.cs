@@ -13,6 +13,7 @@ public static class InputUtility
     {
         Controls = new Controls();
         InDebugMode = false;
+        SetInputType(InputType.None);
     }
    
     public static void SetInputType(InputType newType)
@@ -24,6 +25,10 @@ public static class InputUtility
 
         switch (InputType)
         {
+            case InputType.None:
+                Cursor.visible = true;
+                Cursor.lockState = CursorLockMode.None;
+                break;
             case InputType.Character:
                 Controls.Character.Enable();
                 Cursor.visible = false;

@@ -229,7 +229,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1701356182884867197, guid: f25598c60c0512a4d8b8ef2d0072b6b8, type: 3}
       propertyPath: m_Name
-      value: UISystem
+      value: CameraRender
       objectReference: {fileID: 0}
     - target: {fileID: 2107612189285138032, guid: f25598c60c0512a4d8b8ef2d0072b6b8, type: 3}
       propertyPath: m_Camera
@@ -587,6 +587,10 @@ PrefabInstance:
     - target: {fileID: 618966264341074980, guid: 8964d7951314d6f428946592a2a23565, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 895791651773937933, guid: 8964d7951314d6f428946592a2a23565, type: 3}
+      propertyPath: m_SortingOrder
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1857810572172012240, guid: 8964d7951314d6f428946592a2a23565, type: 3}
       propertyPath: m_LocalPosition.x
