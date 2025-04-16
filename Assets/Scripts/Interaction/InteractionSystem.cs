@@ -27,15 +27,7 @@ public class InteractionSystem : MonoBehaviour
 
 
     // Hidden variables
-    InteractionQuery interactionInfo;
-    GameObject UIElement;
-
-
-    private void Start()
-    {
-        UIElement = UISystem.AddElement(uiPrefab);
-        UIElement.SetActive(false);
-    }
+    InteractionObject interactionObject;
 
     void Update()
     {
@@ -47,20 +39,11 @@ public class InteractionSystem : MonoBehaviour
             maxInteractionRange,
             interactionSphereCastLayers))
         {
-            interactionInfo = new InteractionQuery(hit.collider.GetComponent<InteractionObject>());
+            interactionObject = hit.collider.GetComponent<InteractionObject>();
         }
         else
         {
-            interactionInfo = InteractionQuery.None();
-        }
-
-        if (interactionInfo.HasObject())
-        {
-            UIElement.SetActive(true);
-        }
-        else
-        {
-            UIElement.SetActive(false);
+            interactionObject = null;
         }
     }
 
@@ -69,15 +52,12 @@ public class InteractionSystem : MonoBehaviour
     /// </summary>
     public bool TryInteract()
     {
-        if (interactionInfo.TryGetInteractionObject(out InteractionObject interactionObject))
+        if (interactionObject != null)
         {
             interactionObject.Interact();
             return true;
         }
-        else if (interactionInfo.TryGetPickUpObject(out PickUpObject pickUpObject))
-        {
-            // You can write pickup code here
-        }
+
         return false;
     }
 
