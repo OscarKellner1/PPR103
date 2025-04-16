@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InventoryManager : MonoBehaviour
+public class InventorySystem : MonoBehaviour
 {
-    public static InventoryManager Instance;  // Singleton pattern for easy access
+    public static InventorySystem Instance;  // Singleton pattern for easy access
 
     private Dictionary<string, int> inventory = new Dictionary<string, int>();  // Tracks item name and quantity
 

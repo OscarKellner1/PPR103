@@ -42,7 +42,7 @@ public class ConditionChecker : MonoBehaviour
 
             case DialogueCondition.ConditionType.ItemInInventory:
                 // Check if the player has the required amount of the item in their inventory
-                return InventoryManager.Instance.GetItemCount(condition.IName) >= condition.Amnt;
+                return InventorySystem.Instance.GetItemCount(condition.IName) >= condition.Amnt;
 
             default:
                 Debug.LogWarning("Unhandled condition type: " + condition.CType);
