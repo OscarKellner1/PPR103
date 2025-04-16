@@ -1,7 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using System.ComponentModel;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class InteractionSystem : MonoBehaviour
 {
@@ -21,25 +20,20 @@ public class InteractionSystem : MonoBehaviour
     [SerializeField]
     private bool displayRangeIndicator = false;
 
+    public UnityEvent<InteractionObject> OnLookAtChange;
+
 
     // Hidden variables
     InteractionObject interactionObject;
 
     void Update()
     {
-        Ray lookRay = new(sphereCastSource.transform.position, sphereCastSource.transform.forward);
-        if (Physics.SphereCast(
-            lookRay,
-            interactionSphereCastRadius,
-            out RaycastHit hit,
-            maxInteractionRange,
-            interactionSphereCastLayers))
+        InteractionObject lookAtObject = GetLookAtObject();
+
+        if (interactionObject != lookAtObject)
         {
-            interactionObject = hit.collider.GetComponent<InteractionObject>();
-        }
-        else
-        {
-            interactionObject = null;
+            interactionObject = lookAtObject;
+            OnLookAtChange?.Invoke(interactionObject);
         }
     }
 
@@ -57,6 +51,23 @@ public class InteractionSystem : MonoBehaviour
         return false;
     }
 
+    private InteractionObject GetLookAtObject()
+    {
+        Ray lookRay = new(sphereCastSource.transform.position, sphereCastSource.transform.forward);
+        if (Physics.SphereCast(
+            lookRay,
+            interactionSphereCastRadius,
+            out RaycastHit hit,
+            maxInteractionRange,
+            interactionSphereCastLayers))
+        {
+            return hit.collider.GetComponent<InteractionObject>();
+        }
+        else
+        {
+            return null;
+        }
+    }
 
     //Editor and Gizmos
     private void Reset()
