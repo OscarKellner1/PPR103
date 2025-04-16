@@ -36,7 +36,7 @@ public class CameraController : MonoBehaviour
 
     void LateUpdate()
     {
-        if (charController.Velocity.magnitude > 0f )
+        if (charController.Velocity.magnitude > 0f && charController.IsGrounded)
         {
             bobAmount.Increase(Time.deltaTime);
         }
