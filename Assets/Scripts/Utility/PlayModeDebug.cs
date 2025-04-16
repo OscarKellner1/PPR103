@@ -126,9 +126,47 @@ public class PlayModeDebug : MonoBehaviour
         }
 
         // Force end dialogue
-        if (arguments[0] == "end_dialogue")
+        if (arguments[0] == "end" && arguments[1] == "dialogue" && arguments.Length == 2)
         {
             DialogueManager.Instance.EndDialogue();
+        }
+
+        // Add inventory item
+        if (arguments[0] == "give" && arguments.Length == 2)
+        {
+            InventorySystem.Instance.AddItem(arguments[1], 1);
+        }
+
+        // Add multiple items
+        if (arguments[0] == "give" && arguments.Length == 3)
+        {
+            if (int.TryParse(arguments[2], out int amount))
+            {
+                InventorySystem.Instance.AddItem(arguments[1], amount);
+            }
+            else
+            {
+                Debug.LogError("Invaid argument. Expected integer, got " + arguments[2]);
+            }
+        }
+
+        // Remove inventory item
+        if (arguments[0] == "take" && arguments.Length == 2)
+        {
+            InventorySystem.Instance.RemoveItem(arguments[1], 1);
+        }
+
+        // Remove multiple items
+        if (arguments[0] == "take" && arguments.Length == 3)
+        {
+            if (int.TryParse(arguments[2], out int amount))
+            {
+                InventorySystem.Instance.RemoveItem(arguments[1], amount);
+            }
+            else
+            {
+                Debug.LogError("Invaid argument. Expected integer, got " + arguments[2]);
+            }
         }
 
         inputBuffer = string.Empty;

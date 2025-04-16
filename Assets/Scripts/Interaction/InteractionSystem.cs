@@ -17,10 +17,6 @@ public class InteractionSystem : MonoBehaviour
     [Description("Specifies what layers to check when sphere-casting interactible objects.")]
     private LayerMask interactionSphereCastLayers;
 
-    [Header("UI")]
-    [SerializeField]
-    private GameObject uiPrefab;
-
     [Header("Debug")]
     [SerializeField]
     private bool displayRangeIndicator = false;

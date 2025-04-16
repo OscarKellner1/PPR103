@@ -3,9 +3,24 @@ using UnityEngine;
 
 public class InventorySystem : MonoBehaviour
 {
+    public readonly struct ItemSlot
+    {
+        private readonly string itemName;
+        private readonly int amount;
+
+        public readonly string ItemName => itemName;
+        public readonly int Amount => amount;
+
+        public ItemSlot(string name, int amount)
+        {
+            this.itemName = name;
+            this.amount = amount;
+        }
+    }
+
     public static InventorySystem Instance;  // Singleton pattern for easy access
 
-    private Dictionary<string, int> inventory = new Dictionary<string, int>();  // Tracks item name and quantity
+    private readonly Dictionary<string, int> inventory = new();  // Tracks item name and quantity
 
     private void Awake()
     {
@@ -13,6 +28,7 @@ public class InventorySystem : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
+            DontDestroyOnLoad(gameObject);
         }
         else
         {
@@ -39,9 +55,9 @@ public class InventorySystem : MonoBehaviour
         return inventory.ContainsKey(itemName);  // Replace with actual check if needed
     }
 
-    // Example method to add items to the inventory
     public void AddItem(string itemName, int amount)
     {
+        amount = Mathf.Max(0, amount);
         if (inventory.ContainsKey(itemName))
         {
             inventory[itemName] += amount;
@@ -49,6 +65,23 @@ public class InventorySystem : MonoBehaviour
         else
         {
             inventory.Add(itemName, amount);
+        }
+    }
+
+    public void RemoveItem(string itemName, int amount)
+    {
+        amount = Mathf.Max(0, amount);
+        if (!inventory.ContainsKey(itemName)) return;
+ 
+        inventory[itemName] -= amount;
+        if (inventory[itemName] <= 0) inventory.Remove(itemName);
+    }
+
+    public IEnumerable<ItemSlot> GetItems()
+    {
+        foreach (KeyValuePair<string, int> item in inventory)
+        {
+            yield return new ItemSlot(item.Key, item.Value);
         }
     }
 }
