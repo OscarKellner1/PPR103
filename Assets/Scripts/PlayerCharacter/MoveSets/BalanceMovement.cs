@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Moveset used for balancing. It restricts the movement of the player to a line defined by the beam.
+/// </summary>
 public class BalanceMovement : IMoveSet
 {
     readonly BalancingBeam beam;

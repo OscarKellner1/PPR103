@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// Moveset that is used when moving on the ground / platforming.
+/// </summary>
 public class StandardMovement : IMoveSet
 {
     public void OnEnter(PlayerCharacterController controller) { }

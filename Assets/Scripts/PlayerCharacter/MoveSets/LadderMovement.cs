@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Moveset when climbing things like ladders. Can also be used for sideways traversal.
+/// </summary>
 public class LadderMovement : IMoveSet
 {
     readonly Ladder ladder;

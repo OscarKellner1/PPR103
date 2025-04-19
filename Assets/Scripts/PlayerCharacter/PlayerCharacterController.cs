@@ -1,7 +1,16 @@
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
-
+/// <summary>
+/// Moves a ridgbody based on a specified moveset. Movesets allow the character to have separate behaviours in different
+/// instances. This is useful for when the player wants to do something like climbing, which is a fundamentally different way of 
+/// moving than regular platforming.
+/// 
+/// The moveset can be changed by the SetMoveset method. This is possible to do from within the moveset. This makes the player
+/// character controller a kind of finite state machine. Definition: https://en.wikipedia.org/wiki/Finite-state_machine
+/// 
+/// At start the moveset is automatically set to the StandardMovement class.
+/// </summary>
 public class PlayerCharacterController : MonoBehaviour
 {
     // Inspector varaibles
@@ -16,7 +25,7 @@ public class PlayerCharacterController : MonoBehaviour
     // State
     private bool isGrounded;
     private float moveSpeedModifier = 1f;
-    private IMoveSet moveSet;
+    private IMoveSet moveSet; // Decides how the character should respond to input
 
     // Components
     private new CapsuleCollider collider; // Used in Gizmos
@@ -33,8 +42,17 @@ public class PlayerCharacterController : MonoBehaviour
     private PlayerInput playerInput;
 
     // Public variables
+    /// <summary>
+    /// The base movespeed of the character, before any modifiers have been applied.
+    /// </summary>
     public float BaseMovespeed => baseMovespeed;
+    /// <summary>
+    /// The true movespeed of the character. This includes the move speed modifier.
+    /// </summary>
     public float Movespeed => baseMovespeed * moveSpeedModifier;
+    /// <summary>
+    /// A multiplicative modifier to movespeed. 1.0 is the same as base movespeed.
+    /// </summary>
     public float MovespeedModifier
     { 
         get { return moveSpeedModifier; } 
@@ -60,6 +78,8 @@ public class PlayerCharacterController : MonoBehaviour
         cam = GetComponentInChildren<CameraController>();
         interactionSystem = GetComponent<InteractionSystem>();
 
+        // The character controller uses the new input system.
+        // See https://docs.unity3d.com/Packages/com.unity.inputsystem@1.14/manual/index.html
         moveAction = InputUtility.Controls.Character.Move;
         lookAction = InputUtility.Controls.Character.Look;
         jumpAction = InputUtility.Controls.Character.Jump;
@@ -74,6 +94,8 @@ public class PlayerCharacterController : MonoBehaviour
     {
         isGrounded = groundedSystem.CheckGrounded();
 
+        // Input is stored in different ways based on how it will be used. Most will be used during FixedUpdate so it is
+        // necessary to store it for later. Jump and look are accrued to so that they will be applied properly during FixedUpdate.
         playerInput.Look += lookAction.ReadValue<Vector2>() * lookSensitivity;
         playerInput.Move = moveAction.ReadValue<Vector2>();
         playerInput.Jump |= jumpAction.triggered;
@@ -86,7 +108,7 @@ public class PlayerCharacterController : MonoBehaviour
     {
         moveSet.OnFixedUpdate(playerInput, this);
 
-        // Flushing persistent input
+        // Flushing accrued input
         playerInput.Look = Vector2.zero;
         playerInput.Jump = false;
     }
@@ -158,6 +180,7 @@ public class PlayerCharacterController : MonoBehaviour
 
         rb.AddForce(dir * jumpImpulse, ForceMode.Force);
     }
+
 
     // Gizmos //
     private void OnDrawGizmos()
