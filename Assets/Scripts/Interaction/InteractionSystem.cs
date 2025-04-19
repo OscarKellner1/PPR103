@@ -2,6 +2,10 @@ using System.ComponentModel;
 using UnityEngine;
 using UnityEngine.Events;
 
+/// <summary>
+/// A component that looks for an InteractionOjbect component in front of a source object and allows for interaction with
+/// said object.
+/// </summary>
 public class InteractionSystem : MonoBehaviour
 {
     // Inspector variables
