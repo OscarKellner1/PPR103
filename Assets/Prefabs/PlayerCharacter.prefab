@@ -450,10 +450,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00db5ab20f248964e96b06ca83f20dbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  groundedRaycastLength: 0.1
-  groundedRaycastMask:
+  groundedSpherecastLength: 0.1
+  groundedSpherecastMask:
     serializedVersion: 2
     m_Bits: 65
+  sphereCastRadius: 0
 --- !u!114 &1432131162565930066
 MonoBehaviour:
   m_ObjectHideFlags: 0

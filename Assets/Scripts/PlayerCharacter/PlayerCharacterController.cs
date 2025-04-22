@@ -12,18 +12,21 @@ public class PlayerCharacterController : MonoBehaviour
     private float lookSensitivity = 0.2f;
     [SerializeField]
     private float jumpImpulse = 2f;
+    [SerializeField]
+    private float slopeAngleThreshold = 45f;
 
     // State
-    private bool isGrounded;
+    private GroundCheckResult groundCheck;
     private float moveSpeedModifier = 1f;
     private IMoveSet moveSet;
 
-    // Components
-    private new CapsuleCollider collider; // Used in Gizmos
+    // Components and related
+    private new CapsuleCollider collider;
     private Rigidbody rb;
     private GroundedSystem groundedSystem;
     private CameraController cam;
     private InteractionSystem interactionSystem;
+
 
     // Input
     private InputAction moveAction;
@@ -42,12 +45,15 @@ public class PlayerCharacterController : MonoBehaviour
     }
     public float LookSensitvity => lookSensitivity;
     public float JumpImpulse => jumpImpulse;
+    public float SlopeAngleThreshold => slopeAngleThreshold;
     public bool UseGravity
     {
         get { return rb.useGravity; }
         set { rb.useGravity = value; }  
     }
-    public bool IsGrounded => isGrounded;
+    public bool IsGrounded => groundCheck.hit && !SlopeExceedsThreshold;
+    public bool SlopeExceedsThreshold =>
+        Vector3.Dot(groundCheck.normal, Vector3.up) < Mathf.Cos(Mathf.Deg2Rad*slopeAngleThreshold);
     public Vector3 Velocity => rb.velocity;
     public CameraController CameraController => cam;
     public InteractionSystem InteractionSystem => interactionSystem;
@@ -59,6 +65,7 @@ public class PlayerCharacterController : MonoBehaviour
         groundedSystem = GetComponent<GroundedSystem>();
         cam = GetComponentInChildren<CameraController>();
         interactionSystem = GetComponent<InteractionSystem>();
+        collider = GetComponent<CapsuleCollider>();
 
         moveAction = InputUtility.Controls.Character.Move;
         lookAction = InputUtility.Controls.Character.Look;
@@ -72,12 +79,25 @@ public class PlayerCharacterController : MonoBehaviour
 
     void Update()
     {
-        isGrounded = groundedSystem.CheckGrounded();
+        groundCheck = groundedSystem.CheckGrounded();
 
         playerInput.Look += lookAction.ReadValue<Vector2>() * lookSensitivity;
         playerInput.Move = moveAction.ReadValue<Vector2>();
         playerInput.Jump |= jumpAction.triggered;
         playerInput.Interact = interactAction.triggered;
+
+        if (IsGrounded && playerInput.Move == Vector2.zero)
+        {
+            collider.material.staticFriction = 100;
+            collider.material.dynamicFriction = 100;
+            collider.material.frictionCombine = PhysicMaterialCombine.Maximum;
+        }
+        else
+        {
+            collider.material.staticFriction = 0f;
+            collider.material.dynamicFriction = 0f;
+            collider.material.frictionCombine = PhysicMaterialCombine.Minimum;
+        }
 
         moveSet.OnUpdate(playerInput, this);
     }
@@ -106,6 +126,8 @@ public class PlayerCharacterController : MonoBehaviour
         {
             dir = transform.TransformDirection(dir);
         }
+
+        Vector3 newVelocity;
         if (UseGravity)
         {
             var planarVelocity = scalingMode switch
@@ -119,11 +141,11 @@ public class PlayerCharacterController : MonoBehaviour
                 _ => 
                     throw new ArgumentException("Invalid scaling mode"),
             } * Movespeed;
-            rb.velocity = planarVelocity + Vector3.up * rb.velocity.y;
+            newVelocity = planarVelocity + Vector3.up * rb.velocity.y;
         }
         else
         {
-            rb.velocity = scalingMode switch
+            newVelocity = scalingMode switch
             { 
                 VelocityScaling.Raw => dir,
                 VelocityScaling.Normalize => dir.normalized,
@@ -132,6 +154,24 @@ public class PlayerCharacterController : MonoBehaviour
 
             } * Movespeed;
         }
+
+        if (!groundCheck.hit)
+        {
+            rb.velocity = newVelocity;
+            return;
+        }
+
+
+        bool movingIntoSLope = Vector3.Dot(groundCheck.normal, newVelocity) < 0f;
+        if (SlopeExceedsThreshold && movingIntoSLope)
+        {
+            // Find vector tangent to slope
+            Vector3 tangent = Vector3.Cross(groundCheck.normal, Vector3.up);
+            // Project velocity onto tangent
+            newVelocity = tangent * Vector3.Dot(newVelocity, tangent);
+        }
+
+        rb.velocity = newVelocity;
     }
 
     public void Rotate(Quaternion rotation)
