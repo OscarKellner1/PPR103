@@ -35,7 +35,7 @@ public class ColorKey : MonoBehaviour
         rend.material = normalMaterial;  // Set the initial material to normal
     }
 
-    private void OnMouseDown()
+    public void GotPressed()
     {
         // If the keys are locked, the sequence is being checked, or this key has already been pressed, do nothing
         if (isLocked || isChecking || pressedKeys.Contains(this)) return;
