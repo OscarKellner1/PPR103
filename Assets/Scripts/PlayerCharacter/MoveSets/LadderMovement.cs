@@ -14,7 +14,7 @@ public class LadderMovement : IMoveSet
     public void OnEnter(PlayerCharacterController controller) 
     { 
         controller.UseGravity = false;
-        controller.MovespeedModifier = 0.8f;
+        controller.MovespeedModifier = ladder.MoveSpeedModifier;
     }
 
     public void OnExit(PlayerCharacterController controller) 
