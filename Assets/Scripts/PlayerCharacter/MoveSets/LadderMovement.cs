@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class LadderMovement : IMoveSet
 {
-    readonly Ladder ladder;
+    readonly ClimbArea ladder;
 
-    public LadderMovement(Ladder ladder)
+    public LadderMovement(ClimbArea ladder)
     {
         this.ladder = ladder;
     }

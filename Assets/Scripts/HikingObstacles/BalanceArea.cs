@@ -1,9 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.LightAnchor;
 
-public class BalancingBeam : MonoBehaviour
+public class BalanceArea : MonoBehaviour
 {
     [Header("Beam Direction")]
     [SerializeField]
@@ -15,7 +12,7 @@ public class BalancingBeam : MonoBehaviour
     [SerializeField]
     private Vector3 arrowOffset;
 
-    public Vector3 ForwardDirection => transform.TransformDirection(localForwardDirection);
+    public Vector3 ForwardDirection => transform.TransformDirection(localForwardDirection).normalized;
     public float MoveSpeedModifier => moveSpeedModifier;
 
 

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Ladder : MonoBehaviour
+public class ClimbArea : MonoBehaviour
 {
     [Header("Ladder Direction")]
     [SerializeField]

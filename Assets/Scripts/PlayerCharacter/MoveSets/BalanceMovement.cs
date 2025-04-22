@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class BalanceMovement : IMoveSet
 {
-    readonly BalancingBeam beam;
+    readonly BalanceArea beam;
 
-    public BalanceMovement(BalancingBeam beam)
+    public BalanceMovement(BalanceArea beam)
     {
         this.beam = beam;
     }
@@ -46,7 +46,7 @@ public class BalanceMovement : IMoveSet
             controller.transform.TransformDirection(new Vector3(moveInput.x, 0f, moveInput.y));
 
         Vector3 moveVector =
-            Vector3.Dot(inputWorldMoveDir, beam.ForwardDirection) * beam.ForwardDirection.normalized;
+            Vector3.Dot(inputWorldMoveDir, beam.ForwardDirection) * beam.ForwardDirection;
         controller.SetVelocity(moveVector, Space.World, VelocityScaling.Clamp01);
     }
 }
