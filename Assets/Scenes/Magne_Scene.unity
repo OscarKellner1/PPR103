@@ -2776,6 +2776,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b0b672e1a61fe14cbc4628e96cb1057, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  triggerCollider: {fileID: 0}
   localForwardDirection: {x: 0, y: 1, z: 0}
   moveSpeedModifier: 0.3
   arrowOffset: {x: -0.78, y: 0, z: 0}
@@ -3148,6 +3149,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b0b672e1a61fe14cbc4628e96cb1057, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  triggerCollider: {fileID: 0}
   localForwardDirection: {x: 0, y: 1, z: 0}
   moveSpeedModifier: 0.5
   arrowOffset: {x: -0.78, y: 0, z: 0}
@@ -3624,11 +3626,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1978625454}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 93aa7fe2e618ee847aa72afc4ba2a5db, type: 3}
+  m_Script: {fileID: 11500000, guid: e016cca7551269646a59ca8ad435cf9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   localUpDirection: {x: 0, y: 1, z: 0}
-  arrowOffset: {x: -1, y: 0, z: 0}
+  moveSpeedModifier: 0.8
+  arrowOffset: {x: 0, y: 0, z: 0}
 --- !u!1 &2063511981
 GameObject:
   m_ObjectHideFlags: 0

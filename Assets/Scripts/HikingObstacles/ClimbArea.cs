@@ -18,7 +18,7 @@ public class ClimbArea : MonoBehaviour
     {
         if (other.TryGetComponent(out PlayerCharacterController controller))
         {
-            controller.ChangeMoveset(new LadderMovement(this));
+            controller.ChangeMoveset(new ClimbMoveset(this));
         }
     }
 

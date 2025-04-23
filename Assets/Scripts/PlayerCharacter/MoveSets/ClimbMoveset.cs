@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LadderMovement : IMoveSet
+public class ClimbMoveset : IMoveSet
 {
     readonly ClimbArea ladder;
 
-    public LadderMovement(ClimbArea ladder)
+    public ClimbMoveset(ClimbArea ladder)
     {
         this.ladder = ladder;
     }

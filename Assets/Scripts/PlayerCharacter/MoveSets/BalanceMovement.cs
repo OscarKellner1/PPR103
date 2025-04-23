@@ -4,23 +4,21 @@ using UnityEngine;
 
 public class BalanceMovement : IMoveSet
 {
-    readonly BalanceArea beam;
+    readonly BalanceArea balanceArea;
 
-    public BalanceMovement(BalanceArea beam)
+    public BalanceMovement(BalanceArea balanceArea)
     {
-        this.beam = beam;
+        this.balanceArea = balanceArea;
     }
 
     public void OnEnter(PlayerCharacterController controller)
     {
-        controller.MovespeedModifier = beam.MoveSpeedModifier;
-        controller.UseGravity = false;
+        controller.MovespeedModifier = balanceArea.MoveSpeedModifier;
     }
 
     public void OnExit(PlayerCharacterController controller)
     {
         controller.MovespeedModifier = 1f;
-        controller.UseGravity = true;
     }
 
     public void OnUpdate(PlayerInput input, PlayerCharacterController controller) { }
@@ -42,11 +40,14 @@ public class BalanceMovement : IMoveSet
 
     public void BalanceMove(Vector2 moveInput, PlayerCharacterController controller)
     {
-        Vector3 inputWorldMoveDir =
+        Vector3 worldMove =
             controller.transform.TransformDirection(new Vector3(moveInput.x, 0f, moveInput.y));
 
-        Vector3 moveVector =
-            Vector3.Dot(inputWorldMoveDir, beam.ForwardDirection) * beam.ForwardDirection;
+        Vector3 forwardMove =
+            Vector3.Dot(worldMove, balanceArea.ForwardDirection) * balanceArea.ForwardDirection;
+        Vector3 sideMove = worldMove - forwardMove;
+
+        Vector3 moveVector = forwardMove + sideMove * 0.5f;
         controller.SetVelocity(moveVector, Space.World, VelocityScaling.Clamp01);
     }
 }

@@ -2,6 +2,9 @@ using UnityEngine;
 
 public class BalanceArea : MonoBehaviour
 {
+    [Header("Trigger")]
+    [SerializeField]
+    BoxCollider triggerCollider;
     [Header("Beam Direction")]
     [SerializeField]
     private Vector3 localForwardDirection = Vector3.forward;

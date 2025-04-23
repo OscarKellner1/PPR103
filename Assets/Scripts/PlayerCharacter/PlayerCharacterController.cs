@@ -16,7 +16,7 @@ public class PlayerCharacterController : MonoBehaviour
     private float slopeAngleThreshold = 45f;
 
     // State
-    private GroundCheckResult groundCheck;
+    private GroundCheckResult groundCheck = GroundCheckResult.NoHit();
     private float moveSpeedModifier = 1f;
     private IMoveSet moveSet;
 
@@ -79,13 +79,19 @@ public class PlayerCharacterController : MonoBehaviour
 
     void Update()
     {
-        groundCheck = groundedSystem.CheckGrounded();
-
         playerInput.Look += lookAction.ReadValue<Vector2>() * lookSensitivity;
         playerInput.Move = moveAction.ReadValue<Vector2>();
         playerInput.Jump |= jumpAction.triggered;
         playerInput.Interact = interactAction.triggered;
 
+        moveSet.OnUpdate(playerInput, this);
+    }
+
+    private void FixedUpdate()
+    {
+        groundCheck = groundedSystem.CheckGrounded();
+
+        // Adjust friction
         if (IsGrounded && playerInput.Move == Vector2.zero)
         {
             collider.material.staticFriction = 100;
@@ -99,11 +105,6 @@ public class PlayerCharacterController : MonoBehaviour
             collider.material.frictionCombine = PhysicMaterialCombine.Minimum;
         }
 
-        moveSet.OnUpdate(playerInput, this);
-    }
-
-    private void FixedUpdate()
-    {
         moveSet.OnFixedUpdate(playerInput, this);
 
         // Flushing persistent input
@@ -155,21 +156,19 @@ public class PlayerCharacterController : MonoBehaviour
             } * Movespeed;
         }
 
-        if (!groundCheck.hit)
+        if (UseGravity && groundCheck.hit)
         {
-            rb.velocity = newVelocity;
-            return;
+            bool movingIntoSLope = Vector3.Dot(groundCheck.normal, newVelocity) < 0f;
+            if (SlopeExceedsThreshold && movingIntoSLope)
+            {
+                // Find vector tangent to slope
+                Vector3 tangent = Vector3.Cross(groundCheck.normal, Vector3.up);
+                // Project velocity onto tangent
+                newVelocity = tangent * Vector3.Dot(newVelocity, tangent);
+                newVelocity = new Vector3(newVelocity.x, rb.velocity.y, newVelocity.z);
+            }
         }
-
-
-        bool movingIntoSLope = Vector3.Dot(groundCheck.normal, newVelocity) < 0f;
-        if (SlopeExceedsThreshold && movingIntoSLope)
-        {
-            // Find vector tangent to slope
-            Vector3 tangent = Vector3.Cross(groundCheck.normal, Vector3.up);
-            // Project velocity onto tangent
-            newVelocity = tangent * Vector3.Dot(newVelocity, tangent);
-        }
+        
 
         rb.velocity = newVelocity;
     }
