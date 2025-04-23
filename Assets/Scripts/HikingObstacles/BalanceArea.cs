@@ -2,21 +2,31 @@ using UnityEngine;
 
 public class BalanceArea : MonoBehaviour
 {
-    [Header("Trigger")]
-    [SerializeField]
-    BoxCollider triggerCollider;
     [Header("Beam Direction")]
     [SerializeField]
     private Vector3 localForwardDirection = Vector3.forward;
     [Header("Movement Modifications")]
     [SerializeField]
     float moveSpeedModifier = 1.0f;
+    [SerializeField]
+    bool disableGravity = false;
+    [Header("View Modifications")]
+    [SerializeField] 
+    Vector3 localViewDirection = Vector3.forward;
+    [SerializeField]
+    bool singleSidedView = false;
+    [SerializeField]
+    float fovModifier = 0.7f;
     [Header("Gizmos")]
     [SerializeField]
-    private Vector3 arrowOffset;
+    private Vector3 localArrowOffset = Vector3.up * 2;
 
     public Vector3 ForwardDirection => transform.TransformDirection(localForwardDirection).normalized;
     public float MoveSpeedModifier => moveSpeedModifier;
+    public bool DisableGravity => disableGravity;
+    public Vector3 ViewDirection => transform.TransformDirection(localViewDirection).normalized;
+    public bool SingleSidedView => singleSidedView;
+    public float FovModifier => fovModifier;
 
 
     private void OnTriggerEnter(Collider other)
@@ -38,7 +48,10 @@ public class BalanceArea : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Gizmos.color = Color.blue;
-        ExtraGizmos.DrawArrow(transform.position + transform.TransformDirection(arrowOffset), ForwardDirection);
+        Gizmos.color = Color.cyan;
+        ExtraGizmos.DrawArrow(transform.position + transform.TransformDirection(localArrowOffset), ForwardDirection);
+
+        Gizmos.color = Color.magenta;
+        ExtraGizmos.DrawArrow(transform.position + transform.TransformDirection(localArrowOffset), ViewDirection);
     }
 }

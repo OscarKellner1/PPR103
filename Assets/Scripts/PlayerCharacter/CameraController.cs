@@ -4,31 +4,38 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
+    [Header("Camera bobbing")]
     [SerializeField]
     float bobSpeed = 2f;
     [SerializeField]
     float bobAmplitude = 0.15f;
     [SerializeField]
-    DynamicValue bobAmount;
+    AnimationValue bobAnimation;
+    [Header("FOV")]
+    [SerializeField]
+    SmoothedValue fov = new(60f, 1f);
 
-    private Camera cam;
     private PlayerCharacterController charController;
     private Vector3 cameraOffset;
     private float pitch = 0;
-    
+    private float fovModifier = 1;
     private float bobAnimationValue;
 
     public float Pitch
     {
         get { return pitch; }
-        set { transform.localRotation = Quaternion.Euler(value, 0f, 0f); pitch = value; }
+        set { pitch = ExtraMathf.Mod(value - 180f, 360f) - 180f; transform.localRotation = Quaternion.Euler(pitch, 0f, 0f); }
     }
 
+    public float FOVModifier
+    {
+        get { return fovModifier; }
+        set { fovModifier = value; }
+    }
 
 
     void Start()
     {
-        cam = Camera.main;
         charController = GetComponentInParent<PlayerCharacterController>();
         Pitch = 0f;
     }
@@ -36,24 +43,27 @@ public class CameraController : MonoBehaviour
 
     void LateUpdate()
     {
+        fov.MoveToward(fov.Initial * fovModifier);
+
         if (charController.Velocity.magnitude > 0f && charController.IsGrounded)
         {
-            bobAmount.Increase(Time.deltaTime);
+            bobAnimation.Increase(Time.deltaTime);
         }
         else
         {
-            bobAmount.Decrease(Time.deltaTime);
+            bobAnimation.Decrease(Time.deltaTime);
         }
 
         bobAnimationValue += Time.deltaTime * bobSpeed * charController.Velocity.magnitude;
-        cameraOffset = Vector3.up * Mathf.Sin(bobAnimationValue) * bobAmplitude * bobAmount.Value;
+        cameraOffset = bobAnimation.Value * bobAmplitude * Mathf.Sin(bobAnimationValue) * Vector3.up;
 
         UpdateCamera();
     }
 
     void UpdateCamera()
     {
-        cam.transform.position = transform.position + cameraOffset;
-        cam.transform.rotation = transform.rotation;
+        PlayerCamera.Instance.FOV = fov.Current;
+        var camTransform = PlayerCamera.Instance.transform;
+        camTransform.SetPositionAndRotation(transform.position + cameraOffset, transform.rotation);
     }
 }

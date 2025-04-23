@@ -438,6 +438,7 @@ MonoBehaviour:
   baseMovespeed: 5
   lookSensitivity: 0.2
   jumpImpulse: 200
+  slopeAngleThreshold: 45
 --- !u!114 &3564074074564717536
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -571,7 +572,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bobSpeed: 3
   bobAmplitude: 0.1
-  bobAmount:
-    upperBound: 1
-    lowerBound: 0
-    changeSpeed: 4
+  bobAnimation:
+    speed: 4
+  fov:
+    initial: 60
+    speed: 70

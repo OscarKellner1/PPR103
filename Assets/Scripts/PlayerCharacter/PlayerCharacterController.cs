@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.XR;
 
 public class PlayerCharacterController : MonoBehaviour
 {
@@ -55,6 +56,7 @@ public class PlayerCharacterController : MonoBehaviour
     public bool SlopeExceedsThreshold =>
         Vector3.Dot(groundCheck.normal, Vector3.up) < Mathf.Cos(Mathf.Deg2Rad*slopeAngleThreshold);
     public Vector3 Velocity => rb.velocity;
+    public Quaternion Rotation => rb.rotation;
     public CameraController CameraController => cam;
     public InteractionSystem InteractionSystem => interactionSystem;
 
@@ -156,6 +158,7 @@ public class PlayerCharacterController : MonoBehaviour
             } * Movespeed;
         }
 
+        // Handle slopes
         if (UseGravity && groundCheck.hit)
         {
             bool movingIntoSLope = Vector3.Dot(groundCheck.normal, newVelocity) < 0f;
@@ -168,7 +171,6 @@ public class PlayerCharacterController : MonoBehaviour
                 newVelocity = new Vector3(newVelocity.x, rb.velocity.y, newVelocity.z);
             }
         }
-        
 
         rb.velocity = newVelocity;
     }
@@ -176,6 +178,26 @@ public class PlayerCharacterController : MonoBehaviour
     public void Rotate(Quaternion rotation)
     {
         rb.rotation *= rotation;
+    }
+
+    public void SetRotation(Quaternion rotation)
+    {
+        rb.rotation = rotation;
+    }
+
+    public void LookAt(Vector3 direction)
+    {
+        Vector3 rotationEuler = Quaternion.LookRotation(direction, Vector3.up).eulerAngles;
+        rb.rotation = Quaternion.Euler(0f, rotationEuler.y, 0f);
+        CameraController.Pitch = rotationEuler.x;
+    }
+
+    public Vector3 GetLookDirection()
+    {
+        float yaw = rb.rotation.eulerAngles.y;
+        float pitch = CameraController.Pitch;
+
+        return Quaternion.Euler(pitch, yaw, 0f) * Vector3.forward;
     }
 
     public void AddForce(Vector3 force, Space space = Space.World, ForceMode forceMode = ForceMode.Force)

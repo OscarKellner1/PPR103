@@ -18,7 +18,7 @@ public class ClimbArea : MonoBehaviour
     {
         if (other.TryGetComponent(out PlayerCharacterController controller))
         {
-            controller.ChangeMoveset(new ClimbMoveset(this));
+            controller.ChangeMoveset(new ClimbMovement(this));
         }
     }
 
