@@ -17,7 +17,7 @@ public class PlayerCharacterController : MonoBehaviour
     private float slopeAngleThreshold = 45f;
 
     // State
-    private GroundCheckResult groundCheck = GroundCheckResult.NoHit();
+    private RaycastHit? groundCheck = null;
     private float moveSpeedModifier = 1f;
     private IMoveSet moveSet;
 
@@ -52,9 +52,21 @@ public class PlayerCharacterController : MonoBehaviour
         get { return rb.useGravity; }
         set { rb.useGravity = value; }  
     }
-    public bool IsGrounded => groundCheck.hit && !SlopeExceedsThreshold;
-    public bool SlopeExceedsThreshold =>
-        Vector3.Dot(groundCheck.normal, Vector3.up) < Mathf.Cos(Mathf.Deg2Rad*slopeAngleThreshold);
+    public bool IsGrounded => groundCheck.HasValue && !SlopeExceedsThreshold;
+    public bool SlopeExceedsThreshold
+    {
+        get
+        {
+            if (groundCheck.HasValue)
+            {
+                return Vector3.Dot(groundCheck.Value.normal, Vector3.up) < Mathf.Cos(Mathf.Deg2Rad * slopeAngleThreshold);
+            }
+            else
+            {
+                return false;
+            }
+        }
+    }
     public Vector3 Velocity => rb.velocity;
     public Quaternion Rotation => rb.rotation;
     public CameraController CameraController => cam;
@@ -159,13 +171,13 @@ public class PlayerCharacterController : MonoBehaviour
         }
 
         // Handle slopes
-        if (UseGravity && groundCheck.hit)
+        if (UseGravity && groundCheck.HasValue)
         {
-            bool movingIntoSLope = Vector3.Dot(groundCheck.normal, newVelocity) < 0f;
+            bool movingIntoSLope = Vector3.Dot(groundCheck.Value.normal, newVelocity) < 0f;
             if (SlopeExceedsThreshold && movingIntoSLope)
             {
                 // Find vector tangent to slope
-                Vector3 tangent = Vector3.Cross(groundCheck.normal, Vector3.up);
+                Vector3 tangent = Vector3.Cross(groundCheck.Value.normal, Vector3.up);
                 // Project velocity onto tangent
                 newVelocity = tangent * Vector3.Dot(newVelocity, tangent);
                 newVelocity = new Vector3(newVelocity.x, rb.velocity.y, newVelocity.z);

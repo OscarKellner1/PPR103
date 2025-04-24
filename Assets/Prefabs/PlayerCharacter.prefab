@@ -348,6 +348,7 @@ GameObject:
   - component: {fileID: 3564074074564717536}
   - component: {fileID: 1432131162565930066}
   - component: {fileID: 2578783576949459627}
+  - component: {fileID: 7115765769586931877}
   m_Layer: 6
   m_Name: PlayerCharacter
   m_TagString: Player
@@ -455,7 +456,6 @@ MonoBehaviour:
   groundedSpherecastMask:
     serializedVersion: 2
     m_Bits: 65
-  sphereCastRadius: 0
 --- !u!114 &1432131162565930066
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -494,6 +494,23 @@ MonoBehaviour:
   rayDistance: 3
   isLookingAtSnapSpot: 0
   heldObject: {fileID: 0}
+--- !u!114 &7115765769586931877
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6443429798631478426}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c4d57ad08eb2e54aa62f26c26572e33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soundDictionaryAsset: {fileID: 11400000, guid: 3d6dc5309f05e2b459875cf8bc3ea008, type: 2}
+  footstepTimeline:
+    value: 0
+    eventActivationThreshold: 1
+  footStepRate: 0.65
 --- !u!1 &6462830679076088361
 GameObject:
   m_ObjectHideFlags: 0
