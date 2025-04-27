@@ -79,7 +79,7 @@ public class BalanceMovement : IMoveSet
             Vector3.Dot(worldMove, balanceForwardXZ) * balanceForwardXZ;
         Vector3 sideMove = worldMove - forwardMove;
 
-        Vector3 moveVector = forwardMove + sideMove * 0.5f;
+        Vector3 moveVector = forwardMove + sideMove * 0.3f;
         controller.SetVelocity(moveVector, Space.World, VelocityScaling.Clamp01);
     }
 }

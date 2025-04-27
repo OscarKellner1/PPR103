@@ -15,6 +15,8 @@ public class MaterialSoundDictionary
 
     public AudioClip GetClip(Material mat)
     {
+        if (mat  == null) return DefaultClip;
+
         if (Dictionary.ContainsKey(mat))
         {
             return Dictionary[mat];
