@@ -62,7 +62,12 @@ public class FootSteps : MonoBehaviour
 
         if (ground.collider is not MeshCollider)
         {
-            groundMaterial = ground.collider.GetComponentInParent<MeshRenderer>().sharedMaterial;
+            var meshRenderer = ground.collider.GetComponentInParent<MeshRenderer>();
+            if (meshRenderer != null)
+            {
+                groundMaterial = ground.collider.GetComponentInParent<MeshRenderer>().sharedMaterial;
+            }
+            groundMaterial = null;
             return;
         }
 
