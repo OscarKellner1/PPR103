@@ -2,11 +2,18 @@ using UnityEngine;
 
 public class SetSpotPlacer : MonoBehaviour
 {
+    public string CorrectName;
     public Transform snapPosition; // Where the object will go if placed here
-
+    public AfterActionEvents afterAction;
+    public UnityEngine.Events.UnityEvent AfterPlacementEvent;
     public void OnObjectPlaced(PickupableObject obj)
     {
-        // Handle the logic for when an object is placed at this set spot placer. usually events
+        if (obj.ObjectName == CorrectName)
+        {
+            AfterPlacementEvent.Invoke();
+        }
+
+        
        
     }
 
