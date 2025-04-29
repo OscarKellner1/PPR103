@@ -72,6 +72,11 @@ public class PlayerCharacterController : MonoBehaviour
     public CameraController CameraController => cam;
     public InteractionSystem InteractionSystem => interactionSystem;
 
+    //Respawn Mechanics
+    public Vector3 playerPosition;
+    //[SerializeField] List <GameObject> Checkpoint = new List <GameObject> ();
+    [SerializeField] Vector3 vectorPoint;
+
     // Unity Messages
     void Start()
     {
@@ -99,6 +104,8 @@ public class PlayerCharacterController : MonoBehaviour
         playerInput.Interact = interactAction.triggered;
 
         moveSet.OnUpdate(playerInput, this);
+
+        //Respawning
     }
 
     private void FixedUpdate()
