@@ -17,6 +17,7 @@ public class AfterActionEvents : MonoBehaviour
     public void MofuAfterFirstTalk()
     {
         PlayerPrefs.SetInt("MofuTalkedTo", 1);
+        
     }
 
     #endregion
