@@ -12,7 +12,7 @@ public class FootSteps : MonoBehaviour
     [SerializeField]
     float footStepRate;
 
-    public AudioClip OverideSound;
+    public SoundCollection OverideSound;
     MaterialSoundDictionary soundDictionary;
     GroundedSystem groundedSystem;
     PlayerCharacterController characterController;
@@ -46,7 +46,7 @@ public class FootSteps : MonoBehaviour
     {
         if (OverideSound != null)
         {
-            AudioSource.PlayClipAtPoint(OverideSound, transform.position);
+            AudioSource.PlayClipAtPoint(OverideSound.GetClip(), transform.position);
         }
         else
         {

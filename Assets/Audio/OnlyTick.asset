@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 363b49d2bd8c2784ab6d2f30c9f38493, type: 3}
-  m_Name: MaterialSoundDictionary
+  m_Script: {fileID: 11500000, guid: 57db6c90524baad4aba7e74bcf287462, type: 3}
+  m_Name: OnlyTick
   m_EditorClassIdentifier: 
-  defaultSound: {fileID: 11400000, guid: 0d2db5daf20c73b4c82d049caacdc257, type: 2}
-  materialSounds: []
+  sounds:
+  - {fileID: 8300000, guid: 803e8176fe0454442afaf82afe03be9c, type: 3}
