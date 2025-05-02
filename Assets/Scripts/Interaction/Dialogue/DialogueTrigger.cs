@@ -25,7 +25,7 @@ public class DialogueTrigger : MonoBehaviour
 
     public List<Material> materials; // Assign materials in the inspector (must be 4: idle1, idle2, talk1, talk2)
 
-    [Header("NPC Conversations (Ordered by Importance)")]
+    [Header("NPC Conversations (Ordered by Obscureness)")]
     public List<Conversation> conversations = new List<Conversation>(); // List of possible conversations
 
     private void Start()
@@ -36,7 +36,7 @@ public class DialogueTrigger : MonoBehaviour
         // Ensure we have exactly 4 materials
         if (materials.Count < 4)
         {
-            Debug.LogError("Not enough materials assigned! Needs exactly 4.");
+            Debug.LogError("Not enough materials assigned! Needs at least four 4. It only has " + materials.Count);
             return;
         }
 

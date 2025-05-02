@@ -9,6 +9,7 @@ using TMPro;
 using System.Collections.Generic;
 using static DialogueData;
 using static UnityEngine.EventSystems.EventTrigger;
+using UnityEngine.SceneManagement;
 
 public class DialogueManager : MonoBehaviour
 {
@@ -37,18 +38,27 @@ public class DialogueManager : MonoBehaviour
     private int dialogueIndex = 0;
     private InputType previousInputType; //used to remember the input type used before entering dialogue
     public DialogueUI DUI;
+    private AfterActionEvents AFE;
 
     private void Awake()
     {
-        
+        SceneManager.sceneLoaded += (Args, Scene) =>  AFE = FindAnyObjectByType<AfterActionEvents>(); 
             Instance = this;
-      
+        PlayerPrefs.DeleteAll();
       
     }
+  
 
     // Starts a new dialogue sequence
     public void StartDialogue(DialogueData dialogue, DialogueTrigger npc)
     {
+        dialogueBox.SetActive(false);
+        dialogueObject.SetActive(false);
+        speakerBox.SetActive(false);
+        thoughtBox.SetActive(false);
+        responseButton1.gameObject.SetActive(false);
+        responseButton2.gameObject.SetActive(false);
+
         currentDialogue = dialogue;
         dialogueIndex = 0;
         currentNPC = npc; // Store reference to NPC
@@ -96,7 +106,11 @@ public class DialogueManager : MonoBehaviour
     }
     private IEnumerator NextStep(DialogueEntry entry)
     {
-        if(entry.waitTime != 0)
+        DUI.StopAllCoroutines();
+        if (entry.ActionMethodName != "")
+            AFE.StartInstructions(entry.ActionMethodName);
+
+        if (entry.waitTime != 0)
         {
             dialogueBox.SetActive(false);
             dialogueObject.SetActive(false);
@@ -129,14 +143,23 @@ public class DialogueManager : MonoBehaviour
         dialogueObject.SetActive(true);
         speakerNameText.text = entry.speakerName;
         portraitImage.sprite = entry.portrait;
-        DUI.DisplayText(entry.dialogueText, entry.textspeed);
+        if (entry.isSilent && entry.speakerName != "PLAYER") 
+        {
+            DUI.DisplayText(entry.dialogueText, entry.textspeed, null);
+        }
+        else
+        {
+            DUI.DisplayText(entry.dialogueText, entry.textspeed, entry.SoundDict);
+        }
+        
         // dialogueText.text = entry.dialogueText;
 
         // Handle auto-progress if required
-       
+
 
         // Trigger any events tied to the dialogue entry
-        entry.onDialogueEvent?.Invoke();
+       
+     
         ShowResponses(entry.responses);
         if (entry.autoProgress)
         {
@@ -217,10 +240,11 @@ public class DialogueManager : MonoBehaviour
     // End the current conversation
     public void EndDialogue()
     {
-        
+        DUI.StopAllCoroutines();
         dialogueBox.SetActive(false);
         dialogueObject.SetActive(false);
         speakerBox.SetActive(false);
+        thoughtBox.SetActive(false);
         responseButton1.gameObject.SetActive(false);
         responseButton2.gameObject.SetActive(false);
 
@@ -232,9 +256,9 @@ public class DialogueManager : MonoBehaviour
             currentNPC = null;
         }
        
-        if (currentDialogue?.AfterDialogueEvent != null)
+        if (currentDialogue.AfterDialogueActionMethod != "")
         {
-            currentDialogue.AfterDialogueEvent.Invoke();
+            AFE.StartInstructions(currentDialogue.AfterDialogueActionMethod);
         }
       
         InputUtility.SetInputType(InputType.Character);

@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c784d9b8e2adb3d40ab9be296d5e5c98, type: 3}
+  m_Name: Josephine
+  m_EditorClassIdentifier: 
+  sounds:
+  - {fileID: 8300000, guid: 843cae3ad7758c54db2afd2cc8176382, type: 3}
+  - {fileID: 8300000, guid: ea7328f9c6d4e5c4bba4e50bb98e6c0d, type: 3}
+  - {fileID: 8300000, guid: b971ec3315387bb4f81a55a0c2ca3b9f, type: 3}

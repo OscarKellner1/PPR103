@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c784d9b8e2adb3d40ab9be296d5e5c98, type: 3}
+  m_Name: Terry
+  m_EditorClassIdentifier: 
+  sounds:
+  - {fileID: 8300000, guid: e6e5ca36bb143594eb797b4f1e0ce62a, type: 3}
+  - {fileID: 8300000, guid: f20c0819f7473fd469d614dfd8696afa, type: 3}
+  - {fileID: 8300000, guid: 2828cf89d85d7f542961c9b9bdfe3008, type: 3}

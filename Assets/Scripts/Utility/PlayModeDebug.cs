@@ -134,7 +134,7 @@ public class PlayModeDebug : MonoBehaviour
         // Add inventory item
         if (arguments[0] == "give" && arguments.Length == 2)
         {
-            InventorySystem.Instance.AddItem(arguments[1], 1);
+            //InventorySystem.Instance.AddItem(arguments[1], 1);
         }
 
         // Add multiple items
@@ -142,7 +142,7 @@ public class PlayModeDebug : MonoBehaviour
         {
             if (int.TryParse(arguments[2], out int amount))
             {
-                InventorySystem.Instance.AddItem(arguments[1], amount);
+               // InventorySystem.Instance.AddItem(arguments[1], amount);
             }
             else
             {

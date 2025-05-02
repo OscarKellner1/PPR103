@@ -1,0 +1,257 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 468ecc104494f3c409ea9267ca843a65, type: 3}
+  m_Name: InitialRequest
+  m_EditorClassIdentifier: 
+  dialogueEntries:
+  - speakerName: Mofu
+    portrait: {fileID: 21300000, guid: cd800452905e01b44b16bab8f2f38fa6, type: 3}
+    cameraContext: 
+    dialogueText: "Sup! \n\nThe name's Mofu."
+    isThinking: 0
+    isSilent: 0
+    textspeed: 0.05
+    waitTime: 0
+    autoProgress: 0
+    autoProgressDelay: 0
+    SoundDict: {fileID: 11400000, guid: 0e735bf6ccaed6f42b5d7639b9006ad3, type: 2}
+    ActionMethodName: 
+    responses:
+    - responseText: Hey!
+      nextDialogue: {fileID: 0}
+      Ender: 0
+  - speakerName: Mofu
+    portrait: {fileID: 21300000, guid: cd800452905e01b44b16bab8f2f38fa6, type: 3}
+    cameraContext: 
+    dialogueText: Yeah I'm a Capybara. Yeah I'm in a hot tub.
+    isThinking: 0
+    isSilent: 0
+    textspeed: 0.05
+    waitTime: 0
+    autoProgress: 1
+    autoProgressDelay: 3
+    SoundDict: {fileID: 11400000, guid: 0e735bf6ccaed6f42b5d7639b9006ad3, type: 2}
+    ActionMethodName: 
+    responses: []
+  - speakerName: Mofu
+    portrait: {fileID: 21300000, guid: cd800452905e01b44b16bab8f2f38fa6, type: 3}
+    cameraContext: 
+    dialogueText: What's it to you?
+    isThinking: 0
+    isSilent: 0
+    textspeed: 0.05
+    waitTime: 0
+    autoProgress: 0
+    autoProgressDelay: 3
+    SoundDict: {fileID: 11400000, guid: 0e735bf6ccaed6f42b5d7639b9006ad3, type: 2}
+    ActionMethodName: 
+    responses:
+    - responseText: '[Say Nothing]'
+      nextDialogue: {fileID: 0}
+      Ender: 0
+  - speakerName: Mofu
+    portrait: {fileID: 21300000, guid: cd800452905e01b44b16bab8f2f38fa6, type: 3}
+    cameraContext: 
+    dialogueText: Okay. I'm sorry. It's just...
+    isThinking: 0
+    isSilent: 0
+    textspeed: 0.05
+    waitTime: 4
+    autoProgress: 0
+    autoProgressDelay: 3
+    SoundDict: {fileID: 11400000, guid: 0e735bf6ccaed6f42b5d7639b9006ad3, type: 2}
+    ActionMethodName: 
+    responses:
+    - responseText: '[Continue]'
+      nextDialogue: {fileID: 0}
+      Ender: 0
+  - speakerName: Mofu
+    portrait: {fileID: 21300000, guid: cd800452905e01b44b16bab8f2f38fa6, type: 3}
+    cameraContext: 
+    dialogueText: I cant find my yuzu.
+    isThinking: 0
+    isSilent: 0
+    textspeed: 0.05
+    waitTime: 2
+    autoProgress: 0
+    autoProgressDelay: 3
+    SoundDict: {fileID: 11400000, guid: 0e735bf6ccaed6f42b5d7639b9006ad3, type: 2}
+    ActionMethodName: 
+    responses:
+    - responseText: Your What?
+      nextDialogue: {fileID: 0}
+      Ender: 0
+  - speakerName: Mofu
+    portrait: {fileID: 21300000, guid: cd800452905e01b44b16bab8f2f38fa6, type: 3}
+    cameraContext: 
+    dialogueText: My yuzu.
+    isThinking: 0
+    isSilent: 0
+    textspeed: 0.05
+    waitTime: 0
+    autoProgress: 1
+    autoProgressDelay: 1
+    SoundDict: {fileID: 11400000, guid: 0e735bf6ccaed6f42b5d7639b9006ad3, type: 2}
+    ActionMethodName: 
+    responses: []
+  - speakerName: Mofu
+    portrait: {fileID: 21300000, guid: cd800452905e01b44b16bab8f2f38fa6, type: 3}
+    cameraContext: 
+    dialogueText: ...
+    isThinking: 0
+    isSilent: 1
+    textspeed: 0.05
+    waitTime: 3
+    autoProgress: 1
+    autoProgressDelay: 3
+    SoundDict: {fileID: 11400000, guid: 0e735bf6ccaed6f42b5d7639b9006ad3, type: 2}
+    ActionMethodName: 
+    responses: []
+  - speakerName: Mofu
+    portrait: {fileID: 21300000, guid: cd800452905e01b44b16bab8f2f38fa6, type: 3}
+    cameraContext: 
+    dialogueText: Oh you mean you don't know what a yuzu is?
+    isThinking: 0
+    isSilent: 0
+    textspeed: 0.05
+    waitTime: 3
+    autoProgress: 0
+    autoProgressDelay: 3
+    SoundDict: {fileID: 11400000, guid: 0e735bf6ccaed6f42b5d7639b9006ad3, type: 2}
+    ActionMethodName: 
+    responses:
+    - responseText: Yes!
+      nextDialogue: {fileID: 0}
+      Ender: 0
+    - responseText: Nuh Uh!
+      nextDialogue: {fileID: 0}
+      Ender: 0
+  - speakerName: Mofu
+    portrait: {fileID: 21300000, guid: cd800452905e01b44b16bab8f2f38fa6, type: 3}
+    cameraContext: 
+    dialogueText: 'It''s a fruit.
+
+
+      It my favourite fruit.
+
+
+      It''s my
+      favourite yuzu'
+    isThinking: 0
+    isSilent: 0
+    textspeed: 0.05
+    waitTime: 0
+    autoProgress: 0
+    autoProgressDelay: 3
+    SoundDict: {fileID: 11400000, guid: 0e735bf6ccaed6f42b5d7639b9006ad3, type: 2}
+    ActionMethodName: 
+    responses:
+    - responseText: And You Lost It?
+      nextDialogue: {fileID: 0}
+      Ender: 0
+  - speakerName: Mofu
+    portrait: {fileID: 21300000, guid: cd800452905e01b44b16bab8f2f38fa6, type: 3}
+    cameraContext: 
+    dialogueText: I haven't lost it!
+    isThinking: 0
+    isSilent: 0
+    textspeed: 0.05
+    waitTime: 0
+    autoProgress: 1
+    autoProgressDelay: 2
+    SoundDict: {fileID: 11400000, guid: 0e735bf6ccaed6f42b5d7639b9006ad3, type: 2}
+    ActionMethodName: 
+    responses: []
+  - speakerName: Mofu
+    portrait: {fileID: 21300000, guid: cd800452905e01b44b16bab8f2f38fa6, type: 3}
+    cameraContext: 
+    dialogueText: I know exactly where it is!
+    isThinking: 0
+    isSilent: 0
+    textspeed: 0.05
+    waitTime: 0
+    autoProgress: 0
+    autoProgressDelay: 2
+    SoundDict: {fileID: 11400000, guid: 0e735bf6ccaed6f42b5d7639b9006ad3, type: 2}
+    ActionMethodName: 
+    responses:
+    - responseText: '[Continue]'
+      nextDialogue: {fileID: 0}
+      Ender: 0
+  - speakerName: Mofu
+    portrait: {fileID: 21300000, guid: cd800452905e01b44b16bab8f2f38fa6, type: 3}
+    cameraContext: 
+    dialogueText: I just can't leave to go get it.
+    isThinking: 0
+    isSilent: 0
+    textspeed: 0.05
+    waitTime: 0
+    autoProgress: 0
+    autoProgressDelay: 2
+    SoundDict: {fileID: 11400000, guid: 0e735bf6ccaed6f42b5d7639b9006ad3, type: 2}
+    ActionMethodName: 
+    responses:
+    - responseText: Cuz Of The Hot Tub?
+      nextDialogue: {fileID: 0}
+      Ender: 0
+  - speakerName: Mofu
+    portrait: {fileID: 21300000, guid: cd800452905e01b44b16bab8f2f38fa6, type: 3}
+    cameraContext: 
+    dialogueText: Maybe.
+    isThinking: 0
+    isSilent: 0
+    textspeed: 0.05
+    waitTime: 3
+    autoProgress: 0
+    autoProgressDelay: 2
+    SoundDict: {fileID: 11400000, guid: 0e735bf6ccaed6f42b5d7639b9006ad3, type: 2}
+    ActionMethodName: 
+    responses:
+    - responseText: '[Continue]'
+      nextDialogue: {fileID: 0}
+      Ender: 0
+  - speakerName: PLAYER
+    portrait: {fileID: 21300000, guid: cd800452905e01b44b16bab8f2f38fa6, type: 3}
+    cameraContext: 
+    dialogueText: This guy seems bummed out about his yobo or whatever.
+    isThinking: 1
+    isSilent: 1
+    textspeed: 0.05
+    waitTime: 0
+    autoProgress: 0
+    autoProgressDelay: 2
+    SoundDict: {fileID: 11400000, guid: fa53b23c8397ceb4e9fcfa7c13a052f4, type: 2}
+    ActionMethodName: 
+    responses:
+    - responseText: '[Continue]'
+      nextDialogue: {fileID: 0}
+      Ender: 0
+  - speakerName: PLAYER
+    portrait: {fileID: 21300000, guid: cd800452905e01b44b16bab8f2f38fa6, type: 3}
+    cameraContext: 
+    dialogueText: Should I offer to help him? I don't want to keep my friend waiting...
+    isThinking: 1
+    isSilent: 1
+    textspeed: 0.05
+    waitTime: 0
+    autoProgress: 0
+    autoProgressDelay: 2
+    SoundDict: {fileID: 11400000, guid: fa53b23c8397ceb4e9fcfa7c13a052f4, type: 2}
+    ActionMethodName: 
+    responses:
+    - responseText: Yes
+      nextDialogue: {fileID: 11400000, guid: beeea962ff270514da08c977c7a3a784, type: 2}
+      Ender: 0
+    - responseText: No
+      nextDialogue: {fileID: 11400000, guid: 772d2bfdcbbad0d438ad5a0bfd69ad70, type: 2}
+      Ender: 0
+  AfterDialogueActionMethod: 

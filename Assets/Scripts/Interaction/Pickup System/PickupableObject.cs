@@ -6,6 +6,9 @@ public class PickupableObject : MonoBehaviour
     public bool isHeld = false;
     private Rigidbody rb;
     private Collider col;
+    public AudioSource audioSource;
+    public AudioClip PickupSound;
+    public AudioClip DropSound;
 
     private void Awake()
     {
@@ -15,6 +18,7 @@ public class PickupableObject : MonoBehaviour
 
     public void PickUp(Transform holdPoint)
     {
+        audioSource.PlayOneShot(PickupSound);
         isHeld = true;
         rb.isKinematic = true;
         col.enabled = false;
@@ -23,23 +27,14 @@ public class PickupableObject : MonoBehaviour
         transform.localRotation = Quaternion.identity;
     }
 
-    public void Drop(Vector3 position, Quaternion rotation)
+    public void Drop()
     {
+        audioSource.PlayOneShot(DropSound);
         isHeld = false;
-        transform.SetParent(null);
-        rb.isKinematic = false;
-        col.enabled = true;
-        transform.position = position;
-        transform.rotation = rotation;
+        
     }
 
-    public void SnapTo(Transform target)
-    {
-        isHeld = true;
-        transform.SetParent(null);
-        transform.position = target.position;
-        transform.rotation = target.rotation;
-    }
+  
 
     public void Activated()
     {

@@ -1,0 +1,152 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 468ecc104494f3c409ea9267ca843a65, type: 3}
+  m_Name: OfferHelp
+  m_EditorClassIdentifier: 
+  dialogueEntries:
+  - speakerName: Mofu
+    portrait: {fileID: 21300000, guid: cd800452905e01b44b16bab8f2f38fa6, type: 3}
+    cameraContext: 
+    dialogueText: Really? You'll help me?
+    isThinking: 0
+    isSilent: 0
+    textspeed: 0.05
+    waitTime: 0
+    autoProgress: 1
+    autoProgressDelay: 2
+    SoundDict: {fileID: 11400000, guid: 0e735bf6ccaed6f42b5d7639b9006ad3, type: 2}
+    ActionMethodName: 
+    responses: []
+  - speakerName: Mofu
+    portrait: {fileID: 21300000, guid: cd800452905e01b44b16bab8f2f38fa6, type: 3}
+    cameraContext: 
+    dialogueText: Oh thank you thank you thank you thank you thank you thank you-
+    isThinking: 0
+    isSilent: 0
+    textspeed: 0.02
+    waitTime: 0
+    autoProgress: 1
+    autoProgressDelay: 2
+    SoundDict: {fileID: 11400000, guid: 0e735bf6ccaed6f42b5d7639b9006ad3, type: 2}
+    ActionMethodName: 
+    responses: []
+  - speakerName: Mofu
+    portrait: {fileID: 21300000, guid: cd800452905e01b44b16bab8f2f38fa6, type: 3}
+    cameraContext: 
+    dialogueText: THANK YOU!
+    isThinking: 0
+    isSilent: 0
+    textspeed: 0.3
+    waitTime: 0
+    autoProgress: 0
+    autoProgressDelay: 0
+    SoundDict: {fileID: 11400000, guid: 0e735bf6ccaed6f42b5d7639b9006ad3, type: 2}
+    ActionMethodName: 
+    responses:
+    - responseText: Umm... No Prob.
+      nextDialogue: {fileID: 0}
+      Ender: 0
+  - speakerName: Mofu
+    portrait: {fileID: 21300000, guid: cd800452905e01b44b16bab8f2f38fa6, type: 3}
+    cameraContext: 
+    dialogueText: Okay. So the location of my yuzu?
+    isThinking: 0
+    isSilent: 0
+    textspeed: 0.05
+    waitTime: 1
+    autoProgress: 0
+    autoProgressDelay: 0
+    SoundDict: {fileID: 11400000, guid: 0e735bf6ccaed6f42b5d7639b9006ad3, type: 2}
+    ActionMethodName: 
+    responses:
+    - responseText: Yeah?
+      nextDialogue: {fileID: 0}
+      Ender: 0
+  - speakerName: Mofu
+    portrait: {fileID: 21300000, guid: cd800452905e01b44b16bab8f2f38fa6, type: 3}
+    cameraContext: 
+    dialogueText: There's a house at the bottom of the mountain. An older frog lives
+      there with her daughter.
+    isThinking: 0
+    isSilent: 0
+    textspeed: 0.05
+    waitTime: 0
+    autoProgress: 0
+    autoProgressDelay: 0
+    SoundDict: {fileID: 11400000, guid: 0e735bf6ccaed6f42b5d7639b9006ad3, type: 2}
+    ActionMethodName: 
+    responses:
+    - responseText: Okay.
+      nextDialogue: {fileID: 0}
+      Ender: 0
+  - speakerName: Mofu
+    portrait: {fileID: 21300000, guid: cd800452905e01b44b16bab8f2f38fa6, type: 3}
+    cameraContext: 
+    dialogueText: "And there's a tree next to that house. \n\nLike REALLY close."
+    isThinking: 0
+    isSilent: 0
+    textspeed: 0.05
+    waitTime: 0
+    autoProgress: 0
+    autoProgressDelay: 0
+    SoundDict: {fileID: 11400000, guid: 0e735bf6ccaed6f42b5d7639b9006ad3, type: 2}
+    ActionMethodName: 
+    responses:
+    - responseText: Mhmm.
+      nextDialogue: {fileID: 0}
+      Ender: 0
+  - speakerName: Mofu
+    portrait: {fileID: 21300000, guid: cd800452905e01b44b16bab8f2f38fa6, type: 3}
+    cameraContext: 
+    dialogueText: My yuzu is behind that tree.
+    isThinking: 0
+    isSilent: 0
+    textspeed: 0.05
+    waitTime: 1
+    autoProgress: 0
+    autoProgressDelay: 0
+    SoundDict: {fileID: 11400000, guid: 0e735bf6ccaed6f42b5d7639b9006ad3, type: 2}
+    ActionMethodName: 
+    responses:
+    - responseText: Got it!
+      nextDialogue: {fileID: 0}
+      Ender: 0
+  - speakerName: Mofu
+    portrait: {fileID: 21300000, guid: cd800452905e01b44b16bab8f2f38fa6, type: 3}
+    cameraContext: 
+    dialogueText: Yeah? You'll be able to find it?
+    isThinking: 0
+    isSilent: 0
+    textspeed: 0.05
+    waitTime: 1
+    autoProgress: 0
+    autoProgressDelay: 0
+    SoundDict: {fileID: 11400000, guid: 0e735bf6ccaed6f42b5d7639b9006ad3, type: 2}
+    ActionMethodName: 
+    responses:
+    - responseText: Yessir!
+      nextDialogue: {fileID: 0}
+      Ender: 0
+  - speakerName: Mofu
+    portrait: {fileID: 21300000, guid: cd800452905e01b44b16bab8f2f38fa6, type: 3}
+    cameraContext: 
+    dialogueText: Awesome! Please bring it back to me when you find it!
+    isThinking: 0
+    isSilent: 0
+    textspeed: 0.05
+    waitTime: 0
+    autoProgress: 1
+    autoProgressDelay: 3
+    SoundDict: {fileID: 11400000, guid: 0e735bf6ccaed6f42b5d7639b9006ad3, type: 2}
+    ActionMethodName: 
+    responses: []
+  AfterDialogueActionMethod: OfferedMofuHelp

@@ -33,7 +33,7 @@ MonoBehaviour:
       nextDialogue: {fileID: 0}
       Ender: 0
   - speakerName: Ashfrost
-    portrait: {fileID: 21300000, guid: 7ebed63bde4788f4ab00bf3843fd9310, type: 3}
+    portrait: {fileID: 21300000, guid: c2958a75621e8494494c4b8d2cf49b54, type: 3}
     cameraContext: 
     dialogueText: YOU SIR! Have you been a Skibidy Sigma today?
     isThinking: 0

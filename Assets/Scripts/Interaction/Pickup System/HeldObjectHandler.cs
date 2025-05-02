@@ -213,6 +213,7 @@ private void SetRendererVisible(Transform obj, bool visible)
        yield return new WaitForSeconds(0.0f);
         Collider col = heldObject.GetComponent<Collider>();
         col.enabled = true;
+        heldObject.Drop();
         heldObject = null;
      
 

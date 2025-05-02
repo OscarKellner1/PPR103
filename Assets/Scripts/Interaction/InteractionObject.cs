@@ -7,6 +7,16 @@ public class InteractionObject : MonoBehaviour
     public UnityEvent OnInteract;
     public void Interact()
     {
-        OnInteract.Invoke();
+        if (OnInteract != null)
+        {
+            OnInteract.Invoke();
+        }
+        else
+        {
+            Debug.Log("Something is Null");
+        }
+
+
+        
     }
 }

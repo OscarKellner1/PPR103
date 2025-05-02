@@ -28,6 +28,10 @@ public class ConditionChecker : MonoBehaviour
         {
             case DialogueCondition.ConditionType.PlayerPref:
                 // Check if PlayerPref key exists and matches the expected value
+               
+
+
+
                 return PlayerPrefs.HasKey(condition.Name) && PlayerPrefs.GetInt(condition.Name, 0) == condition.value;
 
             case DialogueCondition.ConditionType.HoldingItem:

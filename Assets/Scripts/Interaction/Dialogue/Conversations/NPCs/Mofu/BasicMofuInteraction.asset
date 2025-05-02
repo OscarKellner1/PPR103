@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogueEntries:
   - speakerName: Mofu
-    portrait: {fileID: 21300000, guid: 8e9cc857033308841a56671285a198fb, type: 3}
+    portrait: {fileID: 21300000, guid: cd800452905e01b44b16bab8f2f38fa6, type: 3}
     cameraContext: 
     dialogueText: Hello! I'm Mofu!
     isThinking: 0
@@ -23,10 +23,8 @@ MonoBehaviour:
     waitTime: 0
     autoProgress: 0
     autoProgressDelay: 0
-    voiceClip: {fileID: 0}
-    onDialogueEvent:
-      m_PersistentCalls:
-        m_Calls: []
+    SoundDict: {fileID: 11400000, guid: 0e735bf6ccaed6f42b5d7639b9006ad3, type: 2}
+    ActionMethodName: 
     responses:
     - responseText: Hello Mofu!
       nextDialogue: {fileID: 0}
@@ -35,7 +33,7 @@ MonoBehaviour:
       nextDialogue: {fileID: 0}
       Ender: 1
   - speakerName: Mofu
-    portrait: {fileID: 21300000, guid: 8e9cc857033308841a56671285a198fb, type: 3}
+    portrait: {fileID: 21300000, guid: cd800452905e01b44b16bab8f2f38fa6, type: 3}
     cameraContext: 
     dialogueText: I DO have alternate sprites which have me with my yuzu.
     isThinking: 0
@@ -44,13 +42,11 @@ MonoBehaviour:
     waitTime: 0
     autoProgress: 1
     autoProgressDelay: 3
-    voiceClip: {fileID: 0}
-    onDialogueEvent:
-      m_PersistentCalls:
-        m_Calls: []
+    SoundDict: {fileID: 11400000, guid: 0e735bf6ccaed6f42b5d7639b9006ad3, type: 2}
+    ActionMethodName: 
     responses: []
   - speakerName: Mofu
-    portrait: {fileID: 21300000, guid: 8e9cc857033308841a56671285a198fb, type: 3}
+    portrait: {fileID: 21300000, guid: cd800452905e01b44b16bab8f2f38fa6, type: 3}
     cameraContext: 
     dialogueText: But SOMEONE hasn't created an inventory system yet. So I can't
       know if you found my yuzu.
@@ -60,13 +56,11 @@ MonoBehaviour:
     waitTime: 0
     autoProgress: 1
     autoProgressDelay: 5
-    voiceClip: {fileID: 0}
-    onDialogueEvent:
-      m_PersistentCalls:
-        m_Calls: []
+    SoundDict: {fileID: 11400000, guid: 0e735bf6ccaed6f42b5d7639b9006ad3, type: 2}
+    ActionMethodName: 
     responses: []
   - speakerName: Mofu
-    portrait: {fileID: 21300000, guid: 8e9cc857033308841a56671285a198fb, type: 3}
+    portrait: {fileID: 21300000, guid: cd800452905e01b44b16bab8f2f38fa6, type: 3}
     cameraContext: 
     dialogueText: Who's to blame?
     isThinking: 0
@@ -75,13 +69,11 @@ MonoBehaviour:
     waitTime: 2
     autoProgress: 1
     autoProgressDelay: 3
-    voiceClip: {fileID: 0}
-    onDialogueEvent:
-      m_PersistentCalls:
-        m_Calls: []
+    SoundDict: {fileID: 11400000, guid: 0e735bf6ccaed6f42b5d7639b9006ad3, type: 2}
+    ActionMethodName: 
     responses: []
   - speakerName: Mofu
-    portrait: {fileID: 21300000, guid: 8e9cc857033308841a56671285a198fb, type: 3}
+    portrait: {fileID: 21300000, guid: cd800452905e01b44b16bab8f2f38fa6, type: 3}
     cameraContext: 
     dialogueText: Who should I throw under the bus?
     isThinking: 1
@@ -90,10 +82,8 @@ MonoBehaviour:
     waitTime: 0
     autoProgress: 0
     autoProgressDelay: 4
-    voiceClip: {fileID: 0}
-    onDialogueEvent:
-      m_PersistentCalls:
-        m_Calls: []
+    SoundDict: {fileID: 0}
+    ActionMethodName: 
     responses:
     - responseText: Magne
       nextDialogue: {fileID: 0}
@@ -102,7 +92,7 @@ MonoBehaviour:
       nextDialogue: {fileID: 0}
       Ender: 0
   - speakerName: Mofu
-    portrait: {fileID: 21300000, guid: 8e9cc857033308841a56671285a198fb, type: 3}
+    portrait: {fileID: 21300000, guid: cd800452905e01b44b16bab8f2f38fa6, type: 3}
     cameraContext: 
     dialogueText: Yeah? If I ever see them they'll um...
     isThinking: 0
@@ -111,16 +101,14 @@ MonoBehaviour:
     waitTime: 0
     autoProgress: 0
     autoProgressDelay: 4
-    voiceClip: {fileID: 0}
-    onDialogueEvent:
-      m_PersistentCalls:
-        m_Calls: []
+    SoundDict: {fileID: 11400000, guid: 0e735bf6ccaed6f42b5d7639b9006ad3, type: 2}
+    ActionMethodName: 
     responses:
     - responseText: Yeah?
       nextDialogue: {fileID: 0}
       Ender: 0
   - speakerName: Mofu
-    portrait: {fileID: 21300000, guid: 8e9cc857033308841a56671285a198fb, type: 3}
+    portrait: {fileID: 21300000, guid: cd800452905e01b44b16bab8f2f38fa6, type: 3}
     cameraContext: 
     dialogueText: They'll regret it.
     isThinking: 0
@@ -129,14 +117,10 @@ MonoBehaviour:
     waitTime: 2
     autoProgress: 0
     autoProgressDelay: 4
-    voiceClip: {fileID: 0}
-    onDialogueEvent:
-      m_PersistentCalls:
-        m_Calls: []
+    SoundDict: {fileID: 11400000, guid: 0e735bf6ccaed6f42b5d7639b9006ad3, type: 2}
+    ActionMethodName: 
     responses:
     - responseText: Sure buddy.
       nextDialogue: {fileID: 0}
       Ender: 0
-  AfterDialogueEvent:
-    m_PersistentCalls:
-      m_Calls: []
+  AfterDialogueActionMethod: 

@@ -24,9 +24,7 @@ MonoBehaviour:
     autoProgress: 0
     autoProgressDelay: 0
     voiceClip: {fileID: 0}
-    onDialogueEvent:
-      m_PersistentCalls:
-        m_Calls: []
+    ActionMethodName: 
     responses:
     - responseText: Um...Okay?
       nextDialogue: {fileID: 0}
@@ -42,13 +40,9 @@ MonoBehaviour:
     autoProgress: 0
     autoProgressDelay: 0
     voiceClip: {fileID: 0}
-    onDialogueEvent:
-      m_PersistentCalls:
-        m_Calls: []
+    ActionMethodName: 
     responses:
     - responseText: Um...Okay?
       nextDialogue: {fileID: 0}
       Ender: 1
-  AfterDialogueEvent:
-    m_PersistentCalls:
-      m_Calls: []
+  AfterDialogueActionMethod: 

@@ -23,8 +23,8 @@ public class DialogueData : ScriptableObject
         public bool autoProgress; // If true, auto-continues after delay
         public float autoProgressDelay; // Delay before auto-progressing
 
-        public AudioClip voiceClip; // Voice clip for the dialogue
-        public UnityEngine.Events.UnityEvent onDialogueEvent; // Events triggered in this entry
+        public AnimalSoundDictionary SoundDict; // Voice clip for the dialogue
+        public string ActionMethodName;
 
        /* public List<DialogueCondition> conditions; // Conditions required for this dialogue
         public DialogueData failedDialogue;*/
@@ -41,7 +41,7 @@ public class DialogueData : ScriptableObject
 
     public List<DialogueEntry> dialogueEntries; // All entries in this dialogue}
     [Header("Events")]
-    public UnityEngine.Events.UnityEvent AfterDialogueEvent = new UnityEngine.Events.UnityEvent();
+    public string AfterDialogueActionMethod;
 
     [System.Serializable]
     public class CameraTarget
