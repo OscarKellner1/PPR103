@@ -45,7 +45,7 @@ public class CameraController : MonoBehaviour
     {
         fov.MoveToward(fov.Initial * fovModifier);
 
-        if (charController.Velocity.magnitude > 0f && charController.IsGrounded)
+        if (charController.Velocity.magnitude > 0.01f && charController.IsGrounded)
         {
             bobAnimation.Increase(Time.deltaTime);
         }
@@ -56,6 +56,8 @@ public class CameraController : MonoBehaviour
 
         bobAnimationValue += Time.deltaTime * bobSpeed * charController.Velocity.magnitude;
         cameraOffset = bobAnimation.Value * bobAmplitude * Mathf.Sin(bobAnimationValue) * Vector3.up;
+        Debug.Log(charController.Velocity.magnitude);
+
 
         UpdateCamera();
     }
