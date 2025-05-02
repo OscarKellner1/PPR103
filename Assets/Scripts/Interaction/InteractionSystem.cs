@@ -20,7 +20,7 @@ public class InteractionSystem : MonoBehaviour
     [SerializeField]
     private bool displayRangeIndicator = false;
 
-    public UnityEvent<InteractionObject> OnLookAtChange;
+    public UnityEvent<InteractionObject> OnLookAtChange { get; private set; } = new();
 
 
     // Hidden variables
