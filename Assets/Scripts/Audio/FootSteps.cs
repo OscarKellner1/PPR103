@@ -50,7 +50,11 @@ public class FootSteps : MonoBehaviour
         }
         else
         {
-            AudioSource.PlayClipAtPoint(soundDictionary.GetClip(groundMaterial), transform.position);
+            var clip = soundDictionary.GetClip(groundMaterial);
+            if (clip != null)
+            {
+                AudioSource.PlayClipAtPoint(soundDictionary.GetClip(groundMaterial), transform.position);
+            }
         }
     }
 

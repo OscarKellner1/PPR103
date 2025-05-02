@@ -15,14 +15,20 @@ public class MaterialSoundDictionary
 
     public AudioClip GetClip(Material mat)
     {
-        if (mat  == null) return DefaultSound.GetClip();
+        if (mat  == null) return GetDefaultClip();
 
-        if (Dictionary.ContainsKey(mat) )
+        if (Dictionary.ContainsKey(mat))
         {
             var clip = Dictionary[mat].GetClip();
             if (clip != null) return clip;
-            else return DefaultSound.GetClip();
+            else return GetDefaultClip();
         }
+        else return GetDefaultClip();
+    }
+
+    private AudioClip GetDefaultClip()
+    {
+        if (DefaultSound == null) return null;
         else return DefaultSound.GetClip();
     }
 }
