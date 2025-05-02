@@ -9,10 +9,36 @@ public class ReticleUIController : MonoBehaviour
     InteractionSystem interactionSystem;
     [SerializeField]
     Image image;
+    [SerializeField]
+    AnimationCurve alphaAnimation;
+    [SerializeField]
+    private float animationSpeed = 2;
+
+    private float maxReticuleAlpha;
+    private float targetReticuleAlpha;
+    private float reticuleAlphaAnimationValue;
+
+    private float ReticuleAlpha
+    {
+        get
+        {
+            return image.color.a;
+        }
+        set
+        {
+            var newColor = image.color;
+            newColor.a = value;
+            image.color = newColor;
+        }
+    }
+
 
     private void Start()
     {
-        image.enabled = false;
+        maxReticuleAlpha = image.color.a;
+
+        ReticuleAlpha = 0;
+        targetReticuleAlpha = ReticuleAlpha;
     }
 
     private void OnEnable()
@@ -22,8 +48,15 @@ public class ReticleUIController : MonoBehaviour
 
     private void HandleInteractionLookChange(InteractionObject interactionObject)
     {
-        if (interactionObject == null) image.enabled = false;
-        else image.enabled = true;
+        if (interactionObject == null) targetReticuleAlpha = 0;
+        else targetReticuleAlpha = maxReticuleAlpha;
+    }
+
+    private void Update()
+    {
+        float delta = Time.deltaTime * animationSpeed;
+        reticuleAlphaAnimationValue = Mathf.MoveTowards(reticuleAlphaAnimationValue, targetReticuleAlpha, delta);
+        ReticuleAlpha = alphaAnimation.Evaluate(reticuleAlphaAnimationValue);
     }
 
     private void OnDisable()

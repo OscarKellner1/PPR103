@@ -4,23 +4,25 @@ using UnityEngine;
 
 public class MaterialSoundDictionary
 {
-    public Dictionary<Material, AudioClip> Dictionary { get; private set; }
-    public AudioClip DefaultClip { get; private set; }
+    public Dictionary<Material, SoundCollection> Dictionary { get; private set; }
+    public SoundCollection DefaultSound { get; private set; }
 
-    public MaterialSoundDictionary(Dictionary<Material, AudioClip> dictionary, AudioClip defaultClip)
+    public MaterialSoundDictionary(Dictionary<Material, SoundCollection> dictionary, SoundCollection defaultSound)
     {
         Dictionary = dictionary;
-        DefaultClip = defaultClip;
+        DefaultSound = defaultSound;
     }
 
     public AudioClip GetClip(Material mat)
     {
-        if (mat  == null) return DefaultClip;
+        if (mat  == null) return DefaultSound.GetClip();
 
-        if (Dictionary.ContainsKey(mat))
+        if (Dictionary.ContainsKey(mat) )
         {
-            return Dictionary[mat];
+            var clip = Dictionary[mat].GetClip();
+            if (clip != null) return clip;
+            else return DefaultSound.GetClip();
         }
-        else return DefaultClip;
+        else return DefaultSound.GetClip();
     }
 }

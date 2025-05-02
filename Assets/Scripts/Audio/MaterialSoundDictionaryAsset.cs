@@ -2,22 +2,22 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-[CreateAssetMenu(fileName = "MaterialSoundDictionary", menuName = "MaterialSoundDictionary", order = 1)]
+[CreateAssetMenu(fileName = "MaterialSoundDictionary", menuName = "Audio/MaterialSoundDictionary", order = 1)]
 public class MaterialSoundDictionaryAsset : ScriptableObject
 {
     [SerializeField]
-    private AudioClip defaultClip;
+    private SoundCollection defaultSound;
     [SerializeField]
     private List<MaterialSoundEntry> materialSounds = new();
 
     public MaterialSoundDictionary GetDictionary()
     {
-        MaterialSoundDictionary msDictionary = new(new Dictionary<Material, AudioClip>(), defaultClip);
+        MaterialSoundDictionary msDictionary = new(new Dictionary<Material, SoundCollection>(), defaultSound);
         var dictionary = msDictionary.Dictionary;
         foreach (var entry in materialSounds)
         {
             if (dictionary.ContainsKey(entry.Material)) continue;
-            dictionary.Add(entry.Material, entry.Clip);
+            dictionary.Add(entry.Material, entry.Sound);
         }
         return msDictionary;
     }
@@ -29,14 +29,14 @@ public struct MaterialSoundEntry
     [SerializeReference]
     Material material;
     [SerializeReference]
-    AudioClip clip;
+    SoundCollection sound;
 
     public readonly Material Material => material;
-    public readonly AudioClip Clip => clip;
+    public readonly SoundCollection Sound => sound;
 
-    public MaterialSoundEntry(Material material, AudioClip clip)
+    public MaterialSoundEntry(Material material, SoundCollection sound)
     {
         this.material = material;
-        this.clip = clip;
+        this.sound = sound;
     }
 }

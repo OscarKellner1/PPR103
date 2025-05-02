@@ -333,6 +333,31 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interactionSystem: {fileID: 1432131162565930066}
   image: {fileID: 1896364159631463593}
+  alphaAnimation:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0.0013529634
+      outSlope: 0.0013529634
+      tangentMode: 0
+      weightedMode: 2
+      inWeight: 0
+      outWeight: 0.69666666
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0.0027188314
+      outSlope: 0.0027188314
+      tangentMode: 0
+      weightedMode: 1
+      inWeight: 0.6933333
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  animationSpeed: 4
 --- !u!1 &6443429798631478426
 GameObject:
   m_ObjectHideFlags: 0
@@ -349,7 +374,7 @@ GameObject:
   - component: {fileID: 1432131162565930066}
   - component: {fileID: 2578783576949459627}
   - component: {fileID: 7115765769586931877}
-  - component: {fileID: 2617287183030017114}
+  - component: {fileID: 294920459525395318}
   m_Layer: 6
   m_Name: PlayerCharacter
   m_TagString: Player
@@ -478,9 +503,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 65
   displayRangeIndicator: 0
-  OnLookAtChange:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!114 &2578783576949459627
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -515,7 +537,7 @@ MonoBehaviour:
     eventActivationThreshold: 1
   footStepRate: 0.65
   OverideSound: {fileID: 0}
---- !u!114 &2617287183030017114
+--- !u!114 &294920459525395318
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

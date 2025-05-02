@@ -3,7 +3,7 @@ using UnityEngine;
 public class GameInfo : MonoBehaviour
 {
     private GameInfo instance;
-    static GameObject playerCharacter;
+    static PlayerCharacterController playerCharacter;
 
     private void Awake()
     {
@@ -18,11 +18,11 @@ public class GameInfo : MonoBehaviour
         }
     }
 
-    public static GameObject GetPlayerCharacter()
+    public static PlayerCharacterController GetPlayerCharacter()
     {
         if (playerCharacter == null)
         {
-            playerCharacter = GameObject.Find("PlayerCharacter");
+            playerCharacter = FindAnyObjectByType<PlayerCharacterController>(FindObjectsInactive.Include);
         }
 
         return playerCharacter;
