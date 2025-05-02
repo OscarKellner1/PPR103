@@ -56,8 +56,6 @@ public class CameraController : MonoBehaviour
 
         bobAnimationValue += Time.deltaTime * bobSpeed * charController.Velocity.magnitude;
         cameraOffset = bobAnimation.Value * bobAmplitude * Mathf.Sin(bobAnimationValue) * Vector3.up;
-        Debug.Log(charController.Velocity.magnitude);
-
 
         UpdateCamera();
     }
