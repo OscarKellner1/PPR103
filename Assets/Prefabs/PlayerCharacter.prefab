@@ -535,8 +535,8 @@ MonoBehaviour:
   footstepTimeline:
     value: 0
     eventActivationThreshold: 1
-  footStepRate: 0.65
-  OverideSound: {fileID: 0}
+  footStepRate: 0.4
+  OverideSound: {fileID: 11400000, guid: 1e31fa62f2153844d9839edac44eb1ef, type: 2}
 --- !u!114 &294920459525395318
 MonoBehaviour:
   m_ObjectHideFlags: 0

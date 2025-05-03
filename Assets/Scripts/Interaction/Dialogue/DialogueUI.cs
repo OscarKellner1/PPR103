@@ -34,16 +34,22 @@ public class DialogueUI : MonoBehaviour
                 // Split the line into words
                 string[] words = line.Split(' ');
 
+                int wordCount = 0; // To keep track of word count for playing sound every other word
+
                 foreach (string word in words)
                 {
-                    // Play a random sound at the start of each word using the AnimalSoundDictionary
+                    // Play a random sound on the first word of the line and every other word
                     if (soundDictionary != null)
                     {
-                        AudioClip randomSound = soundDictionary.GetRandomSound();  // Get a random sound
-                        if (randomSound != null)
+                        if (wordCount % 2 == 0)  // Play sound for every other word (first, third, fifth, etc.)
                         {
-                            audioSource.PlayOneShot(randomSound);  // Play the sound
+                            AudioClip randomSound = soundDictionary.GetRandomSound();  // Get a random sound
+                            if (randomSound != null)
+                            {
+                                audioSource.PlayOneShot(randomSound);  // Play the sound
+                            }
                         }
+                        wordCount++; // Increment the word count for the next word
                     }
 
                     // Type the word with the specified speed
@@ -57,6 +63,7 @@ public class DialogueUI : MonoBehaviour
                     dialogueText.text += " ";
                     yield return null;  // Allows small delay between words
                 }
+
                 dialogueText.text += "\n";
                 // After finishing one line, add a short delay (for the line break)
                 yield return new WaitForSeconds(0.5f);  // 0.5 seconds delay after each line (you can adjust this time)

@@ -10,6 +10,7 @@ public class DialogueTrigger : MonoBehaviour
     {
         public string conversationName; // Name in the Inspector for organization
         public DialogueData dialogue; // The actual dialogue
+      
         public List<DialogueCondition> conditions; // Conditions for this conversation
     }
 

@@ -27,26 +27,52 @@ public class ConditionChecker : MonoBehaviour
         switch (condition.CType)
         {
             case DialogueCondition.ConditionType.PlayerPref:
-                // Check if PlayerPref key exists and matches the expected value
+                // Check PlayerPref condition with comparison options
                
-
-
-
-                return PlayerPrefs.HasKey(condition.Name) && PlayerPrefs.GetInt(condition.Name, 0) == condition.value;
+                    int playerPrefValue = PlayerPrefs.GetInt(condition.PPName);
+                   
+                    switch (condition.PPCond)
+                    {
+                        
+                        case DialogueCondition.PlayerPrefCondition.Is:
+                           
+                            return playerPrefValue == condition.PPValue;
+                        case DialogueCondition.PlayerPrefCondition.IsNot:
+                            return playerPrefValue != condition.PPValue;
+                        case DialogueCondition.PlayerPrefCondition.GreaterThan:
+                            return playerPrefValue > condition.PPValue;
+                        case DialogueCondition.PlayerPrefCondition.LessThan:
+                            return playerPrefValue < condition.PPValue;
+                        default:
+                            Debug.Log("Invalid Condition");
+                            return false;
+                    }
+               
+                
 
             case DialogueCondition.ConditionType.HoldingItem:
-                // Check if the item is held (assumes InventoryManager handles this logic)
-                HeldObjectHandler Handle = GameInfo.GetPlayerCharacter().GetComponent<HeldObjectHandler>();
-                if (Handle.heldObject == null)
-                {                 
-                    return false;
+                // Check if the player is holding the specified item
+                HeldObjectHandler heldObjectHandler = GameInfo.GetPlayerCharacter().GetComponent<HeldObjectHandler>();
+                if (heldObjectHandler != null && heldObjectHandler.heldObject != null)
+                {
+                    return heldObjectHandler.heldObject.gameObject.GetComponent<PickupableObject>().ObjectName == condition.itemName;
                 }
-                return Handle.heldObject.gameObject.GetComponent<PickupableObject>().ObjectName == condition.IName;
-
+                return false;
 
             case DialogueCondition.ConditionType.ItemInInventory:
                 // Check if the player has the required amount of the item in their inventory
-                return InventorySystem.Instance.GetItemCount(condition.IName) >= condition.Amnt;
+                int itemCount = InventorySystem.Instance.GetItemCount(condition.itemName);
+                switch (condition.itemCondition)
+                {
+                    case DialogueCondition.ItemCondition.HasExactly:
+                        return itemCount == condition.TheNeeded;
+                    case DialogueCondition.ItemCondition.HasMoreThan:
+                        return itemCount > condition.TheNeeded;
+                    case DialogueCondition.ItemCondition.HasLessThan:
+                        return itemCount < condition.TheNeeded;
+                    default:
+                        return false;
+                }
 
             default:
                 Debug.LogWarning("Unhandled condition type: " + condition.CType);

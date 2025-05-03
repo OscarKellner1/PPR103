@@ -9,16 +9,36 @@ public class DialogueCondition
         HoldingItem,
         ItemInInventory
     }
-    public string CNme;
-    public ConditionType CType;
 
-    // Add a header to group the following parameters under Player Pref
+    public enum PlayerPrefCondition
+    {
+        Is,
+        IsNot,
+        GreaterThan,
+        LessThan
+    }
+
+    public enum ItemCondition
+    {
+        HasExactly,
+        HasMoreThan,
+        HasLessThan
+    }
+
+    public string CNme;  // Name of the condition (this could be used for debugging purposes)
+    public ConditionType CType;  // The condition type (PlayerPref, HoldingItem, ItemInInventory)
+
+    // Player Pref Condition Parameters
     [Header("Player Pref Condition Parameters")]
-    public string Name;   // Only relevant for PlayerPref condition
-    public int value;    // Only relevant for PlayerPref condition
+    public string PPName;  // The Player Pref key for PlayerPref condition
+    public PlayerPrefCondition PPCond;  // The comparison to use for PlayerPref condition
+    public int PPValue;  // The value to compare to
+    
 
-    // Add a header to group the following parameters under Item conditions
+    // Item Condition Parameters (Used for HoldingItem and ItemInInventory conditions)
     [Header("Item Condition Parameters")]
-    public string IName;  // Used for HoldingItem and ItemInInventory conditions
-    public int Amnt;  // Only relevant for ItemInInventory condition (amount of items required)
+    public string itemName;  // The name of the item
+    public ItemCondition itemCondition;  // The comparison for ItemInInventory condition
+    public int TheNeeded;  // The amount required for ItemInInventory condition
+    
 }

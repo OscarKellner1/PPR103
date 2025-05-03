@@ -52,6 +52,7 @@ public class DialogueManager : MonoBehaviour
     // Starts a new dialogue sequence
     public void StartDialogue(DialogueData dialogue, DialogueTrigger npc)
     {
+        GameInfo.GetPlayerCharacter().CameraController.FOVModifier = 0.8f;
         dialogueBox.SetActive(false);
         dialogueObject.SetActive(false);
         speakerBox.SetActive(false);
@@ -240,6 +241,7 @@ public class DialogueManager : MonoBehaviour
     // End the current conversation
     public void EndDialogue()
     {
+        GameInfo.GetPlayerCharacter().CameraController.FOVModifier = 1f;
         DUI.StopAllCoroutines();
         dialogueBox.SetActive(false);
         dialogueObject.SetActive(false);

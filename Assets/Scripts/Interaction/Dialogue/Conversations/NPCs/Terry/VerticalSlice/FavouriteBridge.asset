@@ -1,0 +1,54 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 468ecc104494f3c409ea9267ca843a65, type: 3}
+  m_Name: FavouriteBridge
+  m_EditorClassIdentifier: 
+  dialogueEntries:
+  - speakerName: Terry
+    portrait: {fileID: 21300000, guid: 47e2f5020c4053645acbfdf99827594d, type: 3}
+    cameraContext: 
+    dialogueText: 'This was my FAVOURITE bridge!
+
+
+      And now it''s gone...'
+    isThinking: 0
+    isSilent: 0
+    textspeed: 0.05
+    waitTime: 0
+    autoProgress: 0
+    autoProgressDelay: 0
+    SoundDict: {fileID: 11400000, guid: aa084c2dfb4cd314495a97ebc037397c, type: 2}
+    ActionMethodName: 
+    responses:
+    - responseText: '[Continue]'
+      nextDialogue: {fileID: 0}
+      Ender: 0
+  - speakerName: Terry
+    portrait: {fileID: 21300000, guid: 47e2f5020c4053645acbfdf99827594d, type: 3}
+    cameraContext: 
+    dialogueText: 'What am I supposed to do now?
+
+
+      Find a NEW favourite bridge?'
+    isThinking: 0
+    isSilent: 0
+    textspeed: 0.05
+    waitTime: 2
+    autoProgress: 0
+    autoProgressDelay: 0
+    SoundDict: {fileID: 11400000, guid: aa084c2dfb4cd314495a97ebc037397c, type: 2}
+    ActionMethodName: 
+    responses:
+    - responseText: Maybe.
+      nextDialogue: {fileID: 0}
+      Ender: 0
+  AfterDialogueActionMethod: TerryTalkedTo

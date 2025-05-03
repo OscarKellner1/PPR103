@@ -89,7 +89,7 @@ MonoBehaviour:
     textspeed: 0.05
     waitTime: 4
     autoProgress: 1
-    autoProgressDelay: 7
+    autoProgressDelay: 3
     SoundDict: {fileID: 11400000, guid: 0e735bf6ccaed6f42b5d7639b9006ad3, type: 2}
     ActionMethodName: MofuChange
     responses: []
@@ -112,7 +112,7 @@ MonoBehaviour:
   - speakerName: Mofu
     portrait: {fileID: 21300000, guid: eacfb89f24f76ae45b76f14da6a32181, type: 3}
     cameraContext: 
-    dialogueText: Of course! Don't all capybaras wear fruit hats?
+    dialogueText: "Of course! \n\nDon't all capybaras wear fruit hats?"
     isThinking: 0
     isSilent: 0
     textspeed: 0.05
