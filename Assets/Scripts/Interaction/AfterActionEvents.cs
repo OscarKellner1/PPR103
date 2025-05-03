@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using UnityEngine.Events;
+using UnityEngine.WSA;
 
 public class AfterActionEvents : MonoBehaviour
 {
@@ -72,6 +73,7 @@ public class AfterActionEvents : MonoBehaviour
         // For the new ToolTip and CustomEvent types
         [HideInInspector] public ToolTipData toolTipData;  // Tooltip information (message and icon)
         [HideInInspector] public UnityEvent customEvent;  // Custom Unity event to be invoked
+        private Transform holder;
 
         public void ExecuteStep(HeldObjectHandler HOH)
         {
@@ -117,13 +119,19 @@ public class AfterActionEvents : MonoBehaviour
                 case StepType.ChangeHeldItem:
                     if (removingItem)
                     {
-                        HOH.heldObject.gameObject.GetComponent<PickupableObject>().isHeld = false;
+                        Destroy(HOH.heldObject.gameObject);
                         HOH.heldObject = null;
+                        
                     }
                     else
                     {
                         HOH.heldObject = heldItem.GetComponent<PickupableObject>();
+                        heldItem.SetActive(true);
                         heldItem.GetComponent<PickupableObject>().isHeld = true;
+                        Transform targetHoldPoint = HeldObjectHandler.Instance.GetHoldPointFor(HOH.heldObject.ObjectName);
+                        
+                        heldItem.GetComponent<PickupableObject>().PickUp(targetHoldPoint);
+                        
                     }
                     break;
 

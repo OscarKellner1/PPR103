@@ -9,6 +9,10 @@ public class PickupableObject : MonoBehaviour
     public AudioSource audioSource;
     public AudioClip PickupSound;
     public AudioClip DropSound;
+    [Space(10)]
+    //public SetSpotPlacer SetSpotPlacer;
+    public float MaxDwnAngle = 60;
+
 
     private void Awake()
     {
@@ -18,6 +22,7 @@ public class PickupableObject : MonoBehaviour
 
     public void PickUp(Transform holdPoint)
     {
+        
         audioSource.PlayOneShot(PickupSound);
         isHeld = true;
         rb.isKinematic = true;

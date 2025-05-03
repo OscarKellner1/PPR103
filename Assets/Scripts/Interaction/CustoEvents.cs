@@ -11,10 +11,9 @@ public class CustoEvents : MonoBehaviour
         public GameObject Mofu;
         public AudioClip Happynoise;
 
-        [Space(10)]
-        [Header("Second Event")]
-        public string weaponName;
-        public int damage;
+    [Space(10)]
+    [Header("Fill Up Bucket")]
+    public Animation WaterTap;
 
         [Space(10)]
         [Header("Third Event")]
@@ -25,5 +24,10 @@ public class CustoEvents : MonoBehaviour
     {
         Mofu.GetComponent<DialogueTrigger>().AlternateSprites = true;
         audioSource.PlayOneShot(Happynoise);
+    }
+    public void WaterTheBucket()
+    {
+        
+        WaterTap.Play();
     }
 }

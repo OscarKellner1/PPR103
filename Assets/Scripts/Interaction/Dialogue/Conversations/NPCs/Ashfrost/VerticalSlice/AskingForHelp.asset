@@ -1,0 +1,91 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 468ecc104494f3c409ea9267ca843a65, type: 3}
+  m_Name: AskingForHelp
+  m_EditorClassIdentifier: 
+  dialogueEntries:
+  - speakerName: Ashfrost
+    portrait: {fileID: 21300000, guid: c2958a75621e8494494c4b8d2cf49b54, type: 3}
+    cameraContext: 
+    dialogueText: ...
+    isThinking: 0
+    isSilent: 1
+    textspeed: 0.05
+    waitTime: 2
+    autoProgress: 1
+    autoProgressDelay: 4
+    SoundDict: {fileID: 11400000, guid: 5cf8be9a7b0ad9244abec960223bd1a5, type: 2}
+    ActionMethodName: 
+    responses: []
+  - speakerName: PLAYER
+    portrait: {fileID: 21300000, guid: c2958a75621e8494494c4b8d2cf49b54, type: 3}
+    cameraContext: 
+    dialogueText: This guy isn't saying anything.
+    isThinking: 1
+    isSilent: 1
+    textspeed: 0.05
+    waitTime: 3
+    autoProgress: 0
+    autoProgressDelay: 4
+    SoundDict: {fileID: 11400000, guid: fa53b23c8397ceb4e9fcfa7c13a052f4, type: 2}
+    ActionMethodName: 
+    responses:
+    - responseText: '[Continue]'
+      nextDialogue: {fileID: 0}
+      Ender: 0
+      EndingActionMethod: 
+  - speakerName: PLAYER
+    portrait: {fileID: 21300000, guid: c2958a75621e8494494c4b8d2cf49b54, type: 3}
+    cameraContext: 
+    dialogueText: He keeps looking at me, and then that bucket next to him...
+    isThinking: 1
+    isSilent: 1
+    textspeed: 0.05
+    waitTime: 3
+    autoProgress: 0
+    autoProgressDelay: 4
+    SoundDict: {fileID: 11400000, guid: fa53b23c8397ceb4e9fcfa7c13a052f4, type: 2}
+    ActionMethodName: 
+    responses:
+    - responseText: '[Continue]'
+      nextDialogue: {fileID: 0}
+      Ender: 0
+      EndingActionMethod: 
+  - speakerName: PLAYER
+    portrait: {fileID: 21300000, guid: c2958a75621e8494494c4b8d2cf49b54, type: 3}
+    cameraContext: 
+    dialogueText: 'Do I...
+
+
+      Do I take the bucket?
+
+
+      He might ask me
+      to do something.'
+    isThinking: 1
+    isSilent: 1
+    textspeed: 0.05
+    waitTime: 3
+    autoProgress: 0
+    autoProgressDelay: 4
+    SoundDict: {fileID: 11400000, guid: fa53b23c8397ceb4e9fcfa7c13a052f4, type: 2}
+    ActionMethodName: 
+    responses:
+    - responseText: '[Take It]'
+      nextDialogue: {fileID: 11400000, guid: ebe096c5f55b55943b0bf9866caaa534, type: 2}
+      Ender: 0
+      EndingActionMethod: 
+    - responseText: '[Leave It]'
+      nextDialogue: {fileID: 0}
+      Ender: 1
+      EndingActionMethod: NotEngaging
+  AfterDialogueActionMethod: 

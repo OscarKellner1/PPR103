@@ -37,6 +37,7 @@ public class DialogueData : ScriptableObject
         public string responseText; // Text of the response
         public DialogueData nextDialogue; // The dialogue that follows this choice
         public bool Ender;
+        public string EndingActionMethod;
     }
 
     public List<DialogueEntry> dialogueEntries; // All entries in this dialogue}

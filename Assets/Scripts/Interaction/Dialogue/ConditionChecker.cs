@@ -51,8 +51,14 @@ public class ConditionChecker : MonoBehaviour
                 
 
             case DialogueCondition.ConditionType.HoldingItem:
-                // Check if the player is holding the specified item
                 HeldObjectHandler heldObjectHandler = GameInfo.GetPlayerCharacter().GetComponent<HeldObjectHandler>();
+                if (condition.itemName == "")
+                {
+                    return heldObjectHandler.heldObject == null;
+                }
+
+                // Check if the player is holding the specified item
+               
                 if (heldObjectHandler != null && heldObjectHandler.heldObject != null)
                 {
                     return heldObjectHandler.heldObject.gameObject.GetComponent<PickupableObject>().ObjectName == condition.itemName;

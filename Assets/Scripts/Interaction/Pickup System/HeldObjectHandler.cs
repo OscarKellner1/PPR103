@@ -1,12 +1,27 @@
-using System.Collections;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class HeldObjectHandler : MonoBehaviour
 {
     public static HeldObjectHandler Instance { get; private set; }
-    
 
-    public Transform holdPoint; // Where objects appear in front of the player
+    [System.Serializable]
+    public struct HoldPointEntry
+    {
+        public string objectName;   // must exactly match PickupableObject.ObjectName
+        public Transform holdPoint; // the custom hold-point for that object
+    }
+
+    [Header("Per-Object Hold Points")]
+    public List<HoldPointEntry> holdPointEntries;
+    private Dictionary<string, Transform> _holdPointMap;
+
+    // fallback if no match is found:
+    [Tooltip("Used if no matching entry in holdPointEntries")]
+    public Transform defaultHoldPoint;
+
+    //public Transform holdPoint; // Where objects appear in front of the player
     public float rayDistance = 3f;
     private SetSpotPlacer currentSnapTarget;
     public bool isLookingAtSnapSpot = false;
@@ -15,6 +30,8 @@ public class HeldObjectHandler : MonoBehaviour
     private Renderer[] heldObjectRenderers; // Store the held object's renderers
 
     private Transform ghostSnapVisual;
+    [Space(10)]
+    public Material PreviewMaterial;
 
     private void Awake()
     {
@@ -26,6 +43,13 @@ public class HeldObjectHandler : MonoBehaviour
         {
             Instance = this;
         }
+        _holdPointMap = new Dictionary<string, Transform>(holdPointEntries.Count);
+        foreach (var entry in holdPointEntries)
+        {
+            if (entry.objectName != null && entry.holdPoint != null)
+                _holdPointMap[entry.objectName] = entry.holdPoint;
+        }
+
     }
 
     void Update()
@@ -41,17 +65,37 @@ public class HeldObjectHandler : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Returns the custom hold‐point for a given object name,
+    /// or the default if none was registered.
+    /// </summary>
+    public Transform GetHoldPointFor(string objectName)
+    {
+        if (_holdPointMap.TryGetValue(objectName, out var t))
+            return t;
+        return defaultHoldPoint;
+    }
+
+
     public void HoldObject(PickupableObject obj)
     {
         heldObject = obj;
-        obj.PickUp(holdPoint);
 
-        // Store renderers to toggle visibility
-        if (heldObject != null)
+        // pick the right holdPoint:
+        Transform target;
+        if (!_holdPointMap.TryGetValue(obj.ObjectName, out target))
         {
-            // Get the renderers of the held object
-            heldObjectRenderers = heldObject.GetComponentsInChildren<Renderer>();
+            Debug.Log("No Dedicated Hold Point For That Object");
+            target = defaultHoldPoint;
+
+
         }
+
+
+        obj.PickUp(target);
+
+        // store renderers for visibility toggling
+        heldObjectRenderers = heldObject.GetComponentsInChildren<Renderer>();
     }
 
     private void TryShowSnapPosition()
@@ -64,6 +108,7 @@ public class HeldObjectHandler : MonoBehaviour
         if (hit.collider.CompareTag("SetSpotPlacer"))
         {
             SetSpotPlacer spot = hit.collider.GetComponent<SetSpotPlacer>();
+                if (spot.CorrectName != heldObject.ObjectName) return;
             if (spot != null)
             {
                     isLookingAtSnapSpot = true;
@@ -85,6 +130,7 @@ public class HeldObjectHandler : MonoBehaviour
 
                     // Enable the renderer of the ghost object (which was cloned)
                     SetRendererVisible(ghostSnapVisual, true);
+                        MakeCloneTheColor(ghostSnapVisual);
                 }
 
                 // Update the ghost position and rotation to match the snap position
@@ -125,21 +171,63 @@ private void SetRendererVisible(Transform obj, bool visible)
 
 
 
+    public GameObject CameraController;
+    
+
+    bool IsLookingTooFarDown(float angle)
+    {
+        // read the camera’s X-euler (0→360)
+        float pitch = Camera.main.transform.eulerAngles.x;
+        // convert to –180…+180
+        if (pitch > 180f) pitch -= 360f;
+        // now pitch > 0 means looking down, < 0 means looking up
+    
+        return pitch > angle;
+    }
 
     public void TryPlaceHeldObject()
     {
+        if (IsLookingTooFarDown(heldObject.MaxDwnAngle)) return;
+    
         if (heldObject == null) return;
-        if(isLookingAtSnapSpot && currentSnapTarget != null)
-        {
-            Destroy(ghostSnapVisual.gameObject); // Remove the ghost object
-            SetHeldObjectVisible(true);
-            currentSnapTarget.OnObjectPlaced(heldObject);
-            StartCoroutine(PlaceObject(currentSnapTarget.snapPosition.position,currentSnapTarget.snapPosition.rotation));
-            
-            
 
+        // === SNAP-SPOT LOGIC ===
+        if (isLookingAtSnapSpot && currentSnapTarget != null)
+        {
+            // 1) Destroy the ghost preview if there is one
+            if (ghostSnapVisual != null)
+            {
+                Destroy(ghostSnapVisual.gameObject);
+                ghostSnapVisual = null;
+            }
+
+            // 2) Re-show the real held object
+            SetHeldObjectVisible(true);
+            // (just in case, also individually re-enable its renderers)
+            foreach (var rend in heldObjectRenderers)
+                rend.enabled = true;
+
+            // 3) Parent and snap the held object into place
+            heldObject.transform.SetParent(currentSnapTarget.transform, worldPositionStays: false);
+            heldObject.transform.localPosition = currentSnapTarget.snapPosition.localPosition;
+            heldObject.transform.localRotation = currentSnapTarget.snapPosition.localRotation;
+
+            // 4) Notify the spot and finalize
+            currentSnapTarget.GotSomething = true;
+            currentSnapTarget.OnObjectPlaced(heldObject);
+
+            // 5) Re-enable the object's own collider and drop
+            Collider col = heldObject.GetComponent<Collider>();
+            col.enabled = true;
+            heldObject.Drop();
+            heldObject = null;
+
+            // 6) Reset state
+            isLookingAtSnapSpot = false;
+            currentSnapTarget = null;
             return;
         }
+
         Vector3 rayOrigin = Camera.main.transform.position;
         Vector3 rayDirection = Camera.main.transform.forward;
 
@@ -180,44 +268,59 @@ private void SetRendererVisible(Transform obj, bool visible)
 
         else if (secondRayHit)
         {
+            
             StartCoroutine(PlaceObject(secondHit.point, Quaternion.identity));
         }
         else
         {
-            Debug.Log("Could not place object � no valid surface found.");
+            Debug.Log("Could not place object — no valid surface found.");
         }
     }
 
 
-    private void SetGhostMaterialTransparent(Transform obj)
+    private void MakeCloneTheColor(Transform obj)
+{
+    // get every Renderer in this object hierarchy
+    foreach (Renderer r in obj.GetComponentsInChildren<Renderer>())
     {
-        foreach (Renderer r in obj.GetComponentsInChildren<Renderer>())
-        {
-            foreach (Material mat in r.materials)
-            {
-                mat.shader = Shader.Find("Transparent/Diffuse");
-                Color c = mat.color;
-                c.a = 0.5f;
-                mat.color = c;
-            }
-        }
+        // grab a copy of its materials array
+        Material[] mats = r.materials;
+        // replace each slot with your preview material
+        for (int i = 0; i < mats.Length; i++)
+            mats[i] = PreviewMaterial;
+        // write it back so Unity updates the renderer
+        r.materials = mats;
     }
+}
+
 
     public bool IsHolding() => heldObject != null;
 
-    private IEnumerator PlaceObject(Vector3 position, Quaternion rotation)
+    private IEnumerator PlaceObject(
+    Vector3 position,
+    Quaternion rotation,
+    Transform parentTransform = null
+)
     {
-        heldObject.transform.SetParent(null); // Unparent so it no longer follows the player
+        // Parent (or unparent) appropriately
+        heldObject.transform.SetParent(parentTransform);
+
+        // Snap into place
         heldObject.transform.position = position;
-        heldObject.transform.rotation = rotation;      
-       yield return new WaitForSeconds(0.0f);
+        heldObject.transform.rotation = rotation;
+
+        // (Tiny pause in case you need to wait a frame)
+        yield return null;
+
+        // Re-enable its own collider
         Collider col = heldObject.GetComponent<Collider>();
         col.enabled = true;
+
+        // Finalize drop
         heldObject.Drop();
         heldObject = null;
-     
-
     }
+
 
     private void SetHeldObjectVisible(bool visible)
     {

@@ -116,6 +116,7 @@ public class DialogueManager : MonoBehaviour
             dialogueBox.SetActive(false);
             dialogueObject.SetActive(false);
             speakerBox.SetActive(false);
+            thoughtBox.SetActive(false);
             responseButton1.gameObject.SetActive(false);
             responseButton2.gameObject.SetActive(false);
             yield return new WaitForSeconds(entry.waitTime);
@@ -224,6 +225,7 @@ public class DialogueManager : MonoBehaviour
         // If the response has the "Ender" flag set to true, end the conversation
         if (response.Ender)
         {
+            if (response.EndingActionMethod != "") AFE.StartInstructions(response.EndingActionMethod);
             EndDialogue();
         }
         else if (response.nextDialogue != null)

@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 468ecc104494f3c409ea9267ca843a65, type: 3}
+  m_Name: HoldingEmptyBucket
+  m_EditorClassIdentifier: 
+  dialogueEntries:
+  - speakerName: PLAYER
+    portrait: {fileID: 21300000, guid: c2958a75621e8494494c4b8d2cf49b54, type: 3}
+    cameraContext: 
+    dialogueText: I don't think I should approach him with an empty bucket...
+    isThinking: 1
+    isSilent: 1
+    textspeed: 0.05
+    waitTime: 0
+    autoProgress: 0
+    autoProgressDelay: 0
+    SoundDict: {fileID: 11400000, guid: fa53b23c8397ceb4e9fcfa7c13a052f4, type: 2}
+    ActionMethodName: 
+    responses:
+    - responseText: '[Leave]'
+      nextDialogue: {fileID: 0}
+      Ender: 0
+      EndingActionMethod: 
+  AfterDialogueActionMethod: 
