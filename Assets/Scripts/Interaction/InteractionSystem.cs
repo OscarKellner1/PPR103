@@ -21,10 +21,11 @@ public class InteractionSystem : MonoBehaviour
     private bool displayRangeIndicator = false;
 
     public UnityEvent<InteractionObject> OnLookAtChange { get; private set; } = new();
-
+    public InteractionObject LookAtObject => interactionObject;
 
     // Hidden variables
     InteractionObject interactionObject;
+
 
     void Update()
     {

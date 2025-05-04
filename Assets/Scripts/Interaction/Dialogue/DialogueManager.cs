@@ -33,6 +33,8 @@ public class DialogueManager : MonoBehaviour
 
     public List<CameraTarget> cameraTargets; // Add code to NPC on awake, to find Dialogue manager, find the entry with the same name as the NPC, and attach its transform to the transform parameter of the entry. Cinemachine!
 
+    public bool HasActiveDialogue {  get; private set; }   
+
     private DialogueData currentDialogue;
     private DialogueTrigger currentNPC;
     private int dialogueIndex = 0;
@@ -69,6 +71,8 @@ public class DialogueManager : MonoBehaviour
         InputUtility.SetInputType(InputType.Dialogue);
 
         ShowDialogueEntry();
+
+        HasActiveDialogue = true;
     }
 
     // Handles the display of each dialogue entry in the sequence
@@ -266,7 +270,8 @@ public class DialogueManager : MonoBehaviour
         }
       
         InputUtility.SetInputType(InputType.Character);
-      
+
+        HasActiveDialogue = false;
     }
     public void FinishedText()
     {

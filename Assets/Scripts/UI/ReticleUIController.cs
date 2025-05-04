@@ -41,26 +41,18 @@ public class ReticleUIController : MonoBehaviour
         targetReticuleAlpha = ReticuleAlpha;
     }
 
-    private void OnEnable()
-    {
-        interactionSystem.OnLookAtChange.AddListener(HandleInteractionLookChange);
-    }
-
-    private void HandleInteractionLookChange(InteractionObject interactionObject)
-    {
-        if (interactionObject == null) targetReticuleAlpha = 0;
-        else targetReticuleAlpha = maxReticuleAlpha;
-    }
-
     private void Update()
     {
+        if (interactionSystem.LookAtObject == null) targetReticuleAlpha = 0f;
+        else targetReticuleAlpha = maxReticuleAlpha;
+
+        if (DialogueManager.Instance.HasActiveDialogue)
+        {
+            targetReticuleAlpha = 0f;
+        }
+
         float delta = Time.deltaTime * animationSpeed;
         reticuleAlphaAnimationValue = Mathf.MoveTowards(reticuleAlphaAnimationValue, targetReticuleAlpha, delta);
         ReticuleAlpha = alphaAnimation.Evaluate(reticuleAlphaAnimationValue);
-    }
-
-    private void OnDisable()
-    {
-        interactionSystem.OnLookAtChange.RemoveListener(HandleInteractionLookChange);
     }
 }
