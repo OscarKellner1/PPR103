@@ -120,6 +120,7 @@ GameObject:
   - component: {fileID: 3655039665701051481}
   - component: {fileID: 1211324441616973030}
   - component: {fileID: 1327390355988881534}
+  - component: {fileID: 985641605801937191}
   m_Layer: 0
   m_Name: CrushNote
   m_TagString: Untagged
@@ -231,48 +232,29 @@ MonoBehaviour:
   videoPlayer: {fileID: 0}
   textDisplay: {fileID: 0}
   uiAnimator: {fileID: 0}
-  clip: {fileID: 32900000, guid: 8c58f07d047c3dd4da43a4fb530faf26, type: 3}
+  clip: {fileID: 32900000, guid: 21cd476e9ab9b424ab24e265067f20ef, type: 3}
+  PCan: {fileID: 0}
+  Sounds: {fileID: 11400000, guid: f2b3e790b089f3640892a8133af1d744, type: 2}
+  AudioSource: {fileID: 985641605801937191}
   entries:
-  - text: 
+  - text: Dear Best Friend,
     typingSpeed: 0.2
     newLine: 0
+    silent: 0
     LineBreaks: 1
-    SecondsBeforeThisShows: 0
-  - text: This is a video playing.
-    typingSpeed: 0.02
-    newLine: 0
-    LineBreaks: 1
-    SecondsBeforeThisShows: 3
-  - text: It will save worrying about real-time cutscenes.
-    typingSpeed: 0.02
+    SecondsBeforeThisShows: 2
+  - text: This place is HELLA dangerous...
+    typingSpeed: 0.2
     newLine: 1
+    silent: 0
     LineBreaks: 3
     SecondsBeforeThisShows: 2
-  - text: ' This'
-    typingSpeed: 0
+  - text: Be safe! <3
+    typingSpeed: 0.2
     newLine: 1
+    silent: 0
     LineBreaks: 3
     SecondsBeforeThisShows: 2
-  - text: ' text'
-    typingSpeed: 0
-    newLine: 0
-    LineBreaks: 1
-    SecondsBeforeThisShows: 0.4
-  - text: ' is'
-    typingSpeed: 0
-    newLine: 0
-    LineBreaks: 1
-    SecondsBeforeThisShows: 1
-  - text: ' rather'
-    typingSpeed: 0.1
-    newLine: 0
-    LineBreaks: 1
-    SecondsBeforeThisShows: 0.4
-  - text: ' FLEXIBLE!'
-    typingSpeed: 0.3
-    newLine: 1
-    LineBreaks: 2
-    SecondsBeforeThisShows: 1
   disappearDelay: 3
 --- !u!114 &1327390355988881534
 MonoBehaviour:
@@ -301,6 +283,102 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!82 &985641605801937191
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2287962128982610921}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &8044938777366518638
 GameObject:
   m_ObjectHideFlags: 0
@@ -433,7 +511,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 2090
+  m_VersionIndex: 2102
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []

@@ -18,62 +18,56 @@ public class DialogueUI : MonoBehaviour
     // The TypeText coroutine that handles the typing animation of the text
     IEnumerator TypeText(string text, float speed, DialogueManager man, AnimalSoundDictionary soundDictionary)
     {
-        if (speed == 0)
+        if (speed <= 0f)
         {
-            dialogueText.text = text;  // Display the full text immediately
+            // Instant display
+            dialogueText.text = text;
         }
         else
         {
-            dialogueText.text = "";  // Clear the text field before starting
+            dialogueText.text = "";
+            // Split into lines for the 0.5s line-break pause
+            string[] lines = text.Split('\n');
 
-            // Split the text into lines by newlines (\n)
-            string[] lines = text.Split(new[] { '\n' });
+            // MOVE wordCount OUTSIDE the line-loop so it accumulates globally
+            int wordCount = 0;
 
             foreach (string line in lines)
             {
-                // Split the line into words
+                // Split this line into words
                 string[] words = line.Split(' ');
-
-                int wordCount = 0; // To keep track of word count for playing sound every other word
 
                 foreach (string word in words)
                 {
-                    // Play a random sound on the first word of the line and every other word
-                    if (soundDictionary != null)
+                    // —————— play on every 2nd word globally ——————
+                    if (soundDictionary != null && wordCount % 2 == 0)
                     {
-                        if (wordCount % 2 == 0)  // Play sound for every other word (first, third, fifth, etc.)
-                        {
-                            AudioClip randomSound = soundDictionary.GetRandomSound();  // Get a random sound
-                            if (randomSound != null)
-                            {
-                                audioSource.PlayOneShot(randomSound);  // Play the sound
-                            }
-                        }
-                        wordCount++; // Increment the word count for the next word
+                        var clip = soundDictionary.GetRandomSound();
+                        if (clip != null)
+                            audioSource.PlayOneShot(clip);
                     }
+                    wordCount++;
 
-                    // Type the word with the specified speed
+                    // TYPE OUT THE WORD…
                     foreach (char c in word)
                     {
-                        dialogueText.text += c;  // Append each character to the dialogueText
-                        yield return new WaitForSeconds(speed);  // Wait for the specified speed before typing the next character
+                        dialogueText.text += c;
+                        yield return new WaitForSeconds(speed);
                     }
 
-                    // Add a space after the word
+                    // …then a space, plus a tiny pause
                     dialogueText.text += " ";
-                    yield return null;  // Allows small delay between words
+                    yield return new WaitForSeconds(speed * 0.1f);
                 }
 
+                // After each line, add newline + longer pause
                 dialogueText.text += "\n";
-                // After finishing one line, add a short delay (for the line break)
-                yield return new WaitForSeconds(0.5f);  // 0.5 seconds delay after each line (you can adjust this time)
+                yield return new WaitForSeconds(0.5f);
             }
         }
 
-        // Once the text typing is complete, call FinishedText on the DialogueManager
-        if (man != null)
-        {
-            man.FinishedText();  // Notify the DialogueManager that typing is complete
-        }
+        // Done typing!
+        man?.FinishedText();
     }
+
 }

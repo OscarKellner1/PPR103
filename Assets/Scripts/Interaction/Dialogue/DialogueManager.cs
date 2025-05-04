@@ -46,7 +46,7 @@ public class DialogueManager : MonoBehaviour
     {
         SceneManager.sceneLoaded += (Args, Scene) =>  AFE = FindAnyObjectByType<AfterActionEvents>(); 
             Instance = this;
-        PlayerPrefs.DeleteAll();
+        
       
     }
   

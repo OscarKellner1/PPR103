@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CustoEvents : MonoBehaviour
 {
@@ -16,7 +17,7 @@ public class CustoEvents : MonoBehaviour
     public Animation WaterTap;
 
         [Space(10)]
-        [Header("Third Event")]
+        [Header("Send Off")]
         public AudioClip backgroundMusic;
        
     
@@ -29,5 +30,13 @@ public class CustoEvents : MonoBehaviour
     {
         
         WaterTap.Play();
+    }
+
+    public void SendOff()
+    {
+        
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + -1);
+       
+
     }
 }

@@ -29,6 +29,7 @@ MonoBehaviour:
     - responseText: Hey!
       nextDialogue: {fileID: 0}
       Ender: 0
+      EndingActionMethod: 
   - speakerName: Mofu
     portrait: {fileID: 21300000, guid: cd800452905e01b44b16bab8f2f38fa6, type: 3}
     cameraContext: 
@@ -58,6 +59,7 @@ MonoBehaviour:
     - responseText: '[Say Nothing]'
       nextDialogue: {fileID: 0}
       Ender: 0
+      EndingActionMethod: 
   - speakerName: Mofu
     portrait: {fileID: 21300000, guid: cd800452905e01b44b16bab8f2f38fa6, type: 3}
     cameraContext: 
@@ -74,6 +76,7 @@ MonoBehaviour:
     - responseText: '[Continue]'
       nextDialogue: {fileID: 0}
       Ender: 0
+      EndingActionMethod: 
   - speakerName: Mofu
     portrait: {fileID: 21300000, guid: cd800452905e01b44b16bab8f2f38fa6, type: 3}
     cameraContext: 
@@ -90,6 +93,7 @@ MonoBehaviour:
     - responseText: Your What?
       nextDialogue: {fileID: 0}
       Ender: 0
+      EndingActionMethod: 
   - speakerName: Mofu
     portrait: {fileID: 21300000, guid: cd800452905e01b44b16bab8f2f38fa6, type: 3}
     cameraContext: 
@@ -132,20 +136,22 @@ MonoBehaviour:
     - responseText: Yes!
       nextDialogue: {fileID: 0}
       Ender: 0
+      EndingActionMethod: 
     - responseText: Nuh Uh!
       nextDialogue: {fileID: 0}
       Ender: 0
+      EndingActionMethod: 
   - speakerName: Mofu
     portrait: {fileID: 21300000, guid: cd800452905e01b44b16bab8f2f38fa6, type: 3}
     cameraContext: 
     dialogueText: 'It''s a fruit.
 
 
-      It my favourite fruit.
+      It''s my favourite fruit.
 
 
-      It''s my
-      favourite yuzu'
+      It''s
+      my favourite yuzu'
     isThinking: 0
     isSilent: 0
     textspeed: 0.05
@@ -158,6 +164,7 @@ MonoBehaviour:
     - responseText: And You Lost It?
       nextDialogue: {fileID: 0}
       Ender: 0
+      EndingActionMethod: 
   - speakerName: Mofu
     portrait: {fileID: 21300000, guid: cd800452905e01b44b16bab8f2f38fa6, type: 3}
     cameraContext: 
@@ -187,6 +194,7 @@ MonoBehaviour:
     - responseText: '[Continue]'
       nextDialogue: {fileID: 0}
       Ender: 0
+      EndingActionMethod: 
   - speakerName: Mofu
     portrait: {fileID: 21300000, guid: cd800452905e01b44b16bab8f2f38fa6, type: 3}
     cameraContext: 
@@ -203,6 +211,7 @@ MonoBehaviour:
     - responseText: Cuz Of The Hot Tub?
       nextDialogue: {fileID: 0}
       Ender: 0
+      EndingActionMethod: 
   - speakerName: Mofu
     portrait: {fileID: 21300000, guid: cd800452905e01b44b16bab8f2f38fa6, type: 3}
     cameraContext: 
@@ -219,6 +228,7 @@ MonoBehaviour:
     - responseText: '[Continue]'
       nextDialogue: {fileID: 0}
       Ender: 0
+      EndingActionMethod: 
   - speakerName: PLAYER
     portrait: {fileID: 21300000, guid: cd800452905e01b44b16bab8f2f38fa6, type: 3}
     cameraContext: 
@@ -235,6 +245,7 @@ MonoBehaviour:
     - responseText: '[Continue]'
       nextDialogue: {fileID: 0}
       Ender: 0
+      EndingActionMethod: 
   - speakerName: PLAYER
     portrait: {fileID: 21300000, guid: cd800452905e01b44b16bab8f2f38fa6, type: 3}
     cameraContext: 
@@ -251,7 +262,9 @@ MonoBehaviour:
     - responseText: Yes
       nextDialogue: {fileID: 11400000, guid: beeea962ff270514da08c977c7a3a784, type: 2}
       Ender: 0
+      EndingActionMethod: 
     - responseText: No
       nextDialogue: {fileID: 11400000, guid: 772d2bfdcbbad0d438ad5a0bfd69ad70, type: 2}
       Ender: 0
+      EndingActionMethod: 
   AfterDialogueActionMethod: 

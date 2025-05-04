@@ -13,6 +13,8 @@ public class PosterInteraction : MonoBehaviour
     public VideoClip clip;
     private bool isInteracting = false;
     public GameObject PCan;
+    public AnimalSoundDictionary Sounds;
+    public AudioSource AudioSource;
 
     [System.Serializable]
     public class PosterEntry
@@ -20,6 +22,7 @@ public class PosterInteraction : MonoBehaviour
         [TextArea] public string text; // Multi-line text input
         public float typingSpeed = 0.05f;
         public bool newLine = true;
+        public bool silent;
         public int LineBreaks = 1; // Number of line breaks if newLine is true
         public float SecondsBeforeThisShows; // Time to wait before starting this entry
     }
@@ -81,21 +84,43 @@ public class PosterInteraction : MonoBehaviour
                 textDisplay.text += new string('\n', entry.LineBreaks); // Add multiple line breaks
             }
 
-            yield return TypeText(entry.text, entry.typingSpeed);
+            yield return TypeText(entry.text, entry.typingSpeed, entry.silent);
         }
     }
 
-    private IEnumerator TypeText(string text, float speed)
+    private IEnumerator TypeText(string text, float speed, bool silent)
     {
+
         if (speed == 0)
         {
+            AudioClip randomSound = null;
+            if (silent == false)
+            {
+                randomSound = Sounds.GetRandomSound();  // Get a random sound
+            }
+
+            
+            if (randomSound != null)
+            {
+                AudioSource.PlayOneShot(randomSound);  // Play the sound
+            }
             textDisplay.text += text;
         }
         else
         {
             foreach (char letter in text)
             {
+                AudioClip randomSound = null;
+                if (silent == false)
+                {
+                    randomSound = Sounds.GetRandomSound();  // Get a random sound
+                }
+                if (randomSound != null)
+                {
+                    AudioSource.PlayOneShot(randomSound);  // Play the sound
+                }
                 textDisplay.text += letter;
+                
                 yield return new WaitForSeconds(speed);
             }
         }

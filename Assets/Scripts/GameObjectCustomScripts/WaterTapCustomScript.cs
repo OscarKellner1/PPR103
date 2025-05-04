@@ -7,6 +7,10 @@ public class WaterTapCustomScript : MonoBehaviour
   public Animation BucketAnim;
     public GameObject SetSpotPlacer;
 
+    private void Start()
+    {
+        PlayerPrefs.DeleteAll();
+    }
     public void StartWatering()
     {
         BucketAnim.Play();
