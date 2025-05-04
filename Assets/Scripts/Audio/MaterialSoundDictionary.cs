@@ -1,13 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class MaterialSoundDictionary
 {
-    public Dictionary<Material, SoundCollection> Dictionary { get; private set; }
-    public SoundCollection DefaultSound { get; private set; }
+    public Dictionary<Material, SoundInstance> Dictionary { get; private set; }
+    public SoundInstance DefaultSound { get; private set; }
 
-    public MaterialSoundDictionary(Dictionary<Material, SoundCollection> dictionary, SoundCollection defaultSound)
+    public MaterialSoundDictionary(Dictionary<Material, SoundInstance> dictionary, SoundInstance defaultSound)
     {
         Dictionary = dictionary;
         DefaultSound = defaultSound;

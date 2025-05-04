@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 363b49d2bd8c2784ab6d2f30c9f38493, type: 3}
   m_Name: MaterialSoundDictionary
   m_EditorClassIdentifier: 
-  defaultSound: {fileID: 0}
+  defaultSound: {fileID: 11400000, guid: 1e31fa62f2153844d9839edac44eb1ef, type: 2}
   materialSounds: []

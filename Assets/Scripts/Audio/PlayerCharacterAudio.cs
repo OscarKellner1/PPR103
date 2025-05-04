@@ -17,6 +17,8 @@ public class PlayerCharacterAudio : MonoBehaviour
     [SerializeField]
     private SoundCollection jumpSound;
 
+    private SoundInstance overrideSoundInstance;
+    private SoundInstance jumpSoundInstance;
 
     MaterialSoundDictionary soundDictionary;
     GroundedSystem groundedSystem;
@@ -29,6 +31,9 @@ public class PlayerCharacterAudio : MonoBehaviour
         groundedSystem = GetComponent<GroundedSystem>();
         soundDictionary = soundDictionaryAsset.GetDictionary();
         footstepTimeline.Event += PlayFootstepSound;
+
+        overrideSoundInstance = OverideSound.GetInstance();
+        jumpSoundInstance = jumpSound.GetInstance();
     }
 
     private void OnEnable()
@@ -53,7 +58,7 @@ public class PlayerCharacterAudio : MonoBehaviour
     {
         if (OverideSound != null)
         {
-            var clip = OverideSound.GetClip();
+            var clip = overrideSoundInstance.GetClip();
             if (clip == null) return;
             AudioSource.PlayClipAtPoint(clip, transform.position);
         }
@@ -70,7 +75,7 @@ public class PlayerCharacterAudio : MonoBehaviour
     private void PlayJumpSound()
     {
         if (jumpSound == null) return;
-        var clip = jumpSound.GetClip();
+        var clip = jumpSoundInstance.GetClip();
         if (clip == null) return;
 
         AudioSource.PlayClipAtPoint(clip, transform.position);

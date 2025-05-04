@@ -9,9 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 57db6c90524baad4aba7e74bcf287462, type: 3}
+  m_Script: {fileID: 11500000, guid: 32a0ed2e627297a408e6a753ee3b6ec9, type: 3}
   m_Name: Basic
   m_EditorClassIdentifier: 
   sounds:
   - {fileID: 8300000, guid: 548c43c3072d01443ba0120281d24f42, type: 3}
   - {fileID: 8300000, guid: 457c391c4a7bad14b92137d6889192c0, type: 3}
+  inOrder: 0

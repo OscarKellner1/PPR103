@@ -12,12 +12,12 @@ public class MaterialSoundDictionaryAsset : ScriptableObject
 
     public MaterialSoundDictionary GetDictionary()
     {
-        MaterialSoundDictionary msDictionary = new(new Dictionary<Material, SoundCollection>(), defaultSound);
+        MaterialSoundDictionary msDictionary = new(new Dictionary<Material, SoundInstance>(), defaultSound.GetInstance());
         var dictionary = msDictionary.Dictionary;
         foreach (var entry in materialSounds)
         {
             if (dictionary.ContainsKey(entry.Material)) continue;
-            dictionary.Add(entry.Material, entry.Sound);
+            dictionary.Add(entry.Material, entry.Sound.GetInstance());
         }
         return msDictionary;
     }
