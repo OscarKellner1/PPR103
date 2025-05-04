@@ -3,16 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(GroundedSystem))]
-public class FootSteps : MonoBehaviour
+public class PlayerCharacterAudio : MonoBehaviour
 {
+    [Header("Footsteps")]
     [SerializeField]
     MaterialSoundDictionaryAsset soundDictionaryAsset;
     [SerializeField]
     RepeatingEventTimeline footstepTimeline;
     [SerializeField]
     float footStepRate;
-
     public SoundCollection OverideSound;
+    [Header("Jumping")]
+    [SerializeField]
+    private SoundCollection jumpSound;
+
+
     MaterialSoundDictionary soundDictionary;
     GroundedSystem groundedSystem;
     PlayerCharacterController characterController;
@@ -23,17 +28,19 @@ public class FootSteps : MonoBehaviour
         characterController = GetComponent<PlayerCharacterController>();
         groundedSystem = GetComponent<GroundedSystem>();
         soundDictionary = soundDictionaryAsset.GetDictionary();
-        footstepTimeline.Event += PlaySound;
+        footstepTimeline.Event += PlayFootstepSound;
     }
 
     private void OnEnable()
     {
         groundedSystem.OnCheckGround.AddListener(SaveMaterialName);
+        characterController.JumpStarted.AddListener(PlayJumpSound);
     }
 
     private void OnDisable()
     {
         groundedSystem.OnCheckGround.RemoveListener(SaveMaterialName);
+        characterController.JumpStarted.RemoveListener(PlayJumpSound);
     }
 
     private void Update()
@@ -42,11 +49,13 @@ public class FootSteps : MonoBehaviour
         footstepTimeline.TraverseTimeline(characterController.Velocity.magnitude * footStepRate);
     }
 
-    private void PlaySound()
+    private void PlayFootstepSound()
     {
         if (OverideSound != null)
         {
-            AudioSource.PlayClipAtPoint(OverideSound.GetClip(), transform.position);
+            var clip = OverideSound.GetClip();
+            if (clip == null) return;
+            AudioSource.PlayClipAtPoint(clip, transform.position);
         }
         else
         {
@@ -56,6 +65,15 @@ public class FootSteps : MonoBehaviour
                 AudioSource.PlayClipAtPoint(soundDictionary.GetClip(groundMaterial), transform.position);
             }
         }
+    }
+
+    private void PlayJumpSound()
+    {
+        if (jumpSound == null) return;
+        var clip = jumpSound.GetClip();
+        if (clip == null) return;
+
+        AudioSource.PlayClipAtPoint(clip, transform.position);
     }
 
     private void SaveMaterialName(RaycastHit? groundCheckResult)

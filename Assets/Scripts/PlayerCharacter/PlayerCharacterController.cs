@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.XR;
 
@@ -71,6 +72,7 @@ public class PlayerCharacterController : MonoBehaviour
     public Quaternion Rotation => rb.rotation;
     public CameraController CameraController => cam;
     public InteractionSystem InteractionSystem => interactionSystem;
+    public UnityEvent JumpStarted { get; private set; } = new();
 
     //Respawn Mechanics
     public Vector3 playerPosition;
@@ -237,7 +239,10 @@ public class PlayerCharacterController : MonoBehaviour
         }
 
         rb.AddForce(dir * jumpImpulse, ForceMode.Force);
+
+        JumpStarted.Invoke();
     }
+
 
     // Gizmos //
     private void OnDrawGizmos()
