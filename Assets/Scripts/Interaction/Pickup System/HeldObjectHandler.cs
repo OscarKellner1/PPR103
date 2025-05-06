@@ -56,6 +56,20 @@ public class HeldObjectHandler : MonoBehaviour
     {
         if (heldObject != null)
         {
+            if (IsLookingTooFarDown(heldObject.MaxDwnAngle))
+            {
+                if (ghostSnapVisual != null)
+                {
+                    Destroy(ghostSnapVisual.gameObject); // Remove the ghost object
+                    ghostSnapVisual = null;
+                }
+
+                // Make the held object visible again
+                SetHeldObjectVisible(true);
+                isLookingAtSnapSpot = false;
+                currentSnapTarget = null;
+                return;
+            }
             TryShowSnapPosition();
 
             if (Input.GetKeyDown(KeyCode.F))
@@ -107,7 +121,8 @@ public class HeldObjectHandler : MonoBehaviour
     {
         if (hit.collider.CompareTag("SetSpotPlacer"))
         {
-            SetSpotPlacer spot = hit.collider.GetComponent<SetSpotPlacer>();
+                if (IsLookingTooFarDown(heldObject.MaxDwnAngle)) return;
+                SetSpotPlacer spot = hit.collider.GetComponent<SetSpotPlacer>();
                 if (spot.CorrectName != heldObject.ObjectName) return;
             if (spot != null)
             {
@@ -187,7 +202,7 @@ private void SetRendererVisible(Transform obj, bool visible)
 
     public void TryPlaceHeldObject()
     {
-        if (IsLookingTooFarDown(heldObject.MaxDwnAngle)) return;
+        
     
         if (heldObject == null) return;
 
