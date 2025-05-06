@@ -6,16 +6,14 @@ using UnityEngine.InputSystem.XR;
 
 public class PlayerCharacterController : MonoBehaviour
 {
-    // Inspector varaibles
     [Header("Movement")]
     [SerializeField]
     private float baseMovespeed = 5f;
     [SerializeField]
-    private float lookSensitivity = 0.2f;
-    [SerializeField]
     private float jumpImpulse = 2f;
     [SerializeField]
     private float slopeAngleThreshold = 45f;
+    private float lookSensitivity = 0.2f;
 
     // State
     private RaycastHit? groundCheck = null;
@@ -45,7 +43,11 @@ public class PlayerCharacterController : MonoBehaviour
         get { return moveSpeedModifier; } 
         set { moveSpeedModifier = value; }
     }
-    public float LookSensitvity => lookSensitivity;
+    public float LookSensitvity
+    {
+        get { return lookSensitivity; }
+        set { lookSensitivity = value; }
+    }
     public float JumpImpulse => jumpImpulse;
     public float SlopeAngleThreshold => slopeAngleThreshold;
     public bool UseGravity
@@ -82,6 +84,9 @@ public class PlayerCharacterController : MonoBehaviour
     // Unity Messages
     void Start()
     {
+        // Load default settings
+        lookSensitivity = Settings.Instance.MouseSensitivity;
+
         rb = GetComponent<Rigidbody>();
         groundedSystem = GetComponent<GroundedSystem>();
         cam = GetComponentInChildren<CameraController>();
@@ -100,6 +105,11 @@ public class PlayerCharacterController : MonoBehaviour
 
     void Update()
     {
+        if (Keyboard.current.escapeKey.wasPressedThisFrame)
+        {
+            Settings.Instance.ToggleMenu();
+        }
+
         playerInput.Look += lookAction.ReadValue<Vector2>() * lookSensitivity;
         playerInput.Move = moveAction.ReadValue<Vector2>();
         playerInput.Jump |= jumpAction.triggered;
@@ -134,7 +144,6 @@ public class PlayerCharacterController : MonoBehaviour
         playerInput.Look = Vector2.zero;
         playerInput.Jump = false;
     }
-
 
     // Public interface
     public void ChangeMoveset(IMoveSet newMoveset)
@@ -242,7 +251,6 @@ public class PlayerCharacterController : MonoBehaviour
 
         JumpStarted.Invoke();
     }
-
 
     // Gizmos //
     private void OnDrawGizmos()

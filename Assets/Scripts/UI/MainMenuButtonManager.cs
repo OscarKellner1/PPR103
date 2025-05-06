@@ -19,4 +19,21 @@ public class MainMenuButtonManager : MonoBehaviour
     {
         Application.Quit();
     }
+
+    public void PressedSettings()
+    {
+        gameObject.SetActive(false);
+        Settings.Instance.OpenMenu();
+        Settings.Instance.OnClose.AddListener(ActivateSelf);
+    }
+
+    private void ActivateSelf()
+    {
+        gameObject.SetActive(true);
+    }
+
+    public void OnDisable()
+    {
+        Settings.Instance.OnClose.RemoveListener(ActivateSelf);
+    }
 }
