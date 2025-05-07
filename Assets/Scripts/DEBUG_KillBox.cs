@@ -9,8 +9,13 @@ public class DEBUG_KillBox : MonoBehaviour
     private Transform spawnTarget;
 
     [SerializeField]
+    public AudioSource Fail;
+    public AudioClip Smack;
+
+    [SerializeField]
     [HideInInspector]
     private new BoxCollider collider;
+
 
     private void OnTriggerEnter(Collider other)
     {
@@ -19,12 +24,13 @@ public class DEBUG_KillBox : MonoBehaviour
             var playerTransform = other.gameObject.transform;
             playerTransform.position = spawnTarget.position;
             playerTransform.rotation = spawnTarget.rotation;
+            Fail.PlayOneShot(Smack);
         }
     }
 
 
-    // Editor and Gizmos
-    void Reset()
+// Editor and Gizmos
+void Reset()
     {
         collider = GetComponent<BoxCollider>();
         collider.isTrigger = true;

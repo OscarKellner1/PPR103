@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerRespawn : MonoBehaviour
 {
     public Vector3 SpawnPoint;
+    public Quaternion SpawnRotation;
     public void SetSpawnPoint(Vector3 SpawnChange)
     {
         SpawnPoint = SpawnChange;
@@ -13,6 +14,7 @@ public class PlayerRespawn : MonoBehaviour
     private void SpawnHere()
     {
         transform.position = SpawnPoint;
+        transform.rotation = SpawnRotation;
     }
     // Update is called once per frame
     void Update()
