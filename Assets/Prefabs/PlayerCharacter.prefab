@@ -260,6 +260,8 @@ GameObject:
   - component: {fileID: 5220754669936206984}
   - component: {fileID: 3750037325620780150}
   - component: {fileID: 444004818086658311}
+  - component: {fileID: 1397842977498265127}
+  - component: {fileID: 3341412827158733589}
   m_Layer: 6
   m_Name: Canvas
   m_TagString: Untagged
@@ -389,6 +391,30 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   animationSpeed: 4
+--- !u!225 &1397842977498265127
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4169681803891578939}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
+--- !u!114 &3341412827158733589
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4169681803891578939}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93e903a20d696f440b44deaf0a8d5c0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6443429798631478426
 GameObject:
   m_ObjectHideFlags: 0
@@ -494,7 +520,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseMovespeed: 5
-  lookSensitivity: 0.2
   jumpImpulse: 200
   slopeAngleThreshold: 45
   playerPosition: {x: 0, y: 0, z: 0}
